@@ -1,0 +1,32 @@
+// @flow
+declare type Locale = 'ru' | 'en' | 'it' | 'es' | 'pt' | 'de' | 'fr';
+
+export type Address = {
+ country: ?string,
+ state: ?string,
+ city: ?string,
+ street: ?string,
+ number: ?string,
+ zipCode: ?string,
+ formattedAddress: string,
+}
+
+declare type Partner = {
+ id: string,
+ logo: ?string,
+ companyName: string,
+ contactPerson: string,
+ phone: string,
+ email: string,
+ website: ?string,
+ address: ?Address,
+ vat: string,
+ score: ?number,
+ note: string,
+}
+
+declare type DocumentType = {
+  name: string,
+  type: string,
+  url: string,
+}

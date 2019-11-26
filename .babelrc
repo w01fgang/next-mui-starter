@@ -1,0 +1,19 @@
+{
+  "presets": [
+    ["next/babel", {
+      "preset-env": {
+        "targets": {
+          "chrome": 55,
+          "node": "10.13"
+        }
+      }
+    }]
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-optional-chaining",
+    "@babel/plugin-transform-flow-strip-types",
+    ["relay", { "artifactDirectory": "__generated__" }],
+    "react-intl",
+    "inline-react-svg"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "env": {
+    "RELAY_ENDPOINT": "@relay-endpoint"
+  },
+  "build": {
+    "env": {
+      "RELAY_ENDPOINT": "@relay-endpoint"
+    }
+  }
+}

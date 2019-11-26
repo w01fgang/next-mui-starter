@@ -1,0 +1,22 @@
+// @flow
+export type NextApiRequest = IncomingMessage & {
+  query: {
+    [key: string]: string | string[],
+    ...
+  },
+  cookies: {
+    [key: string]: string,
+    ...
+  },
+  body: any,
+  ...
+};
+
+declare type Send<T> = (body: T) => void;
+
+export type NextApiResponse<T = any> = ServerResponse & {
+  send: Send<T>,
+  json: Send<T>,
+  status: (statusCode: number) => NextApiResponse<T>,
+  ...
+};

@@ -1,0 +1,41 @@
+[include]
+
+[ignore]
+<PROJECT_ROOT>/node_modules
+<PROJECT_ROOT>/coverage/.*
+<PROJECT_ROOT>/\.git/
+<PROJECT_ROOT>/UI\ Kit/.*
+
+[untyped]
+<PROJECT_ROOT>/node_modules/graphql/.*
+
+[libs]
+
+
+[options]
+emoji=true
+sharedmemory.hash_table_pow=21
+lazy_mode=fs
+esproposal.optional_chaining=enable
+esproposal.nullish_coalescing=enable
+
+; This option lets you alias 'any' with a given string - useful for explaining why you’re using 'any'
+; Please, do not use "fix me" suppress types and comments
+suppress_type=$FlowFixMe
+suppress_type=$FlowFixMeProps
+suppress_type=$FlowFixMeState
+
+suppress_comment= \\(.\\|\n\\)*\\$flow:
+
+[lints]
+unnecessary-optional-chain=error
+
+[strict]
+nonstrict-import
+unclear-type
+unsafe-getters-setters
+untyped-import
+untyped-type-import
+
+[version]
+0.112.0

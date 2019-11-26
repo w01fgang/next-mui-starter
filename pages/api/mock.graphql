@@ -1,0 +1,109 @@
+scalar Date
+scalar Time
+
+# User access role
+enum Role {
+  ADMIN
+  OPERATOR
+  DRIVER
+}
+
+enum Plan {
+  TRIAL
+  PRO
+}
+
+# Current user
+type User {
+  id: ID!
+  name: String!
+  surname: String!
+  companyName: String!
+  role: Role!
+  createdAt: Date!
+  company: Company!
+}
+
+type WorkDay {
+  day: Int!
+  from: Time!
+  to: Time!
+}
+
+type Address {
+  country: String!
+  state: String
+  city: String!
+  street: String
+  number: String
+  zipCode: String
+  formattedAddress: String!
+}
+
+type Office {
+  id: ID!
+  name: String!
+  address: Address!
+  email: String
+  phone: String
+  workDays: [WorkDay!]!
+}
+
+type Company {
+  id: ID!
+  name: String!
+  phone: String
+  email: String
+  website: String
+  addresses: OfficeConnection!
+  vat: String
+  subscribtion: Plan!
+  expiryDate: Date!
+  offices: OfficeConnection!
+}
+# An edge in a connection.
+type OfficeEdge {
+  # The order at the end of the edge.
+  node: Office!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+# A connection to a list of offices.
+type OfficeConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [OfficeEdge!]!
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+type Viewer {
+  me: User!
+}
+
+type Query {
+  viewer: Viewer!
+
+  # Fetches an object given its ID
+  # node(id: ID!): Node @resolver(name: "node")
+}
