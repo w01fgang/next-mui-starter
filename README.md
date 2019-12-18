@@ -6,7 +6,7 @@
 - [React Relay](https://relay.dev)
 - [Material-ui](http://material-ui.com)
 - [Styled components](https://www.styled-components.com)
-- [React Intl](https://www.styled-components.com)
+- [React Intl](https://github.com/formatjs/react-intl)
 - [Luxon](https://moment.github.io/luxon)
 - [FaunaDB](https://fauna.com)
 
