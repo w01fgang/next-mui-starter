@@ -2259,7 +2259,7 @@ declare module "@material-ui/core/styles/jssPreset" {
 declare module "@material-ui/core/styles/makeStyles" {
   import type { Theme } from "@material-ui/core/styles/createMuiTheme";
   declare type MakeStylesCallback = (theme: Theme) => { [key: string]: $Shape<CSSStyleDeclaration> | { [key: string]: $Shape<CSSStyleDeclaration> } };
-  declare module.exports: (callback: MakeStylesCallback) => () => { [key: string]: string };
+  declare module.exports: (callback: MakeStylesCallback | { [key: string]: $Shape<CSSStyleDeclaration> }) => () => { [key: string]: string };
 }
 
 declare module "@material-ui/core/styles/MuiThemeProvider" {
