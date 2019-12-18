@@ -1,6 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 
+import NewCarConfiguration from './new-car-configuration';
+
 type Props = {};
 
 class Index extends Component<Props> {
@@ -9,7 +11,7 @@ class Index extends Component<Props> {
   render() {
     return (
       <div>
-        Home page
+        <NewCarConfiguration />
       </div>
     );
   }
