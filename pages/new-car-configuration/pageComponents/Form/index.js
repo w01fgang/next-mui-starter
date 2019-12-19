@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { useIntl } from 'react-intl';
 
 import VehicleInformation from '../VehicleInformation';
 
@@ -9,7 +10,6 @@ import Button from '../../../../components/TestButton';
 import Car from '../../../../assets/svg/carIcon.svg';
 import ImagePickerIcon from '../../../../assets/svg/imagePickerIcon.svg';
 import WarninigIconWithPlus from '../../../../assets/svg/warninigIconWithPlus.svg';
-
 
 const useStyles = makeStyles((theme) => ({
   buttonContainer: {
@@ -46,17 +46,29 @@ const useStyles = makeStyles((theme) => ({
 
 const tabs = [
   {
-    title: 'Vehicle information',
+    data: {
+      id: 'сarConfiguration.carInfoTab',
+      description: 'Tab',
+      defaultValue: 'Tab',
+    },
     component: VehicleInformation,
     icon: Car,
   },
   {
-    title: 'Upload photos',
+    data: {
+      id: 'сarConfiguration.carImageTab',
+      description: 'Tab',
+      defaultValue: 'Tab',
+    },
     component: () => <p>photos</p>,
     icon: ImagePickerIcon,
   },
   {
-    title: 'Add damages',
+    data: {
+      id: 'сarConfiguration.carDamagesTab',
+      description: 'Tab',
+      defaultValue: 'Tab',
+    },
     component: () => <p>Damages</p>,
     icon: WarninigIconWithPlus,
   },
@@ -64,12 +76,13 @@ const tabs = [
 
 function Form() {
   const classes = useStyles();
+  const { messages } = useIntl();
   return (
     <div className={classes.formContainer}>
       <TubContainer data={tabs} />
       <div className={classes.buttonContainer}>
-        <Button className={classes.button} title="Add Vehicle" style={{ marginRight: '16px' }} />
-        <Button className={classes.button} title="Cancel" style={{ background: 'white', color: '#455A64' }} />
+        <Button className={classes.button} title={messages['сarConfiguration.form.confirmButton']} style={{ marginRight: '16px' }} />
+        <Button className={classes.button} title={messages['сarConfiguration.form.confirmButton']} style={{ background: 'white', color: '#455A64' }} />
       </div>
     </div>
   );

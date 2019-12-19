@@ -2,6 +2,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
+import { FormattedMessage, useIntl } from 'react-intl';
+
+import messages from './massages';
+
 import Breadcrumbs from '../../components/Breadcrumbs';
 import Select from '../../components/Select';
 import Form from './pageComponents/Form';
@@ -43,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
 const breadcrumbsData = [
   {
     title: 'Home',
@@ -56,14 +59,17 @@ const breadcrumbsData = [
 ];
 
 function CarConfiguration() {
+  const { messages: intlMessages } = useIntl();
   const classes = useStyles();
   return (
     <Box>
-      <Box className={classes.pageTitle}>Add New Car</Box>
+      <Box className={classes.pageTitle}>
+        <FormattedMessage {...messages.title} />
+      </Box>
       <Box className={classes.breadcrumbsContainer}>
         <Breadcrumbs data={breadcrumbsData} />
         <Box className={classes.select}>
-          <Select withShadow placeholder="Last added vehicles" options={[]} />
+          <Select withShadow placeholder={intlMessages['сarConfiguration.vehiclesSelect']} options={[]} />
         </Box>
       </Box>
       <Form />

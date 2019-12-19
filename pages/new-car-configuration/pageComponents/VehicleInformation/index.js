@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Button } from '@material-ui/core';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Select from '../../../../components/Select';
 import Input from '../../../../components/Input';
@@ -16,6 +17,8 @@ import FinanceIcon from '../../../../assets/svg/financeIcon.svg';
 import EuroIcon from '../../../../assets/svg/euroIcon.svg';
 import EuroIconKm from '../../../../assets/svg/euroIconKm.svg';
 import KmIcon from '../../../../assets/svg/kmIcon.svg';
+
+import messages from './messages';
 
 import { brandOptions, carOptions, colorOption } from './data';
 
@@ -91,15 +94,17 @@ const useStyles = makeStyles((theme) => ({
 function CarInfo() {
   const [selectedCarOwner, setCarOwner] = React.useState(null);
   const [parametersOpen, setParametersOpen] = useState(false);
+  const { messages: intlMess } = useIntl();
   const classes = useStyles();
+
   return (
     <Grid className={classes.container}>
       <Grid className={classes.grid}>
-        <Grid className={classes.brandLogo}>Brand Logo</Grid>
+        <Grid className={classes.brandLogo}><FormattedMessage {...messages.logo} /></Grid>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4} md={4}>
             <Select
-              placeholder="Brand"
+              placeholder={intlMess['сarConfiguration.form.brandSelect']}
               isMandatory
               options={brandOptions}
             />
@@ -107,20 +112,20 @@ function CarInfo() {
           <Grid item xs={12} sm={4} md={4}>
             <Select
               isMandatory
-              placeholder="Model"
+              placeholder={intlMess['сarConfiguration.form.modelSelect']}
               options={carOptions}
             />
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
             <Select
               isMandatory
-              placeholder="Body Type"
+              placeholder={intlMess['сarConfiguration.form.bodySelect']}
               options={carOptions}
             />
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
             <Select
-              placeholder="Year of issue"
+              placeholder={intlMess['сarConfiguration.form.yearSelect']}
               isMandatory
               options={carOptions}
             />
@@ -128,24 +133,24 @@ function CarInfo() {
           <Grid item xs={12} sm={4} md={4}>
             <Select
               icon={QuestionIcon}
-              placeholder="Base location"
+              placeholder={intlMess['сarConfiguration.form.locationSelect']}
               options={carOptions}
             />
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
             <Input
-              placeholder="Plate number"
+              placeholder={intlMess['сarConfiguration.form.plateNumberSelect']}
               icon={ShapeIcon}
             />
           </Grid>
         </Grid>
       </Grid>
       <Grid>
-        <p style={{ fontSize: '14px', margin: '25px 0 15px 0' }}>Here you can decide if car is your own or is agency’s car</p>
+        <p style={{ fontSize: '14px', margin: '25px 0 15px 0' }}><FormattedMessage {...messages.info} /></p>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4}>
             <Radio
-              label="It’s own Vehicle"
+              label={intlMess['сarConfiguration.form.radio.ownCar']}
               checked={selectedCarOwner === 'own car'}
               onChange={() => setCarOwner('own car')}
               name="own car"
@@ -153,7 +158,7 @@ function CarInfo() {
           </Grid>
           <Grid item xs={12} sm={4}>
             <Radio
-              label="It’s own Vehicle"
+              label={intlMess['сarConfiguration.form.radio.companyCar']}
               checked={selectedCarOwner === 'company car'}
               onChange={() => setCarOwner('company car')}
               name="company car"
@@ -162,7 +167,7 @@ function CarInfo() {
           <Grid item xs={12} sm={4}>
             <Button className={classes.newAgency}>
               <Suit />
-              Add new Agency
+              <FormattedMessage {...messages.agencyButton} />
             </Button>
           </Grid>
         </Grid>
@@ -179,7 +184,7 @@ function CarInfo() {
           className={classes.openButton}
         >
           { !parametersOpen ? <PlusIcon /> : <MinusIcon /> }
-          Parameters
+          <FormattedMessage {...messages.parametersButton} />
         </Button>
         <div className={classes.line} />
       </Grid>
@@ -188,61 +193,61 @@ function CarInfo() {
           <Grid container spacing={3} style={{ marginTop: '25px' }}>
             <Grid item xs={12} sm={3}>
               <Input
-                placeholder="Odometer"
+                placeholder={intlMess['сarConfiguration.form.odometerInput']}
                 icon={ShapeIcon}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={3}>
               <Select
-                placeholder="External Color"
+                placeholder={intlMess['сarConfiguration.form.colorSelect']}
                 options={colorOption}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={2}>
               <Select
-                placeholder="Passengers"
+                placeholder={intlMess['сarConfiguration.form.passengersSelect']}
                 options={[]}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={2}>
               <Select
-                placeholder="Fuel type"
+                placeholder={intlMess['сarConfiguration.form.fuelTypeSelect']}
                 options={[]}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={2}>
               <Select
-                placeholder="Transmission"
+                placeholder={intlMess['сarConfiguration.form.transmissionSelect']}
                 options={[]}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={3}>
               <Input
-                placeholder="Base kilometres a day"
+                placeholder={intlMess['сarConfiguration.form.kilometresInput']}
                 icon={KmIcon}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={3}>
               <Input
-                placeholder="KM’s extra price"
+                placeholder={intlMess['сarConfiguration.form.extraPriseInput']}
                 icon={EuroIconKm}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={2}>
               <Input
-                placeholder="Base price"
+                placeholder={intlMess['сarConfiguration.form.priceInput']}
                 icon={EuroIcon}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={2}>
               <Input
-                placeholder="Franchise"
+                placeholder={intlMess['сarConfiguration.form.financeInput']}
                 icon={FinanceIcon}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={2}>
               <Input
-                placeholder="Deposit"
+                placeholder={intlMess['сarConfiguration.form.depositInput']}
                 icon={DepositIcon}
               />
             </Grid>

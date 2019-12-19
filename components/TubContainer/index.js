@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import { FormattedMessage } from 'react-intl';
 
 const useStyles = makeStyles((theme) => ({
   tabContainer: {
@@ -50,16 +51,15 @@ type TabContainerProps = {
 
 function Tab(props: TabProps) {
   const {
-    title, isActive, icon: Icon, onChange, index,
+    data, isActive, icon: Icon, onChange, index,
   } = props;
   const styleProps = { borderBottom: isActive ? '2px solid #1E88E5' : '' };
   const classes = useStyles(styleProps);
 
-
   return (
     <Grid className={classes.tabContainer} onClick={() => onChange(index)}>
       { Icon && <Icon className={classes.icon} /> }
-      <Typography color={isActive ? 'primary' : 'inherit'}>{title}</Typography>
+      <Typography color={isActive ? 'primary' : 'inherit'}><FormattedMessage {...data} /></Typography>
     </Grid>
   );
 }
@@ -76,11 +76,11 @@ function TubContainer(props: TabContainerProps) {
           data.map((item, i) => (
             <Tab
               onChange={setActiveTab}
-              key={item.title}
+              key={item.data.id}
               index={i}
               isActive={activeTab === i}
               icon={item.icon}
-              title={item.title}
+              data={item.data}
             />
           ))
         }
