@@ -1,8 +1,8 @@
-/* eslint-disable */
+// @flow
 import React, { Component } from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import {
-  Grow, Paper, Popper, MenuItem, MenuList,
+  Grow, Paper, MenuItem, MenuList, Box, Popper,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -31,12 +31,42 @@ const styles = {
   },
 };
 
-class Select extends Component {
-  state = {
-    open: false,
-    value: null,
-    clientWidth: 0,
-  };
+type Props = {
+  placeholder: string,
+  options: Array<{
+    value: number,
+    title: string,
+    comp: React$ComponentType<*>,
+  }>,
+  classes: {
+    root: {},
+    placeholder: {},
+  },
+  isMandatory: boolean,
+  icon: React$ComponentType<*>,
+  withShadow: boolean,
+  prevOpen: any,
+};
+
+type State = {
+  open: boolean,
+  value: any,
+  clientWidth: number,
+}
+
+class Select extends Component<Props, State> {
+  anchorRef: any;
+
+  prevOpen: any;
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      value: null,
+      clientWidth: 0,
+    };
+  }
 
   componentDidMount() {
     const { open } = this.state;
@@ -102,11 +132,12 @@ class Select extends Component {
     } = this.props;
     const { open, value } = this.state;
     this.prevOpen = React.createRef(open);
+    const borderContainer = isMandatory ? '2px solid #A3D2FC' : '1px solid #CED4DA';
 
     return (
-      <div
+      <Box
         style={{
-          border: withShadow ? 'none' : isMandatory ? '2px solid #A3D2FC' : '1px solid #CED4DA',
+          border: withShadow ? 'none' : borderContainer,
           boxShadow: withShadow && '0px 2px 15px rgba(0, 0, 0, 0.1)',
         }}
         className={classes.root}
@@ -115,17 +146,17 @@ class Select extends Component {
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
       >
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Box style={{ display: 'flex', alignItems: 'center' }}>
           {Icon && <Icon style={{ marginRight: '10px' }} />}
           <p style={{ color: '#455A64' }}>{value || placeholder}</p>
-        </div>
+        </Box>
         { value && <p className={classes.placeholder}>{placeholder}</p>}
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          {value && <span onClick={() => this.setState({ value: '' })}>x</span> }
+        <Box style={{ display: 'flex', alignItems: 'center' }}>
+          {value && <Box onClick={() => this.setState({ value: '' })}>x</Box> }
           <DownArrowIcon style={{ marginLeft: '10px' }} />
           { this.renderMenu() }
-        </div>
-      </div>
+        </Box>
+      </Box>
     );
   }
 }

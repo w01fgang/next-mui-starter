@@ -4,7 +4,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Radio, Grid } from '@material-ui/core';
 
 type Props = {
-  onChange: void,
+  onChange: Function,
   checked: boolean,
   label: string,
   name: string,
@@ -20,7 +20,7 @@ const GreenRadio = withStyles({
   checked: {},
 })((props) => <Radio color="default" {...props} />);
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(() => ({
   container: {
     width: '100%',
     border: (props) => props.border,
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
     fontWeight: 'bold',
     fontSize: '14px',
   },
-});
+}));
 
 function CustomRadio(props: Props) {
   const {

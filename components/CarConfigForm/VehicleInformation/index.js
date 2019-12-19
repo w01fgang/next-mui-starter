@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button, Box } from '@material-ui/core';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Select from '../../../../components/Select';
-import Input from '../../../../components/Input';
-import Radio from '../../../../components/Radio';
+import Select from '../../Select';
+import Input from '../../Input';
+import Radio from '../../Radio';
 
-import Suit from '../../../../assets/svg/suitIcon.svg';
-import PlusIcon from '../../../../assets/svg/plusIcon.svg';
-import MinusIcon from '../../../../assets/svg/munisIcon.svg';
-import QuestionIcon from '../../../../assets/svg/questionIcon.svg';
-import ShapeIcon from '../../../../assets/svg/shapeIcon.svg';
-import DepositIcon from '../../../../assets/svg/depositIcon.svg';
-import FinanceIcon from '../../../../assets/svg/financeIcon.svg';
-import EuroIcon from '../../../../assets/svg/euroIcon.svg';
-import EuroIconKm from '../../../../assets/svg/euroIconKm.svg';
-import KmIcon from '../../../../assets/svg/kmIcon.svg';
+import Suit from '../../../assets/svg/suitIcon.svg';
+import PlusIcon from '../../../assets/svg/plusIcon.svg';
+import MinusIcon from '../../../assets/svg/munisIcon.svg';
+import QuestionIcon from '../../../assets/svg/questionIcon.svg';
+import ShapeIcon from '../../../assets/svg/shapeIcon.svg';
+import DepositIcon from '../../../assets/svg/depositIcon.svg';
+import FinanceIcon from '../../../assets/svg/financeIcon.svg';
+import EuroIcon from '../../../assets/svg/euroIcon.svg';
+import EuroIconKm from '../../../assets/svg/euroIconKm.svg';
+import KmIcon from '../../../assets/svg/kmIcon.svg';
 
 import messages from './messages';
 
@@ -186,7 +186,7 @@ function CarInfo() {
           { !parametersOpen ? <PlusIcon /> : <MinusIcon /> }
           <FormattedMessage {...messages.parametersButton} />
         </Button>
-        <div className={classes.line} />
+        <Box className={classes.line} />
       </Grid>
       {
         parametersOpen && (

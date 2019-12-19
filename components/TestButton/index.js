@@ -4,12 +4,13 @@ import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 type Props = {
-  style: string,
-  onClick: void,
+  style: {},
+  onClick: Function,
   disabled: boolean,
   title: string,
 };
-const useStyles = makeStyles((theme) => ({
+
+const useStyles = makeStyles({
   root: {
     width: '241px',
     textTransform: 'unset',
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.25), 0px -1px 2px rgba(0, 0, 0, 0.1)',
     borderRadius: '4px',
   },
-}));
+});
 
 // this component was written because exciting Button component unreuseble;
 const TestButton = (props: Props) => {

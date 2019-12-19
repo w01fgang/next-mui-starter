@@ -1,6 +1,6 @@
 // @flow
 import React, { useState } from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { FormattedMessage } from 'react-intl';
 
@@ -38,15 +38,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type TabProps = {
-  title: string,
+  data: {
+    id: string,
+    description: string,
+    defaultMessage: string,
+  },
   isActive: boolean,
-  icon: React$Component,
-  onChange: void,
+  icon: any,
+  onChange: Function,
   index: number
 };
 
 type TabContainerProps = {
-  data: []
+  data: Array<{
+    icon: any,
+    component: any,
+    data: {
+      id: string,
+      description: string,
+      defaultMessage: string,
+    },
+  }>
 };
 
 function Tab(props: TabProps) {
@@ -70,8 +82,8 @@ function TubContainer(props: TabContainerProps) {
   const { data } = props;
   const Component = data[activeTab].component;
   return (
-    <div>
-      <div className={classes.container}>
+    <Box>
+      <Box className={classes.container}>
         {
           data.map((item, i) => (
             <Tab
@@ -84,11 +96,9 @@ function TubContainer(props: TabContainerProps) {
             />
           ))
         }
-      </div>
-      <div className="tub-content">
-        <Component />
-      </div>
-    </div>
+      </Box>
+      <Component />
+    </Box>
   );
 }
 

@@ -8,7 +8,7 @@ import messages from './massages';
 
 import Breadcrumbs from '../../components/Breadcrumbs';
 import Select from '../../components/Select';
-import Form from './pageComponents/Form';
+import Form from '../../components/CarConfigForm';
 
 const useStyles = makeStyles((theme) => ({
   pageTitle: {
@@ -51,10 +51,12 @@ const breadcrumbsData = [
   {
     title: 'Home',
     href: '/',
+    active: false,
   },
   {
     title: 'Add New Car',
     active: true,
+    href: '',
   },
 ];
 

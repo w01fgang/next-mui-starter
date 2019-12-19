@@ -1,18 +1,18 @@
 import React from 'react';
 
 export const carOptions = [
-  { title: 'Add Custom Modal', comp: () => <p style={{ fontWeight: 'bold', color: '#1E88E5' }}>Add Custom Modal</p>, year: 1994 },
-  { title: 'A220', comp: () => <p>A220</p>, year: 1974 },
-  { title: 'A220 4MATIC', comp: () => <p>A220 4MATIC</p>, year: 2008 },
-  { title: 'C300', comp: () => <p>C300</p>, year: 1957 },
-  { title: 'GLS 450', comp: () => <p>GLS 450</p>, year: 1993 },
+  { title: 'Add Custom Modal', comp: () => <p style={{ fontWeight: 'bold', color: '#1E88E5' }}>Add Custom Modal</p>, value: 1994 },
+  { title: 'A220', comp: () => <p>A220</p>, value: 1974 },
+  { title: 'A220 4MATIC', comp: () => <p>A220 4MATIC</p>, value: 2008 },
+  { title: 'C300', comp: () => <p>C300</p>, value: 1957 },
+  { title: 'GLS 450', comp: () => <p>GLS 450</p>, value: 1993 },
 ];
 export const brandOptions = [
-  { title: 'Add Custom Brand', comp: () => <p style={{ fontWeight: 'bold', color: '#1E88E5' }}>Add Custom Brand</p>, year: 1994 },
-  { title: 'Acura', comp: () => <p>Acura</p>, year: 1974 },
-  { title: 'BMW', comp: () => <p>BMW</p>, year: 2008 },
-  { title: 'Cirtoen', comp: () => <p>Cirtoen</p>, year: 1957 },
-  { title: 'Dodge', comp: () => <p>Dodge</p>, year: 1993 },
+  { title: 'Add Custom Brand', comp: () => <p style={{ fontWeight: 'bold', color: '#1E88E5' }}>Add Custom Brand</p>, value: 1994 },
+  { title: 'Acura', comp: () => <p>Acura</p>, value: 1974 },
+  { title: 'BMW', comp: () => <p>BMW</p>, value: 2008 },
+  { title: 'Cirtoen', comp: () => <p>Cirtoen</p>, value: 1957 },
+  { title: 'Dodge', comp: () => <p>Dodge</p>, value: 1993 },
 ];
 
 const colorsSet = [

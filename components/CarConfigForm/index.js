@@ -1,15 +1,16 @@
 // @flow
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@material-ui/core';
 import { useIntl } from 'react-intl';
 
-import VehicleInformation from '../VehicleInformation';
+import VehicleInformation from './VehicleInformation';
 
-import TubContainer from '../../../../components/TubContainer';
-import Button from '../../../../components/TestButton';
-import Car from '../../../../assets/svg/carIcon.svg';
-import ImagePickerIcon from '../../../../assets/svg/imagePickerIcon.svg';
-import WarninigIconWithPlus from '../../../../assets/svg/warninigIconWithPlus.svg';
+import TubContainer from '../TubContainer';
+import Button from '../TestButton';
+import Car from '../../assets/svg/carIcon.svg';
+import ImagePickerIcon from '../../assets/svg/imagePickerIcon.svg';
+import WarninigIconWithPlus from '../../assets/svg/warninigIconWithPlus.svg';
 
 const useStyles = makeStyles((theme) => ({
   buttonContainer: {
@@ -49,7 +50,7 @@ const tabs = [
     data: {
       id: 'сarConfiguration.carInfoTab',
       description: 'Tab',
-      defaultValue: 'Tab',
+      defaultMessage: 'Tab',
     },
     component: VehicleInformation,
     icon: Car,
@@ -58,7 +59,7 @@ const tabs = [
     data: {
       id: 'сarConfiguration.carImageTab',
       description: 'Tab',
-      defaultValue: 'Tab',
+      defaultMessage: 'Tab',
     },
     component: () => <p>photos</p>,
     icon: ImagePickerIcon,
@@ -67,7 +68,7 @@ const tabs = [
     data: {
       id: 'сarConfiguration.carDamagesTab',
       description: 'Tab',
-      defaultValue: 'Tab',
+      defaultMessage: 'Tab',
     },
     component: () => <p>Damages</p>,
     icon: WarninigIconWithPlus,
@@ -78,13 +79,25 @@ function Form() {
   const classes = useStyles();
   const { messages } = useIntl();
   return (
-    <div className={classes.formContainer}>
+    <Box className={classes.formContainer}>
       <TubContainer data={tabs} />
-      <div className={classes.buttonContainer}>
-        <Button className={classes.button} title={messages['сarConfiguration.form.confirmButton']} style={{ marginRight: '16px' }} />
-        <Button className={classes.button} title={messages['сarConfiguration.form.confirmButton']} style={{ background: 'white', color: '#455A64' }} />
-      </div>
-    </div>
+      <Box className={classes.buttonContainer}>
+        <Button
+          disabled={false}
+          onClick={() => {}}
+          className={classes.button}
+          title={messages['сarConfiguration.form.confirmButton']}
+          style={{ marginRight: '16px' }}
+        />
+        <Button
+          disabled={false}
+          onClick={() => {}}
+          className={classes.button}
+          title={messages['сarConfiguration.form.confirmButton']}
+          style={{ background: 'white', color: '#455A64' }}
+        />
+      </Box>
+    </Box>
   );
 }
 
