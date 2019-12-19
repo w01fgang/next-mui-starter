@@ -6,7 +6,7 @@ import NewCarConfiguration from './new-car-configuration';
 type Props = {};
 
 class Index extends Component<Props> {
-  static displayName = 'Index'
+  static displayName = 'Index';
 
   render() {
     return (

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   tabContainer: {
     display: 'flex',
     cursor: 'pointer',
@@ -15,7 +15,26 @@ const useStyles = makeStyles({
     boxSizing: 'border-box',
     borderBottom: (props) => props.borderBottom,
   },
-});
+  container: {
+    display: 'flex',
+    borderBottom: '#F2F0F0 1px solid',
+    [theme.breakpoints.up('xs')]: {
+      justifyContent: 'space-between',
+    },
+    [theme.breakpoints.up('sm')]: {
+      justifyContent: 'flex-start',
+    },
+  },
+  icon: {
+    marginRight: '14px',
+    [theme.breakpoints.up('xs')]: {
+      display: 'none',
+    },
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
+  },
+}));
 
 type TabProps = {
   title: string,
@@ -39,7 +58,7 @@ function Tab(props: TabProps) {
 
   return (
     <Grid className={classes.tabContainer} onClick={() => onChange(index)}>
-      { Icon && <Icon style={{ marginRight: '14px' }} /> }
+      { Icon && <Icon className={classes.icon} /> }
       <Typography color={isActive ? 'primary' : 'inherit'}>{title}</Typography>
     </Grid>
   );
@@ -47,11 +66,12 @@ function Tab(props: TabProps) {
 
 function TubContainer(props: TabContainerProps) {
   const [activeTab, setActiveTab] = useState(0);
+  const classes = useStyles();
   const { data } = props;
   const Component = data[activeTab].component;
   return (
     <div>
-      <div className="tub-container" style={{ display: 'flex', borderBottom: '#F2F0F0 1px solid' }}>
+      <div className={classes.container}>
         {
           data.map((item, i) => (
             <Tab

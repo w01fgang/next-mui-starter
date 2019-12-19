@@ -19,7 +19,7 @@ import KmIcon from '../../../../assets/svg/kmIcon.svg';
 
 import { brandOptions, carOptions, colorOption } from './data';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   container: {
     padding: 20,
   },
@@ -40,16 +40,30 @@ const useStyles = makeStyles({
     textTransform: 'uppercase',
     borderRadius: '50%',
     textAlign: 'center',
+    [theme.breakpoints.up('xs')]: {
+      display: 'none',
+    },
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+      margin: '0 50px 0 45px',
+    },
   },
   newAgency: {
-    boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.25), 0px -1px 2px rgba(0, 0, 0, 0.1)',
     borderRadius: 4,
     textTransform: 'unset',
     fontWeight: 'bold',
     fontSize: '13px',
     color: '#1E88E5',
     height: 48,
-    width: '100%',
+    [theme.breakpoints.up('xs')]: {
+      padding: 0,
+      width: 'auto',
+      boxShadow: 'none',
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: '100%',
+      boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.25), 0px -1px 2px rgba(0, 0, 0, 0.1)',
+    },
   },
   openButton: {
     border: '1px solid #A3D2FC',
@@ -72,7 +86,7 @@ const useStyles = makeStyles({
     left: 0,
     top: 44,
   },
-});
+}));
 
 function CarInfo() {
   const [selectedCarOwner, setCarOwner] = React.useState(null);
@@ -83,42 +97,42 @@ function CarInfo() {
       <Grid className={classes.grid}>
         <Grid className={classes.brandLogo}>Brand Logo</Grid>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={4} md={4}>
             <Select
               placeholder="Brand"
               isMandatory
               options={brandOptions}
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={4} md={4}>
             <Select
               isMandatory
               placeholder="Model"
               options={carOptions}
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={4} md={4}>
             <Select
               isMandatory
               placeholder="Body Type"
               options={carOptions}
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={4} md={4}>
             <Select
               placeholder="Year of issue"
               isMandatory
               options={carOptions}
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={4} md={4}>
             <Select
               icon={QuestionIcon}
               placeholder="Base location"
               options={carOptions}
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={4} md={4}>
             <Input
               placeholder="Plate number"
               icon={ShapeIcon}
@@ -172,61 +186,61 @@ function CarInfo() {
       {
         parametersOpen && (
           <Grid container spacing={3} style={{ marginTop: '25px' }}>
-            <Grid item xs={3}>
+            <Grid item xs={12} sm={3}>
               <Input
                 placeholder="Odometer"
                 icon={ShapeIcon}
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12} sm={3} md={3}>
               <Select
                 placeholder="External Color"
                 options={colorOption}
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={12} sm={3} md={2}>
               <Select
                 placeholder="Passengers"
                 options={[]}
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={12} sm={3} md={2}>
               <Select
                 placeholder="Fuel type"
                 options={[]}
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={12} sm={3} md={2}>
               <Select
                 placeholder="Transmission"
                 options={[]}
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12} sm={3} md={3}>
               <Input
                 placeholder="Base kilometres a day"
                 icon={KmIcon}
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12} sm={3} md={3}>
               <Input
                 placeholder="KM’s extra price"
                 icon={EuroIconKm}
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={12} sm={3} md={2}>
               <Input
                 placeholder="Base price"
                 icon={EuroIcon}
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={12} sm={6} md={2}>
               <Input
                 placeholder="Franchise"
                 icon={FinanceIcon}
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={12} sm={6} md={2}>
               <Input
                 placeholder="Deposit"
                 icon={DepositIcon}

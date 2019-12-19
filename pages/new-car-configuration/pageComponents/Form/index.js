@@ -11,9 +11,16 @@ import ImagePickerIcon from '../../../../assets/svg/imagePickerIcon.svg';
 import WarninigIconWithPlus from '../../../../assets/svg/warninigIconWithPlus.svg';
 
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   buttonContainer: {
-    margin: '0 0 45px 25px',
+    margin: '0 25px 45px 25px',
+    [theme.breakpoints.up('xs')]: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
   },
   formContainer: {
     background: 'white',
@@ -22,7 +29,20 @@ const useStyles = makeStyles({
     boxShadow: '0px 5px 15px rgba(63, 63, 68, 0.1)',
     borderRadius: '4px',
   },
-});
+  button: {
+    [theme.breakpoints.up('xs')]: {
+      width: '100%',
+      marginBottom: 25,
+    },
+    [theme.breakpoints.up('sm')]: {
+      margin: 0,
+      width: 189,
+    },
+    [theme.breakpoints.up('md')]: {
+      width: 240,
+    },
+  },
+}));
 
 const tabs = [
   {
@@ -48,8 +68,8 @@ function Form() {
     <div className={classes.formContainer}>
       <TubContainer data={tabs} />
       <div className={classes.buttonContainer}>
-        <Button title="Add Vehicle" />
-        <Button title="Cancel" style={{ background: 'white', color: '#455A64', marginLeft: '16px' }} />
+        <Button className={classes.button} title="Add Vehicle" style={{ marginRight: '16px' }} />
+        <Button className={classes.button} title="Cancel" style={{ background: 'white', color: '#455A64' }} />
       </div>
     </div>
   );
