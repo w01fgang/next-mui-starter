@@ -27,5 +27,6 @@
   "сarConfiguration.form.extraPriseInput": "KM’s extra price",
   "сarConfiguration.form.priceInput": "Base price",
   "сarConfiguration.form.financeInput": "Franchise",
-  "сarConfiguration.form.depositInput": "Deposit"
+  "сarConfiguration.form.depositInput": "Deposit",
+  "сarConfiguration.imageUpload.choosePhotos": "Choose Photos"
 }
