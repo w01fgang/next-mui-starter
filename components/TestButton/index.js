@@ -1,16 +1,17 @@
 // @flow
 import React from 'react';
 import { Button } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 type Props = {
   style: {},
   onClick: Function,
   disabled: boolean,
   title: string,
+  classes: {}
 };
 
-const useStyles = makeStyles({
+const styles = {
   root: {
     width: '241px',
     textTransform: 'unset',
@@ -21,15 +22,13 @@ const useStyles = makeStyles({
     boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.25), 0px -1px 2px rgba(0, 0, 0, 0.1)',
     borderRadius: '4px',
   },
-});
+};
 
 // this component was written because exciting Button component unreuseble;
 const TestButton = (props: Props) => {
   const {
-    style, onClick, disabled, title, ...rest
+    style, onClick, disabled, title, classes, ...rest
   } = props;
-
-  const classes = useStyles();
 
   return (
     <Button
@@ -44,4 +43,4 @@ const TestButton = (props: Props) => {
   );
 };
 
-export default TestButton;
+export default withStyles(styles)(TestButton);

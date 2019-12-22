@@ -23,9 +23,11 @@ const GreenRadio = withStyles({
 const useStyles = makeStyles(() => ({
   container: {
     width: '100%',
+    // $flow: have to be dinemic
     border: (props) => props.border,
     boxSizing: 'border-box',
     borderRadius: '4px',
+    // $flow: have to be dinemic
     background: (props) => props.background,
     cursor: 'pointer',
   },
@@ -43,6 +45,7 @@ function CustomRadio(props: Props) {
     background: checked ? '#F5FBFF' : 'white',
     border: `1px solid ${checked ? '#A3D2FC' : '#CED4DA'}`,
   };
+  // $flow: need to pass object
   const classes = useStyles(styleProps);
   return (
     <Grid container className={classes.container} onClick={onChange}>

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import {
+  // $flow: Popper exist in @material-ui/core package
   Grow, Paper, MenuItem, MenuList, Box, Popper,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -131,6 +132,8 @@ class Select extends Component<Props, State> {
       placeholder, classes, isMandatory, icon: Icon, withShadow,
     } = this.props;
     const { open, value } = this.state;
+
+    // $flow: React.createRef
     this.prevOpen = React.createRef(open);
     const borderContainer = isMandatory ? '2px solid #A3D2FC' : '1px solid #CED4DA';
 

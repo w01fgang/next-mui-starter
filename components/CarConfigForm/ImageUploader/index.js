@@ -1,115 +1,116 @@
 // @flow
 import React, { Component } from 'react';
 import { Box, Grid } from '@material-ui/core';
-import { FormattedMessage } from 'react-intl';
+import { withStyles } from '@material-ui/core/styles';
+
+import CarImageContainer from './carSelector';
 
 import ImageIcon from '../../../assets/svg/imageIcon.svg';
-import carFrontView from '../../../assets/svg/carFrontView.svg';
-import carProfileView from '../../../assets/svg/carProfileView.svg';
-import carSemiFrontView from '../../../assets/svg/carSemiFrontView.svg';
 
-import Button from '../../TestButton';
+const styles = {
+  container: {
+    borderBottom: '1px solid #EEF4F8',
+    margin: '25px',
+    paddingBottom: '25px',
+  },
+  photoButtonText: { display: 'flex', alignItems: 'center' },
+  photoButton: {
+    marginTop: '25px', background: 'white', color: '#1E88E5', border: '1px solid #A3D2FC', boxShadow: 'none',
+  },
+  fileInput: {
+    color: 'transparent',
+    width: 240,
+    height: 48,
+    '&::before': {
+      width: 240,
+      height: 48,
+      boxSizing: 'border-box',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: '#1E88E5',
+      fontWeight: 'bold',
+      fontSize: 13,
+      content: "'Choose Photos'",
+      background: 'white',
+      border: '1px solid #A3D2FC',
+      borderRadius: '3px',
+      padding: '5px 8px',
+      outline: 'none',
+      whiteSpace: 'nowrap',
+      userSelect: 'none',
+      cursor: 'pointer',
+    },
+    '&::-webkit-file-upload-button': {
+      visibility: 'hidden',
+    },
+  },
+};
 
-const carViews = [carSemiFrontView, carProfileView, carFrontView];
+type Props = {
+  classes: {
+    container: {},
+    fileInput: {},
+  },
+};
 
-class ImageUploader extends Component {
+type State = {
+  imageFile0: null,
+  imageFile1: null,
+  imageFile2: null,
+}
+
+class ImageUploader extends Component<Props, State> {
   state = {
-    uploadStatus: 'default',
+    imageFile0: null,
+    imageFile1: null,
+    imageFile2: null,
   };
 
-  renderImage = (index) => {
-    const CarView = carViews[index];
-
-    switch (this.state.uploadStatus) {
-      case 'default':
-        return (
-          <div style={{
-            width: '100%',
-            height: '200px',
-            border: '1px solid #EEF4F8',
-            borderRadius: '8px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-          >
-            <CarView />
-          </div>
-        );
-      case 'inProgress':
-        return (<div style={{
-          width: '100%',
-          height: '200px',
-          boxShadow: '0px 5px 15px rgba(63, 63, 68, 0.1)',
-          borderRadius: '8px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}/>);
-      case 'done':
-        return (<div />);
-      default:
-        return (
-          <div style={{
-            width: '100%',
-            height: '200px',
-            border: '1px solid #EEF4F8',
-            borderRadius: '8px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-          >
-            <CarView />
-          </div>
-        );
+  selectThumbnailImage = ({ files }) => {
+    if (files) {
+      Array.from(files).map((item, index) => this.setState({ [`imageFile${index}`]: item }));
     }
   };
 
-  renderImageContainer = () => (
-    <Grid container spacing={3}>
-      {
-          [1, 2, 3].map((item, index) => (
-            <Grid item xs={12} sm={4} md={4} key={item}>
-              {this.renderImage(index)}
-            </Grid>
-          ))
-        }
-    </Grid>
-  );
-
-  uploadStatusHandler = (state) => {
-    this.setState({ uploadStatus: state });
-  };
+  removeImages = () => this.setState({
+    imageFile0: null,
+    imageFile1: null,
+    imageFile2: null,
+  });
 
   render() {
-    const { uploadStatus } = this.state;
+    const { classes } = this.props;
+
     return (
-      <Box style={{
-        borderBottom: '1px solid #EEF4F8',
-        margin: '25px',
-        paddingBottom: '25px',
-      }}
-      >
-        { this.renderImageContainer() }
-        <Grid container justify="space-between" alignItems="center">
-          <Button
-            onClick={() => this.uploadStatusHandler('inProgress')}
-            title={(
-              <Box style={{ display: 'flex', alignItems: 'center' }}>
-                <ImageIcon />
-                <FormattedMessage id="сarConfiguration.imageUpload.choosePhotos" defaultMessage="Choose Photos" />
-              </Box>
-            )}
-            style={{
-              marginTop: '25px', background: 'white', color: '#1E88E5', border: '1px solid #A3D2FC', boxShadow: 'none',
-            }}
-          />
-          { uploadStatus !== 'default' && <Box onClick={() => this.uploadStatusHandler('default')}>Remove all</Box> }
+      <Box className={classes.container}>
+        <Grid container spacing={3}>
+          {
+            Object.keys(this.state).map((item, index) => (
+              <Grid item xs={12} sm={4} md={4} key={item}>
+                <CarImageContainer
+                  index={index}
+                  file={this.state[`imageFile${index}`]}
+                />
+              </Grid>
+            ))
+          }
+        </Grid>
+        <Grid container justify="space-between" alignItems="center" style={{ marginTop: '25px' }}>
+          <Box style={{ position: 'relative', display: 'flex' }}>
+            <input
+              type="file"
+              multiple
+              className={classes.fileInput}
+              onChange={(e) => this.selectThumbnailImage(e.target)}
+            />
+            <ImageIcon style={{ position: 'absolute', left: '50px', top: '16px' }} />
+          </Box>
+          { this.state.imageFile0 && <Box onClick={this.removeImages}>Remove all</Box> }
         </Grid>
       </Box>
     );
   }
 }
 
-export default ImageUploader;
+export default withStyles(styles)(ImageUploader);

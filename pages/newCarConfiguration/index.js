@@ -4,8 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import messages from './massages';
-
 import Breadcrumbs from '../../components/Breadcrumbs';
 import Select from '../../components/Select';
 import Form from '../../components/CarConfigForm';
@@ -66,7 +64,11 @@ function CarConfiguration() {
   return (
     <Box>
       <Box className={classes.pageTitle}>
-        <FormattedMessage {...messages.title} />
+        <FormattedMessage
+          id="CarConfigurationPage.title"
+          defaultMessage="Add New Car"
+          description="Page title"
+        />
       </Box>
       <Box className={classes.breadcrumbsContainer}>
         <Breadcrumbs data={breadcrumbsData} />
