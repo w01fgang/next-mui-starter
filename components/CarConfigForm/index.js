@@ -6,6 +6,7 @@ import { useIntl } from 'react-intl';
 
 import VehicleInformation from './VehicleInformation';
 import ImageUploader from './ImageUploader';
+import DamagesInfo from './DamagesInfo';
 
 import TubContainer from '../TubContainer';
 import Button from '../TestButton';
@@ -49,15 +50,6 @@ const useStyles = makeStyles((theme) => ({
 const tabs = [
   {
     data: {
-      id: 'сarConfiguration.carImageTab',
-      description: 'Tab',
-      defaultMessage: 'Tab',
-    },
-    component: ImageUploader,
-    icon: ImagePickerIcon,
-  },
-  {
-    data: {
       id: 'сarConfiguration.carInfoTab',
       description: 'Tab',
       defaultMessage: 'Tab',
@@ -67,11 +59,20 @@ const tabs = [
   },
   {
     data: {
+      id: 'сarConfiguration.carImageTab',
+      description: 'Tab',
+      defaultMessage: 'Tab',
+    },
+    component: ImageUploader,
+    icon: ImagePickerIcon,
+  },
+  {
+    data: {
       id: 'сarConfiguration.carDamagesTab',
       description: 'Tab',
       defaultMessage: 'Tab',
     },
-    component: () => <p>Damages</p>,
+    component: DamagesInfo,
     icon: WarninigIconWithPlus,
   },
 ];

@@ -11,18 +11,18 @@ import carSemiFrontView from '../../../assets/svg/carSemiFrontView.svg';
 const carViews = [carSemiFrontView, carProfileView, carFrontView];
 
 const styles = {
-  container: {
+  emptyPhoto: {
     padding: '0 15px',
     width: '100%',
     height: '200px',
     borderRadius: '8px',
-  },
-  emptyPhoto: {
-    extend: 'container',
     border: '1px solid #EEF4F8',
   },
   progressPhoto: {
-    extend: 'container',
+    padding: '0 15px',
+    width: '100%',
+    height: '200px',
+    borderRadius: '8px',
     boxShadow: '0px 5px 15px rgba(63, 63, 68, 0.1)',
   },
   loaderContainer: {
@@ -46,6 +46,7 @@ const styles = {
     fontSize: 10,
   },
 };
+
 type Props = {
   classes: {
     container: {},
@@ -69,7 +70,6 @@ type State = {
   fileName: string,
   cancelReaderHandler: Function,
 }
-
 
 class CarSelector extends Component<Props, State> {
   state = {
