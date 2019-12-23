@@ -19,14 +19,16 @@ const useStyles = makeStyles({
 
 type Props = {
   placeholder?: string,
+  onChange: Function,
 }
 
 export default function Textarea(props: Props) {
-  const { placeholder } = props;
+  const { placeholder, onChange } = props;
   const classes = useStyles();
 
   return (
     <TextareaAutosize
+      onChange={({ target }) => onChange(target.value)}
       aria-label="empty textarea"
       placeholder={placeholder}
       className={classes.root}

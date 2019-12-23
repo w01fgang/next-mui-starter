@@ -47,6 +47,7 @@ type Props = {
   icon: React$ComponentType<*>,
   withShadow: boolean,
   prevOpen: any,
+  onChange: Function,
 };
 
 type State = {
@@ -124,6 +125,8 @@ class Select extends Component<Props, State> {
   };
 
   onChange = (item) => {
+    const { onChange } = this.props;
+    onChange(item);
     this.setState({ value: item.title, open: false });
   };
 

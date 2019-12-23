@@ -104,6 +104,7 @@ function CarInfo() {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4} md={4}>
             <Select
+              onChange={() => {}}
               placeholder={intlMess['сarConfiguration.form.brandSelect']}
               isMandatory
               options={brandOptions}
@@ -111,6 +112,7 @@ function CarInfo() {
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
             <Select
+              onChange={() => {}}
               isMandatory
               placeholder={intlMess['сarConfiguration.form.modelSelect']}
               options={carOptions}
@@ -118,6 +120,7 @@ function CarInfo() {
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
             <Select
+              onChange={() => {}}
               isMandatory
               placeholder={intlMess['сarConfiguration.form.bodySelect']}
               options={carOptions}
@@ -125,6 +128,7 @@ function CarInfo() {
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
             <Select
+              onChange={() => {}}
               placeholder={intlMess['сarConfiguration.form.yearSelect']}
               isMandatory
               options={carOptions}
@@ -132,6 +136,7 @@ function CarInfo() {
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
             <Select
+              onChange={() => {}}
               icon={QuestionIcon}
               placeholder={intlMess['сarConfiguration.form.locationSelect']}
               options={carOptions}
@@ -199,24 +204,28 @@ function CarInfo() {
             </Grid>
             <Grid item xs={12} sm={3} md={3}>
               <Select
+                onChange={() => {}}
                 placeholder={intlMess['сarConfiguration.form.colorSelect']}
                 options={colorOption}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={2}>
               <Select
+                onChange={() => {}}
                 placeholder={intlMess['сarConfiguration.form.passengersSelect']}
                 options={[]}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={2}>
               <Select
+                onChange={() => {}}
                 placeholder={intlMess['сarConfiguration.form.fuelTypeSelect']}
                 options={[]}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={2}>
               <Select
+                onChange={() => {}}
                 placeholder={intlMess['сarConfiguration.form.transmissionSelect']}
                 options={[]}
               />

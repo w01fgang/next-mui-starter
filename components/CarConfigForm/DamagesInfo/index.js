@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid, Box } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 import Switch from '../../Switch';
@@ -17,12 +17,26 @@ type Props = {
     damagesInfo: {},
     damagesHeader: {},
     damagesInfoRow: {},
+    damageIcon: {},
   },
 }
 
 type State = {
   exterior: boolean,
   modalOpen: boolean,
+  damages: Array<{
+    damageDescription: string,
+    damageDegree: string,
+    damageType: string,
+    position: {
+      x: number,
+      y: number
+    },
+  }>,
+  clickPosition: null | {
+    x: number,
+    y: number,
+  }
 };
 
 const styles = {
@@ -54,12 +68,27 @@ const styles = {
     height: 66,
     color: '#455A64',
   },
+  damageIcon: {
+    position: 'absolute',
+    fontSize: '10px',
+    width: '16px',
+    height: '16px',
+    background: '#FC4B6C',
+    border: '2px solid #FFFFFF',
+    color: 'white',
+    display: 'flex',
+    borderRadius: '50%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 };
 
 class DamagesInfo extends Component<Props, State> {
   state = {
     exterior: true,
     modalOpen: false,
+    damages: [],
+    clickPosition: null,
   };
 
   carBodyRef: any;
@@ -107,14 +136,28 @@ class DamagesInfo extends Component<Props, State> {
     );
   };
 
-  selectDamagesHandler = () => {
+  selectDamagesHandler = ({ clientX, clientY }) => {
     // const rect = this.carBodyRef.firstElementChild.getBoundingClientRect();
     // console.log(Math.floor(event.clientY) - rect.top, Math.floor(event.clientX - rect.left));
-    this.setState({ modalOpen: true });
+    this.setState({ modalOpen: true, clickPosition: { x: clientX, y: clientY } });
   };
+
+  formHandler = (damage) => {
+    this.setState((prevState) => this.setState({
+      damages: [...prevState.damages, damage],
+      modalOpen: false,
+    }));
+  };
+
+  removeDamage(damageIndex) {
+    this.setState((prevState) => this.setState({
+      damages: prevState.damages.filter((item, index) => index !== damageIndex),
+    }));
+  }
 
   render() {
     const { classes } = this.props;
+    const { clickPosition, modalOpen, damages } = this.state;
     const CarBody = this.state.exterior ? ExteriorBody : InteriorBody;
     return (
       <Grid container>
@@ -129,6 +172,21 @@ class DamagesInfo extends Component<Props, State> {
               margin: '30px 0',
             }}
           >
+            {
+              damages.map((item, index) => (
+                <Box
+                  style={{
+                    left: item.position.x,
+                    top: item.position.y,
+                  }}
+                  className={classes.damageIcon}
+                  key={item.position.x}
+                  index
+                >
+                  {index + 1}
+                </Box>
+              ))
+            }
             <CarBody
               className="testSvg"
               onClick={this.selectDamagesHandler}
@@ -142,18 +200,24 @@ class DamagesInfo extends Component<Props, State> {
             <Grid item md={1}>Degree</Grid>
             <Grid item md={1} container justify="center" />
           </Grid>
-          <Grid container alignItems="center" className={classes.damagesInfoRow}>
-            <Grid item md={1} container justify="center">1</Grid>
-            <Grid item md={9}>
-              <Grid style={{ fontWeight: '500', textDecoration: 'underline', color: '#1E88E5' }}>Scratch</Grid>
-              <Grid style={{ fontSize: '10px', color: '#99ABB4' }}>a mark or wound made by scratching</Grid>
-            </Grid>
-            <Grid item md={1}>Low</Grid>
-            <Grid item md={1} container justify="center"><CloseIcon /></Grid>
-          </Grid>
+          {
+            damages.map((item, index) => (
+              <Grid key={item.position.x} container alignItems="center" className={classes.damagesInfoRow}>
+                <Grid item md={1} container justify="center">{index + 1}</Grid>
+                <Grid item md={9}>
+                  <Grid style={{ fontWeight: '500', textDecoration: 'underline', color: '#1E88E5' }}>{item.damageType}</Grid>
+                  <Grid style={{ fontSize: '10px', color: '#99ABB4' }}>{item.damageDescription}</Grid>
+                </Grid>
+                <Grid item md={1}>{item.damageDegree}</Grid>
+                <Grid item md={1} container justify="center"><CloseIcon onClick={() => this.removeDamage(index)} /></Grid>
+              </Grid>
+            ))
+          }
         </Grid>
         <AddDamagesModal
-          open={this.state.modalOpen}
+          clickPosition={clickPosition}
+          open={modalOpen}
+          onSubmit={this.formHandler}
           handleClose={() => this.setState({ modalOpen: false })}
         />
       </Grid>

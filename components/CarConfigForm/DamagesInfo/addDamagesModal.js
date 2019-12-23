@@ -12,6 +12,19 @@ import CarImageContainer from '../ImageUploader/carSelector';
 
 import TrashIcon from '../../../assets/svg/trashIcon.svg';
 
+export const damagesOptions = [
+  { title: 'Add Custom Damage', comp: () => <p style={{ fontWeight: 'bold', color: '#1E88E5' }}>Add Custom Damage</p>, value: 'new' },
+  { title: 'Scratch', comp: () => <p>Scratch</p>, value: 'Scratch' },
+  { title: 'Dent', comp: () => <p>Dent</p>, value: 'Dent' },
+  { title: 'Clack', comp: () => <p>Clack</p>, value: 'Clack' },
+  { title: 'Clip', comp: () => <p>Clip</p>, value: 'Clip' },
+];
+
+export const damagesDegreeOptions = [
+  { title: 'Low', comp: () => <p>Low</p>, value: 'Low' },
+  { title: 'High', comp: () => <p>High</p>, value: 'High' },
+];
+
 const styles = {
   textarea: {
     marginTop: 25,
@@ -42,6 +55,11 @@ const styles = {
 type Props = {
   open: boolean,
   handleClose: Function,
+  onSubmit: Function,
+  clickPosition: {
+    x: number,
+    y: number,
+  },
   classes: {
     imageButtons: {},
     photoContainer: {},
@@ -53,7 +71,10 @@ type Props = {
 type State = {
   selectedImages: Array<{
     size: number,
-  }>
+  }>,
+  damageType: string,
+  damageDegree: string,
+  damageDescription: string,
 }
 
 class AddDamages extends Component<Props, State> {
@@ -61,6 +82,9 @@ class AddDamages extends Component<Props, State> {
     super(props);
     this.state = {
       selectedImages: [],
+      damageType: '',
+      damageDegree: '',
+      damageDescription: '',
     };
   }
 
@@ -69,6 +93,14 @@ class AddDamages extends Component<Props, State> {
       const images = Array.from(files);
       this.setState({ selectedImages: images });
     }
+  };
+
+  handleSubmit = () => {
+    const { onSubmit, clickPosition } = this.props;
+    const { damageDescription, damageDegree, damageType } = this.state;
+    onSubmit({
+      damageDescription, damageDegree, damageType, position: { ...clickPosition },
+    });
   };
 
   render() {
@@ -85,19 +117,23 @@ class AddDamages extends Component<Props, State> {
             <Grid container spacing={2}>
               <Grid item xs={8}>
                 <Select
+                  onChange={(type) => this.setState({ damageType: type.value })}
                   placeholder="Damage type"
-                  options={[]}
+                  options={damagesOptions}
                 />
               </Grid>
               <Grid item xs={4}>
                 <Select
+                  onChange={(type) => this.setState({ damageDegree: type.value })}
                   placeholder="Degree"
-                  options={[]}
+                  options={damagesDegreeOptions}
                 />
               </Grid>
             </Grid>
             <Box className={classes.textarea}>
-              <Textarea />
+              <Textarea
+                onChange={(type) => this.setState({ damageDescription: type })}
+              />
             </Box>
           </Grid>
           <Grid container spacing={2} className={classes.photoContainer}>
@@ -135,7 +171,7 @@ class AddDamages extends Component<Props, State> {
             <Grid item xs={6}>
               <Button
                 disabled={false}
-                onClick={() => {}}
+                onClick={this.handleSubmit}
                 title="Add Damage"
                 style={{ width: '100%' }}
               />
