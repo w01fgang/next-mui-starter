@@ -4,6 +4,7 @@ import { Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 import Switch from '../../Switch';
+import AddDamagesModal from './addDamagesModal';
 
 import ExteriorBody from '../../../assets/svg/sedanBody.svg';
 import InteriorBody from '../../../assets/svg/sedanInterior.svg';
@@ -21,6 +22,7 @@ type Props = {
 
 type State = {
   exterior: boolean,
+  modalOpen: boolean,
 };
 
 const styles = {
@@ -57,6 +59,7 @@ const styles = {
 class DamagesInfo extends Component<Props, State> {
   state = {
     exterior: true,
+    modalOpen: false,
   };
 
   carBodyRef: any;
@@ -104,9 +107,10 @@ class DamagesInfo extends Component<Props, State> {
     );
   };
 
-  selectDamagesHandler = (event) => {
-    const rect = this.carBodyRef.firstElementChild.getBoundingClientRect();
-    console.log(Math.floor(event.clientY) - rect.top, Math.floor(event.clientX - rect.left));
+  selectDamagesHandler = () => {
+    // const rect = this.carBodyRef.firstElementChild.getBoundingClientRect();
+    // console.log(Math.floor(event.clientY) - rect.top, Math.floor(event.clientX - rect.left));
+    this.setState({ modalOpen: true });
   };
 
   render() {
@@ -148,6 +152,10 @@ class DamagesInfo extends Component<Props, State> {
             <Grid item md={1} container justify="center"><CloseIcon /></Grid>
           </Grid>
         </Grid>
+        <AddDamagesModal
+          open={this.state.modalOpen}
+          handleClose={() => this.setState({ modalOpen: false })}
+        />
       </Grid>
     );
   }

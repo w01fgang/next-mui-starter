@@ -23,11 +23,11 @@ const GreenRadio = withStyles({
 const useStyles = makeStyles(() => ({
   container: {
     width: '100%',
-    // $flow: have to be dinemic
+    // $flow: have to be dynamic
     border: (props) => props.border,
     boxSizing: 'border-box',
     borderRadius: '4px',
-    // $flow: have to be dinemic
+    // $flow: have to be dynamic
     background: (props) => props.background,
     cursor: 'pointer',
   },

@@ -14,14 +14,14 @@ const styles = {
   emptyPhoto: {
     padding: '0 15px',
     width: '100%',
-    height: '200px',
+    height: '100%',
     borderRadius: '8px',
     border: '1px solid #EEF4F8',
   },
   progressPhoto: {
     padding: '0 15px',
     width: '100%',
-    height: '200px',
+    height: '100%',
     borderRadius: '8px',
     boxShadow: '0px 5px 15px rgba(63, 63, 68, 0.1)',
   },
@@ -80,6 +80,12 @@ class CarSelector extends Component<Props, State> {
     cancelReaderHandler: () => {},
   };
 
+  componentDidMount() {
+    if (this.props.file) {
+      this.readFile(this.props.file);
+    }
+  }
+
   componentDidUpdate(prevProps) {
     if (
       (!prevProps.file && this.props.file)
@@ -137,7 +143,7 @@ class CarSelector extends Component<Props, State> {
         style={{ padding: 0 }}
         className={classes.progressPhoto}
       >
-        <img style={{ width: '100%', height: '160px' }} src={this.state.resultImage} alt="" />
+        <img style={{ width: '100%', height: '80%' }} src={this.state.resultImage} alt="" />
         <Grid container alignItems="center" justify="space-between" style={{ padding: '0 15px' }}>
           <Box>{this.state.fileName}</Box>
           <Box

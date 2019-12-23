@@ -87,7 +87,7 @@ class ImageUploader extends Component<Props, State> {
         <Grid container spacing={3}>
           {
             Object.keys(this.state).map((item, index) => (
-              <Grid item xs={12} sm={4} md={4} key={item}>
+              <Grid item xs={12} sm={4} md={4} key={item} style={{ height: '200px' }}>
                 <CarImageContainer
                   index={index}
                   file={this.state[`imageFile${index}`]}
