@@ -4,10 +4,9 @@ import { Box, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 import CarImageContainer from './carSelector';
+import FileInput from '../../FileInput';
 
-import ImageIcon from '../../../assets/svg/imageIcon.svg';
-
-const styles = {
+const styles = (theme) => ({
   container: {
     borderBottom: '1px solid #EEF4F8',
     margin: '25px',
@@ -15,42 +14,47 @@ const styles = {
   },
   photoButtonText: { display: 'flex', alignItems: 'center' },
   photoButton: {
-    marginTop: '25px', background: 'white', color: '#1E88E5', border: '1px solid #A3D2FC', boxShadow: 'none',
+    marginTop: '25px',
+    background: 'white',
+    color: '#1E88E5',
+    border: '1px solid #A3D2FC',
+    boxShadow: 'none',
   },
   fileInput: {
-    color: 'transparent',
-    width: 240,
-    height: 48,
-    '&::before': {
-      width: 240,
-      height: 48,
-      boxSizing: 'border-box',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      color: '#1E88E5',
-      fontWeight: 'bold',
-      fontSize: 13,
-      content: "'Choose Photos'",
-      background: 'white',
-      border: '1px solid #A3D2FC',
-      borderRadius: '3px',
-      padding: '5px 8px',
-      outline: 'none',
-      whiteSpace: 'nowrap',
-      userSelect: 'none',
-      cursor: 'pointer',
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
     },
-    '&::-webkit-file-upload-button': {
-      visibility: 'hidden',
+    [theme.breakpoints.up('sm')]: {
+      width: 190,
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: 240,
     },
   },
-};
+  removeButton: {
+    [theme.breakpoints.down('xs')]: {
+      marginTop: '25px',
+      background: 'white',
+      color: '#1E88E5',
+      border: '1px solid #A3D2FC',
+      boxShadow: 'none',
+      width: '100%',
+      height: '48px',
+      justifyContent: 'center',
+      alignItems: 'center',
+      display: 'flex',
+      borderRadius: '4px',
+      fontWeight: 'bold',
+      fontSize: '13px',
+    },
+  },
+});
 
 type Props = {
   classes: {
     container: {},
     fileInput: {},
+    removeButton: {},
   },
 };
 
@@ -97,16 +101,12 @@ class ImageUploader extends Component<Props, State> {
           }
         </Grid>
         <Grid container justify="space-between" alignItems="center" style={{ marginTop: '25px' }}>
-          <Box style={{ position: 'relative', display: 'flex' }}>
-            <input
-              type="file"
-              multiple
-              className={classes.fileInput}
-              onChange={(e) => this.selectThumbnailImage(e.target)}
+          <Box className={classes.fileInput}>
+            <FileInput
+              handleChange={this.selectThumbnailImage}
             />
-            <ImageIcon style={{ position: 'absolute', left: '50px', top: '16px' }} />
           </Box>
-          { this.state.imageFile0 && <Box onClick={this.removeImages}>Remove all</Box> }
+          { this.state.imageFile0 && <Box className={classes.removeButton} onClick={this.removeImages}>Remove all</Box> }
         </Grid>
       </Box>
     );

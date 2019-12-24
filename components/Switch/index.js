@@ -1,7 +1,7 @@
 import { withStyles } from '@material-ui/core/styles';
 import { Switch } from '@material-ui/core';
 
-const styles = {
+const AntSwitch = withStyles({
   root: {
     width: 34,
     height: 18,
@@ -32,6 +32,7 @@ const styles = {
     opacity: 1,
     backgroundColor: 'white',
   },
-};
+  checked: {},
+})(Switch);
 
-export default withStyles(styles)(Switch);
+export default AntSwitch;

@@ -45,6 +45,7 @@ type TabProps = {
   },
   isActive: boolean,
   icon: any,
+  activeIcon: any,
   onChange: Function,
   index: number
 };
@@ -52,6 +53,7 @@ type TabProps = {
 type TabContainerProps = {
   data: Array<{
     icon: any,
+    activeIcon: any,
     component: any,
     data: {
       id: string,
@@ -63,14 +65,14 @@ type TabContainerProps = {
 
 function Tab(props: TabProps) {
   const {
-    data, isActive, icon: Icon, onChange, index,
+    data, isActive, icon: Icon, onChange, index, activeIcon: ActiveIcon,
   } = props;
   const styleProps = { borderBottom: isActive ? '2px solid #1E88E5' : '' };
   const classes = useStyles(styleProps);
 
   return (
     <Grid className={classes.tabContainer} onClick={() => onChange(index)}>
-      { Icon && <Icon className={classes.icon} /> }
+      { isActive ? <ActiveIcon className={classes.icon} /> : <Icon className={classes.icon} /> }
       <Typography color={isActive ? 'primary' : 'inherit'}><FormattedMessage {...data} /></Typography>
     </Grid>
   );
@@ -87,6 +89,7 @@ function TubContainer(props: TabContainerProps) {
         {
           data.map((item, i) => (
             <Tab
+              activeIcon={item.activeIcon}
               onChange={setActiveTab}
               key={item.data.id}
               index={i}

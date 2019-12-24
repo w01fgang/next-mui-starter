@@ -10,9 +10,12 @@ import DamagesInfo from './DamagesInfo';
 
 import TubContainer from '../TubContainer';
 import Button from '../TestButton';
-import Car from '../../assets/svg/carIcon.svg';
+import CarIconFill from '../../assets/svg/carIconFill.svg';
+import CarIcon from '../../assets/svg/carIcon.svg';
 import ImagePickerIcon from '../../assets/svg/imagePickerIcon.svg';
+import ImagePickerIconFill from '../../assets/svg/imagePickerIconFill.svg';
 import WarninigIconWithPlus from '../../assets/svg/warninigIconWithPlus.svg';
+import WarninigIconWithPlusFill from '../../assets/svg/warninigIconWithPlusFill.svg';
 
 const useStyles = makeStyles((theme) => ({
   buttonContainer: {
@@ -51,11 +54,13 @@ const tabs = [
   {
     data: {
       id: 'сarConfiguration.carInfoTab',
+
       description: 'Tab',
       defaultMessage: 'Tab',
     },
     component: VehicleInformation,
-    icon: Car,
+    icon: CarIcon,
+    activeIcon: CarIconFill,
   },
   {
     data: {
@@ -65,6 +70,7 @@ const tabs = [
     },
     component: ImageUploader,
     icon: ImagePickerIcon,
+    activeIcon: ImagePickerIconFill,
   },
   {
     data: {
@@ -74,6 +80,7 @@ const tabs = [
     },
     component: DamagesInfo,
     icon: WarninigIconWithPlus,
+    activeIcon: WarninigIconWithPlusFill,
   },
 ];
 

@@ -6,6 +6,11 @@ import ImageIcon from '../../assets/svg/imageIcon.svg';
 
 // $flow: flow error with colling useStyles
 const useStyles = makeStyles({
+  container: {
+    position: 'relative',
+    display: 'flex',
+    width: '100%',
+  },
   fileInput: {
     color: 'transparent',
     width: '100%',
@@ -46,19 +51,19 @@ const useStyles = makeStyles({
 
 type Props = {
   handleChange: Function,
-  title: string,
+  title?: string,
 }
 
-export default function ({ handleChange, title }: Props) {
-  const iconLeftPosition = `calc(50% - ${((title.length || 'Choose Photos'.length) * 4) + 10}px)`;
+function FileInput({ handleChange, title }: Props) {
+  const iconLeftPosition = `calc(50% - ${(((title && title.length) || 'Choose Photos'.length) * 4) + 10}px)`;
   const styleProps = {
     left: iconLeftPosition,
-    content: `'${title}'` || "'Choose Photos'",
+    content: title ? `'${title}'` : "'Choose Photos'",
   };
   // $flow: need to pass object
   const classes = useStyles(styleProps);
   return (
-    <Box style={{ position: 'relative', display: 'flex' }}>
+    <Box className={classes.container}>
       <input
         type="file"
         multiple
@@ -69,3 +74,9 @@ export default function ({ handleChange, title }: Props) {
     </Box>
   );
 }
+
+FileInput.defaultProps = {
+  title: '',
+};
+
+export default FileInput;

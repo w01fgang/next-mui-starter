@@ -115,14 +115,14 @@ class AddDamages extends Component<Props, State> {
         >
           <Grid>
             <Grid container spacing={2}>
-              <Grid item xs={8}>
+              <Grid item xs={12} sm={8}>
                 <Select
                   onChange={(type) => this.setState({ damageType: type.value })}
                   placeholder="Damage type"
                   options={damagesOptions}
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={12} sm={4}>
                 <Select
                   onChange={(type) => this.setState({ damageDegree: type.value })}
                   placeholder="Degree"
@@ -139,9 +139,8 @@ class AddDamages extends Component<Props, State> {
           <Grid container spacing={2} className={classes.photoContainer}>
             {
               selectedImages.map((item) => (
-                <Grid item xs={6} style={{ height: '150px' }}>
+                <Grid item xs={12} key={item.size} sm={6} style={{ height: '150px' }}>
                   <CarImageContainer
-                    key={item.size}
                     index={1}
                     file={item}
                   />
@@ -150,7 +149,7 @@ class AddDamages extends Component<Props, State> {
             }
           </Grid>
           <Grid container spacing={2} className={classes.imageButtons}>
-            <Grid item xs={selectedImages.length !== 0 ? 6 : 12}>
+            <Grid item xs={12} sm={selectedImages.length !== 0 ? 6 : 12}>
               <FileInput
                 title="Upload Photos"
                 handleChange={this.selectImage}
@@ -158,7 +157,7 @@ class AddDamages extends Component<Props, State> {
             </Grid>
             {
               selectedImages.length !== 0 && (
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6}>
                   <Box className={classes.removeButton} onClick={() => this.setState({ selectedImages: [] })}>
                     <TrashIcon />
                     Remove all

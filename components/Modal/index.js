@@ -7,13 +7,18 @@ import {
 import CloseIcon from '../../assets/svg/closeIcon.svg';
 
 // $flow: error with colling useStyles
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    overflow: 'scroll',
+    maxHeight: '100%',
     '&::focus': {
       outLine: 'none !important',
+    },
+    [theme.breakpoints.up('xs')]: {
+      margin: 25,
     },
   },
   root: {
@@ -39,7 +44,7 @@ const useStyles = makeStyles({
   modalBody: {
     padding: '25px 25px 30px',
   },
-});
+}));
 
 type Props = {
   open: boolean,

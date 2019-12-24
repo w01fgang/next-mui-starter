@@ -12,12 +12,14 @@ import CloseIcon from '../../../assets/svg/closeIcon.svg';
 
 type Props = {
   classes: {
+    container: {},
     damagesSelector: {},
     damagesStateContainer: {},
     damagesInfo: {},
     damagesHeader: {},
     damagesInfoRow: {},
     damageIcon: {},
+    infoTap: {},
   },
 }
 
@@ -39,13 +41,49 @@ type State = {
   }
 };
 
-const styles = {
+const styles = (theme) => ({
+  container: {
+    [theme.breakpoints.down('xs')]: {
+      display: 'block',
+      borderBottom: 'none',
+      marginBottom: 0,
+    },
+    [theme.breakpoints.up('lg')]: {
+      display: 'flex',
+    },
+    borderBottom: '1px solid #EEF4F8',
+    marginBottom: 30,
+  },
   damagesSelector: {
     borderRight: '1px solid #EEF4F8',
     width: '35%',
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
+      borderBottom: '1px solid #EEF4F8',
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: '43%',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '35%',
+    },
   },
   damagesInfo: {
     width: '65%',
+    display: 'flex',
+    flexDirection: 'column',
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
+      minHeight: 230,
+      borderBottom: '1px solid #EEF4F8',
+      marginBottom: 25,
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: '57%',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '65%',
+    },
   },
   damagesStateContainer: {
     height: 66,
@@ -61,6 +99,12 @@ const styles = {
     fontSize: '10px',
     height: 66,
     color: '#99ABB4',
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
+    [theme.breakpoints.up('lg')]: {
+      display: 'flex',
+    },
   },
   damagesInfoRow: {
     borderBottom: '1px solid #EEF4F8',
@@ -81,7 +125,19 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
   },
-};
+  infoTap: {
+    flex: 1,
+    width: '100%',
+    display: 'flex',
+    textAlign: 'center',
+    padding: 'auto',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: '600',
+    fontSize: 16,
+    color: '#99ABB4',
+  },
+});
 
 class DamagesInfo extends Component<Props, State> {
   state = {
@@ -136,10 +192,10 @@ class DamagesInfo extends Component<Props, State> {
     );
   };
 
-  selectDamagesHandler = ({ clientX, clientY }) => {
+  selectDamagesHandler = ({ pageX, pageY }) => {
     // const rect = this.carBodyRef.firstElementChild.getBoundingClientRect();
     // console.log(Math.floor(event.clientY) - rect.top, Math.floor(event.clientX - rect.left));
-    this.setState({ modalOpen: true, clickPosition: { x: clientX, y: clientY } });
+    this.setState({ modalOpen: true, clickPosition: { x: pageX, y: pageY } });
   };
 
   formHandler = (damage) => {
@@ -160,7 +216,7 @@ class DamagesInfo extends Component<Props, State> {
     const { clickPosition, modalOpen, damages } = this.state;
     const CarBody = this.state.exterior ? ExteriorBody : InteriorBody;
     return (
-      <Grid container>
+      <Grid container className={classes.container}>
         <Grid className={classes.damagesSelector}>
           {this.renderDamagesStateContainer()}
           <Grid
@@ -195,24 +251,25 @@ class DamagesInfo extends Component<Props, State> {
         </Grid>
         <Grid className={classes.damagesInfo}>
           <Grid container className={classes.damagesHeader} alignItems="center">
-            <Grid item md={1} container justify="center">No</Grid>
-            <Grid item md={9}>Damage name</Grid>
-            <Grid item md={1}>Degree</Grid>
-            <Grid item md={1} container justify="center" />
+            <Grid item xs={1} sm={2} md={1} container justify="center">No</Grid>
+            <Grid item xs={9} sm={7} md={9}>Damage name</Grid>
+            <Grid item xs={1}>Degree</Grid>
+            <Grid item xs={1} sm={2} md={1} container justify="center" />
           </Grid>
           {
             damages.map((item, index) => (
               <Grid key={item.position.x} container alignItems="center" className={classes.damagesInfoRow}>
-                <Grid item md={1} container justify="center">{index + 1}</Grid>
-                <Grid item md={9}>
+                <Grid item xs={1} sm={2} md={1} container justify="center">{index + 1}</Grid>
+                <Grid item xs={9} sm={7} md={9}>
                   <Grid style={{ fontWeight: '500', textDecoration: 'underline', color: '#1E88E5' }}>{item.damageType}</Grid>
                   <Grid style={{ fontSize: '10px', color: '#99ABB4' }}>{item.damageDescription}</Grid>
                 </Grid>
-                <Grid item md={1}>{item.damageDegree}</Grid>
-                <Grid item md={1} container justify="center"><CloseIcon onClick={() => this.removeDamage(index)} /></Grid>
+                <Grid item xs={1}>{item.damageDegree}</Grid>
+                <Grid item xs={1} sm={2} md={1} container justify="center"><CloseIcon onClick={() => this.removeDamage(index)} /></Grid>
               </Grid>
             ))
           }
+          <Box className={classes.infoTap}>Tap on vehicle part for add damage</Box>
         </Grid>
         <AddDamagesModal
           clickPosition={clickPosition}
