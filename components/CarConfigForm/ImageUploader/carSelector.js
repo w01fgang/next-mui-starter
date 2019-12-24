@@ -56,6 +56,7 @@ type Props = {
     loaderContainer: {},
     loadPercent: {},
   },
+  onRemoveCurrentImage: Function,
   file: {
     size: number,
     name: string
@@ -99,7 +100,12 @@ class CarSelector extends Component<Props, State> {
     }
   }
 
-  removeImage = () => this.setState({ uploadStatus: 'default' });
+  removeImage = () => {
+    const { onRemoveCurrentImage, file } = this.props;
+    if (onRemoveCurrentImage) {
+      onRemoveCurrentImage(file);
+    } else this.setState({ uploadStatus: 'default' });
+  };
 
   readFile = (file) => {
     const fileReader = new FileReader();

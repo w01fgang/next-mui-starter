@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { useIntl } from 'react-intl';
 
+import messages from './messages';
+
 import VehicleInformation from './VehicleInformation';
 import ImageUploader from './ImageUploader';
 import DamagesInfo from './DamagesInfo';
@@ -86,7 +88,8 @@ const tabs = [
 
 function Form() {
   const classes = useStyles();
-  const { messages } = useIntl();
+  const intl = useIntl();
+
   return (
     <Box className={classes.formContainer}>
       <TubContainer data={tabs} />
@@ -95,14 +98,14 @@ function Form() {
           disabled={false}
           onClick={() => {}}
           className={classes.button}
-          title={messages['сarConfiguration.form.confirmButton']}
+          title={intl.formatMessage(messages.confirmButton)}
           style={{ marginRight: '16px' }}
         />
         <Button
           disabled={false}
           onClick={() => {}}
           className={classes.button}
-          title={messages['сarConfiguration.form.confirmButton']}
+          title={intl.formatMessage(messages.cancelButton)}
           style={{ background: 'white', color: '#455A64' }}
         />
       </Box>

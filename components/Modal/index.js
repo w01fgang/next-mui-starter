@@ -12,8 +12,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'scroll',
-    maxHeight: '100%',
     '&::focus': {
       outLine: 'none !important',
     },

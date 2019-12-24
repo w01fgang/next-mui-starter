@@ -193,8 +193,9 @@ class DamagesInfo extends Component<Props, State> {
   };
 
   selectDamagesHandler = ({ pageX, pageY }) => {
+    // with this code we will receive position relatively to svg
     // const rect = this.carBodyRef.firstElementChild.getBoundingClientRect();
-    // console.log(Math.floor(event.clientY) - rect.top, Math.floor(event.clientX - rect.left));
+    // console.log(Math.floor(event.pageY) - rect.top, Math.floor(event.pageX - rect.left));
     this.setState({ modalOpen: true, clickPosition: { x: pageX, y: pageY } });
   };
 
@@ -213,8 +214,10 @@ class DamagesInfo extends Component<Props, State> {
 
   render() {
     const { classes } = this.props;
-    const { clickPosition, modalOpen, damages } = this.state;
-    const CarBody = this.state.exterior ? ExteriorBody : InteriorBody;
+    const {
+      clickPosition, modalOpen, damages, exterior,
+    } = this.state;
+    const CarBody = exterior ? ExteriorBody : InteriorBody;
     return (
       <Grid container className={classes.container}>
         <Grid className={classes.damagesSelector}>
@@ -229,21 +232,25 @@ class DamagesInfo extends Component<Props, State> {
             }}
           >
             {
-              damages.map((item, index) => (
-                <Box
-                  style={{
-                    left: item.position.x,
-                    top: item.position.y,
-                  }}
-                  className={classes.damageIcon}
-                  key={item.position.x}
-                  index
-                >
-                  {index + 1}
-                </Box>
-              ))
+              damages.map((item, index) => {
+                if (item.exterior !== exterior) return null;
+                return (
+                  <Box
+                    style={{
+                      left: item.position.x,
+                      top: item.position.y,
+                    }}
+                    className={classes.damageIcon}
+                    key={item.position.x}
+                    index
+                  >
+                    {index + 1}
+                  </Box>
+                );
+              })
             }
             <CarBody
+              id="car-body-for-selecting-damages"
               className="testSvg"
               onClick={this.selectDamagesHandler}
             />
@@ -272,6 +279,7 @@ class DamagesInfo extends Component<Props, State> {
           <Box className={classes.infoTap}>Tap on vehicle part for add damage</Box>
         </Grid>
         <AddDamagesModal
+          exterior={exterior}
           clickPosition={clickPosition}
           open={modalOpen}
           onSubmit={this.formHandler}

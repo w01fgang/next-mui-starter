@@ -54,6 +54,7 @@ const styles = {
 
 type Props = {
   open: boolean,
+  exterior: boolean,
   handleClose: Function,
   onSubmit: Function,
   clickPosition: {
@@ -71,6 +72,7 @@ type Props = {
 type State = {
   selectedImages: Array<{
     size: number,
+    lastModified: number,
   }>,
   damageType: string,
   damageDegree: string,
@@ -91,15 +93,25 @@ class AddDamages extends Component<Props, State> {
   selectImage = ({ files }) => {
     if (files) {
       const images = Array.from(files);
-      this.setState({ selectedImages: images });
+      this.setState((prevState) => ({ selectedImages: [...prevState.selectedImages, ...images] }));
     }
   };
 
+  removeImage = (image) => {
+    this.setState((prevState) => ({
+      selectedImages: prevState.selectedImages.filter((item) => item.lastModified !== image.lastModified),
+    }));
+  };
+
   handleSubmit = () => {
-    const { onSubmit, clickPosition } = this.props;
+    const { onSubmit, clickPosition, exterior } = this.props;
     const { damageDescription, damageDegree, damageType } = this.state;
     onSubmit({
-      damageDescription, damageDegree, damageType, position: { ...clickPosition },
+      damageDescription,
+      damageDegree,
+      damageType,
+      exterior,
+      position: { ...clickPosition },
     });
   };
 
@@ -139,8 +151,9 @@ class AddDamages extends Component<Props, State> {
           <Grid container spacing={2} className={classes.photoContainer}>
             {
               selectedImages.map((item) => (
-                <Grid item xs={12} key={item.size} sm={6} style={{ height: '150px' }}>
+                <Grid item xs={12} key={item.lastModified} sm={6} style={{ height: '150px' }}>
                   <CarImageContainer
+                    onRemoveCurrentImage={this.removeImage}
                     index={1}
                     file={item}
                   />

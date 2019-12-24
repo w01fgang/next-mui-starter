@@ -94,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
 function CarInfo() {
   const [selectedCarOwner, setCarOwner] = React.useState(null);
   const [parametersOpen, setParametersOpen] = useState(false);
-  const { messages: intlMess } = useIntl();
+  const intl = useIntl();
   const classes = useStyles();
 
   return (
@@ -105,7 +105,7 @@ function CarInfo() {
           <Grid item xs={12} sm={4} md={4}>
             <Select
               onChange={() => {}}
-              placeholder={intlMess['сarConfiguration.form.brandSelect']}
+              placeholder={intl.formatMessage(messages.brandSelect)}
               isMandatory
               options={brandOptions}
             />
@@ -114,7 +114,7 @@ function CarInfo() {
             <Select
               onChange={() => {}}
               isMandatory
-              placeholder={intlMess['сarConfiguration.form.modelSelect']}
+              placeholder={intl.formatMessage(messages.modelSelect)}
               options={carOptions}
             />
           </Grid>
@@ -122,14 +122,14 @@ function CarInfo() {
             <Select
               onChange={() => {}}
               isMandatory
-              placeholder={intlMess['сarConfiguration.form.bodySelect']}
+              placeholder={intl.formatMessage(messages.bodySelect)}
               options={carOptions}
             />
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
             <Select
               onChange={() => {}}
-              placeholder={intlMess['сarConfiguration.form.yearSelect']}
+              placeholder={intl.formatMessage(messages.yearSelect)}
               isMandatory
               options={carOptions}
             />
@@ -138,13 +138,13 @@ function CarInfo() {
             <Select
               onChange={() => {}}
               icon={QuestionIcon}
-              placeholder={intlMess['сarConfiguration.form.locationSelect']}
+              placeholder={intl.formatMessage(messages.locationSelect)}
               options={carOptions}
             />
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
             <Input
-              placeholder={intlMess['сarConfiguration.form.plateNumberSelect']}
+              placeholder={intl.formatMessage(messages.plateNumberSelect)}
               icon={ShapeIcon}
             />
           </Grid>
@@ -155,7 +155,7 @@ function CarInfo() {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4}>
             <Radio
-              label={intlMess['сarConfiguration.form.radio.ownCar']}
+              label={intl.formatMessage(messages.radioOwnCar)}
               checked={selectedCarOwner === 'own car'}
               onChange={() => setCarOwner('own car')}
               name="own car"
@@ -163,7 +163,7 @@ function CarInfo() {
           </Grid>
           <Grid item xs={12} sm={4}>
             <Radio
-              label={intlMess['сarConfiguration.form.radio.companyCar']}
+              label={intl.formatMessage(messages.radioCompanyCar)}
               checked={selectedCarOwner === 'company car'}
               onChange={() => setCarOwner('company car')}
               name="company car"
@@ -198,65 +198,65 @@ function CarInfo() {
           <Grid container spacing={3} style={{ marginTop: '25px' }}>
             <Grid item xs={12} sm={3}>
               <Input
-                placeholder={intlMess['сarConfiguration.form.odometerInput']}
+                placeholder={intl.formatMessage(messages.odometerInput)}
                 icon={ShapeIcon}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={3}>
               <Select
                 onChange={() => {}}
-                placeholder={intlMess['сarConfiguration.form.colorSelect']}
+                placeholder={intl.formatMessage(messages.colorSelect)}
                 options={colorOption}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={2}>
               <Select
                 onChange={() => {}}
-                placeholder={intlMess['сarConfiguration.form.passengersSelect']}
+                placeholder={intl.formatMessage(messages.passengersSelect)}
                 options={[]}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={2}>
               <Select
                 onChange={() => {}}
-                placeholder={intlMess['сarConfiguration.form.fuelTypeSelect']}
+                placeholder={intl.formatMessage(messages.fuelTypeSelect)}
                 options={[]}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={2}>
               <Select
                 onChange={() => {}}
-                placeholder={intlMess['сarConfiguration.form.transmissionSelect']}
+                placeholder={intl.formatMessage(messages.transmissionSelect)}
                 options={[]}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={3}>
               <Input
-                placeholder={intlMess['сarConfiguration.form.kilometresInput']}
+                placeholder={intl.formatMessage(messages.kilometresInput)}
                 icon={KmIcon}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={3}>
               <Input
-                placeholder={intlMess['сarConfiguration.form.extraPriseInput']}
+                placeholder={intl.formatMessage(messages.extraPriseInput)}
                 icon={EuroIconKm}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={2}>
               <Input
-                placeholder={intlMess['сarConfiguration.form.priceInput']}
+                placeholder={intl.formatMessage(messages.priceInput)}
                 icon={EuroIcon}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={2}>
               <Input
-                placeholder={intlMess['сarConfiguration.form.financeInput']}
+                placeholder={intl.formatMessage(messages.financeInput)}
                 icon={FinanceIcon}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={2}>
               <Input
-                placeholder={intlMess['сarConfiguration.form.depositInput']}
+                placeholder={intl.formatMessage(messages.depositInput)}
                 icon={DepositIcon}
               />
             </Grid>

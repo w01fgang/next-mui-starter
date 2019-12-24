@@ -33,7 +33,7 @@ const styles = {
 };
 
 type Props = {
-  placeholder: string,
+  placeholder: any,
   options: Array<{
     value: number,
     title: string,
@@ -51,7 +51,7 @@ type Props = {
 };
 
 type State = {
-  open: boolean,
+  open: boolean | string,
   value: any,
   clientWidth: number,
 }
@@ -105,10 +105,7 @@ class Select extends Component<Props, State> {
                   {
                     this.props.options.map(({ comp: Comp, ...item }) => (
                       <MenuItem
-                        onClick={(event) => {
-                          this.handleClose(event);
-                          this.onChange({ ...item, Comp });
-                        }}
+                        onClick={() => this.onChange({ ...item, Comp })}
                         key={item.value}
                       >
                         { Comp ? <Comp /> : item.title }
@@ -127,7 +124,7 @@ class Select extends Component<Props, State> {
   onChange = (item) => {
     const { onChange } = this.props;
     onChange(item);
-    this.setState({ value: item.title, open: false });
+    this.setState({ value: item.title, open: 'false' });
   };
 
   render() {
