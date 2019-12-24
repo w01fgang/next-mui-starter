@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Box, Grid } from '@material-ui/core';
 import { Circle } from 'rc-progress';
+import clsx from 'clsx';
 
 import carFrontView from '../../../assets/svg/carFrontView.svg';
 import carProfileView from '../../../assets/svg/carProfileView.svg';
@@ -14,16 +15,23 @@ const styles = {
   emptyPhoto: {
     padding: '0 15px',
     width: '100%',
+    minHeight: 160,
+    maxHeight: 220,
     height: '100%',
     borderRadius: '8px',
     border: '1px solid #EEF4F8',
   },
   progressPhoto: {
     padding: '0 15px',
+    minHeight: 160,
+    maxHeight: 220,
     width: '100%',
     height: '100%',
     borderRadius: '8px',
     boxShadow: '0px 5px 15px rgba(63, 63, 68, 0.1)',
+  },
+  completeContainer: {
+    padding: 0,
   },
   loaderContainer: {
     marginTop: 45,
@@ -45,6 +53,19 @@ const styles = {
     fontWeight: 'bold',
     fontSize: 10,
   },
+  infoSection: { padding: '0 15px' },
+  removeButton: {
+    color: '#1E88E5',
+    textDecoration: 'underline',
+    cursor: 'pointer',
+  },
+  cancelLoading: {
+    color: '#1E88E5',
+    textDecoration: 'underline',
+    cursor: 'pointer',
+  },
+  image: { width: '100%', height: '80%' },
+  loadingButtons: { marginTop: '35px' },
 };
 
 type Props = {
@@ -54,7 +75,13 @@ type Props = {
     progressPhoto: {},
     fileSize: {},
     loaderContainer: {},
+    cancelLoading: {},
+    loadingButtons: {},
+    image: {},
+    infoSection: {},
     loadPercent: {},
+    completeContainer: {},
+    removeButton: {},
   },
   onRemoveCurrentImage: Function,
   file: {
@@ -145,15 +172,12 @@ class CarSelector extends Component<Props, State> {
   renderCompletedState = () => {
     const { classes } = this.props;
     return (
-      <Box
-        style={{ padding: 0 }}
-        className={classes.progressPhoto}
-      >
-        <img style={{ width: '100%', height: '80%' }} src={this.state.resultImage} alt="" />
-        <Grid container alignItems="center" justify="space-between" style={{ padding: '0 15px' }}>
+      <Box className={clsx(classes.progressPhoto, classes.completeContainer)}>
+        <img className={classes.image} src={this.state.resultImage} alt="" />
+        <Grid container alignItems="center" justify="space-between" className={classes.infoSection}>
           <Box>{this.state.fileName}</Box>
           <Box
-            style={{ color: '#1E88E5', textDecoration: 'underline', cursor: 'pointer' }}
+            className={classes.removeButton}
             onClick={this.removeImage}
           >
             Remove
@@ -183,9 +207,9 @@ class CarSelector extends Component<Props, State> {
           <Circle percent={loadPercent} strokeWidth="4" strokeColor="#1E88E5" />
         </Box>
         <Box className={classes.fileSize}>{`${currentFileSize} / ${fileSize} mb`}</Box>
-        <Grid container alignItems="center" justify="space-between" style={{ marginTop: '35px' }}>
+        <Grid container alignItems="center" justify="space-between" className={classes.loadingButtons}>
           <Box>{fileName}</Box>
-          <Box style={{ color: '#1E88E5', textDecoration: 'underline', cursor: 'pointer' }} onClick={this.cancelReaderHandler}>cancel</Box>
+          <Box className={classes.cancelLoading} onClick={this.cancelReaderHandler}>cancel</Box>
         </Grid>
       </Grid>
     );

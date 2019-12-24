@@ -23,6 +23,7 @@ const styles = {
     padding: 15,
     background: 'white',
   },
+  container: { display: 'flex', alignItems: 'center' },
   placeholder: {
     transition: 'all 0.5s ease',
     position: 'absolute',
@@ -30,6 +31,8 @@ const styles = {
     background: 'white',
     padding: '0 4px',
   },
+  propsIcon: { marginRight: '10px' },
+  popper: { zIndex: 2 },
 };
 
 type Props = {
@@ -41,13 +44,16 @@ type Props = {
   }>,
   classes: {
     root: {},
+    popper: {},
     placeholder: {},
+    propsIcon: {},
+    container: {},
   },
   isMandatory: boolean,
   icon: React$ComponentType<*>,
   withShadow: boolean,
   prevOpen: any,
-  onChange: ({}) => void,
+  onChange?: ({}) => void,
 };
 
 type State = {
@@ -56,10 +62,18 @@ type State = {
   clientWidth: number,
 }
 
+const DownIcon = withStyles({
+  container: { marginLeft: '10px' },
+})(({ classes }) => <DownArrowIcon className={classes.container} />);
+
 class Select extends Component<Props, State> {
   anchorRef: any;
 
   prevOpen: any;
+
+  static defaultProps = {
+    onChange: () => {},
+  };
 
   constructor(props) {
     super(props);
@@ -92,8 +106,10 @@ class Select extends Component<Props, State> {
 
   renderMenu = () => {
     const { open, clientWidth } = this.state;
+    const { classes } = this.props;
+
     return (
-      <Popper style={{ zIndex: 2 }} open={open} anchorEl={this.anchorRef} role={undefined} key="papper" transition disablePortal>
+      <Popper className={classes.popper} open={open} anchorEl={this.anchorRef} role={undefined} key="papper" transition disablePortal>
         {({ TransitionProps, placement }) => (
           <Grow
             {...TransitionProps}
@@ -123,6 +139,7 @@ class Select extends Component<Props, State> {
 
   onChange = (item) => {
     const { onChange } = this.props;
+    // $flow: add on callback to all instance
     onChange(item);
     this.setState({ value: item.title, open: 'false' });
   };
@@ -146,17 +163,17 @@ class Select extends Component<Props, State> {
         className={classes.root}
         onClick={this.handleToggle}
         ref={(node) => { this.anchorRef = node; }}
-        aria-controls={open ? 'menu-list-grow' : undefined}
+        aria-controls={open && 'menu-list-grow'}
         aria-haspopup="true"
       >
-        <Box style={{ display: 'flex', alignItems: 'center' }}>
-          {Icon && <Icon style={{ marginRight: '10px' }} />}
-          <p style={{ color: '#455A64' }}>{value || placeholder}</p>
+        <Box className={classes.container}>
+          {Icon && <Icon className={classes.propsIcon} />}
+          <p color="#455A64">{value || placeholder}</p>
         </Box>
         { value && <p className={classes.placeholder}>{placeholder}</p>}
-        <Box style={{ display: 'flex', alignItems: 'center' }}>
+        <Box className={classes.container}>
           {value && <Box onClick={() => this.setState({ value: '' })}>x</Box> }
-          <DownArrowIcon style={{ marginLeft: '10px' }} />
+          <DownIcon />
           { this.renderMenu() }
         </Box>
       </Box>

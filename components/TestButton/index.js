@@ -27,13 +27,12 @@ const styles = {
 // this component was written because exciting Button component unreuseble;
 const TestButton = (props: Props) => {
   const {
-    style, onClick, disabled, title, classes, ...rest
+    onClick, disabled, title, classes, ...rest
   } = props;
 
   return (
     <Button
       {...rest}
-      style={style}
       classes={classes}
       onClick={onClick}
       disabled={disabled}

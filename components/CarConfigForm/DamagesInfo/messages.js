@@ -81,4 +81,9 @@ export default defineMessages({
     defaultMessage: 'Interior',
     description: 'switch',
   },
+  clickInfo: {
+    id: 'сarConfiguration.damagesTub.clickInfo',
+    defaultMessage: 'Tap on vehicle part for add damage',
+    description: 'info how to tap',
+  },
 });

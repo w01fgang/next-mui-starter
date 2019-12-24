@@ -58,40 +58,6 @@ const useStyles = makeStyles((theme) => ({
   confirmButton: { marginRight: '16px' },
 }));
 
-const tabs = [
-  {
-    data: {
-      id: 'сarConfiguration.carInfoTab',
-
-      description: 'Tab',
-      defaultMessage: 'Tab',
-    },
-    component: VehicleInformation,
-    icon: CarIcon,
-    activeIcon: CarIconFill,
-  },
-  {
-    data: {
-      id: 'сarConfiguration.carImageTab',
-      description: 'Tab',
-      defaultMessage: 'Tab',
-    },
-    component: ImageUploader,
-    icon: ImagePickerIcon,
-    activeIcon: ImagePickerIconFill,
-  },
-  {
-    data: {
-      id: 'сarConfiguration.carDamagesTab',
-      description: 'Tab',
-      defaultMessage: 'Tab',
-    },
-    component: DamagesInfo,
-    icon: WarninigIconWithPlus,
-    activeIcon: WarninigIconWithPlusFill,
-  },
-];
-
 type Props = {
   onCancel: () => void,
   onSubmit: () => void
@@ -101,6 +67,27 @@ function Form(props: Props) {
   const classes = useStyles();
   const intl = useIntl();
   const { onCancel, onSubmit } = props;
+  const tabs = [
+    {
+      title: intl.formatMessage(messages.carInfoTab),
+      component: VehicleInformation,
+      icon: CarIcon,
+      activeIcon: CarIconFill,
+    },
+    {
+      title: intl.formatMessage(messages.imageUploadTab),
+      component: ImageUploader,
+      icon: ImagePickerIcon,
+      activeIcon: ImagePickerIconFill,
+    },
+    {
+      title: intl.formatMessage(messages.damagesInfoTab),
+      component: DamagesInfo,
+      icon: WarninigIconWithPlus,
+      activeIcon: WarninigIconWithPlusFill,
+    },
+  ];
+
 
   return (
     <Box className={classes.formContainer}>

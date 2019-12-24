@@ -19,6 +19,7 @@ type Props = {
     container: {},
     damagesSelector: {},
     damagesStateContainer: {},
+    stateLeftSelector: {},
     damagesInfo: {},
     damagesHeader: {},
     damagesInfoRow: {},
@@ -160,13 +161,17 @@ const styles = (theme) => ({
     fontSize: '15px',
     marginLeft: '30px',
   },
+  stateLeftSelector: {
+    fontSize: '15px',
+    marginRight: '30px',
+  },
   activeStateSelector: {
     color: '#99ABB4',
-    fonWeight: '500',
+    fontWeight: '500',
   },
   inactiveStateSelector: {
     color: '#455A64',
-    fonWeight: 'bold',
+    fontWeight: 'bold',
   },
   damageIconContainer: {
     margin: '30px 0',
@@ -200,7 +205,7 @@ class DamagesInfo extends Component<Props, State> {
       >
         <Grid
           className={clsx(
-            classes.stateSelector,
+            classes.stateLeftSelector,
             exterior ? classes.activeStateSelector : classes.inactiveStateSelector,
           )}
           item
@@ -304,7 +309,7 @@ class DamagesInfo extends Component<Props, State> {
               </Grid>
             ))
           }
-          <Box className={classes.infoTap}>Tap on vehicle part for add damage</Box>
+          <Box className={classes.infoTap}><FormattedMessage {...messages.clickInfo} /></Box>
         </Grid>
         <AddDamagesModal
           exterior={exterior}

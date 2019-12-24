@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/styles';
 
 type Props = {
   placeholder: string,
-  icon: void
+  icon: any,
 }
 
 const useStyles = makeStyles({

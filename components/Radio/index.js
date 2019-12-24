@@ -22,6 +22,7 @@ const GreenRadio = withStyles({
 
 const useStyles = makeStyles(() => ({
   container: {
+    height: 48,
     width: '100%',
     // $flow: have to be dynamic
     border: (props) => props.border,
@@ -34,6 +35,8 @@ const useStyles = makeStyles(() => ({
   label: {
     fontWeight: 'bold',
     fontSize: '14px',
+    display: 'flex',
+    alignItems: 'center',
   },
 }));
 
@@ -54,7 +57,7 @@ function CustomRadio(props: Props) {
         name={name}
         onChange={onChange}
       />
-      <p className={classes.label}>{label}</p>
+      <div className={classes.label}>{label}</div>
     </Grid>
   );
 }

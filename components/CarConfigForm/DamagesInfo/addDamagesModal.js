@@ -21,6 +21,7 @@ const styles = {
   },
   photoContainer: {
     marginTop: 20,
+    marginBottom: 20,
   },
   imageButtons: {
     marginTop: 20,
@@ -84,6 +85,10 @@ type State = {
   damageDescription: string,
 }
 
+const AddSelectorOption = withStyles({
+  container: { fontWeight: 'bold', color: '#1E88E5' },
+})(({ title, classes }) => <p className={classes.container}>{title}</p>);
+
 class AddDamages extends Component<Props, State> {
   constructor(props) {
     super(props);
@@ -142,7 +147,7 @@ class AddDamages extends Component<Props, State> {
     } = this.props;
     const { selectedImages } = this.state;
     const damagesOptions = [
-      { title: intl.formatMessage(messages.newDamage), comp: () => <p style={{ fontWeight: 'bold', color: '#1E88E5' }}>{intl.formatMessage(messages.newDamage)}</p>, value: 'new' },
+      { title: intl.formatMessage(messages.newDamage), comp: () => <AddSelectorOption title={intl.formatMessage(messages.newDamage)} />, value: 'new' },
       { title: intl.formatMessage(messages.damageScratch), comp: () => <p>{intl.formatMessage(messages.damageScratch)}</p>, value: 'Scratch' },
       { title: intl.formatMessage(messages.damageDent), comp: () => <p>{intl.formatMessage(messages.damageDent)}</p>, value: 'Dent' },
       { title: intl.formatMessage(messages.damageClack), comp: () => <p>{intl.formatMessage(messages.damageClack)}</p>, value: 'Clack' },

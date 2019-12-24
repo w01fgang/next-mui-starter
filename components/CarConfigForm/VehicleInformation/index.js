@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Button, Box } from '@material-ui/core';
+import {
+  Grid, Button, Box, Input as MaterialInput,
+} from '@material-ui/core';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Select from '../../Select';
@@ -51,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
       margin: '0 50px 0 45px',
     },
   },
+  info: { fontSize: '14px', margin: '25px 0 15px 0' },
   newAgency: {
     borderRadius: 4,
     textTransform: 'unset',
@@ -67,6 +70,9 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
       boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.25), 0px -1px 2px rgba(0, 0, 0, 0.1)',
     },
+  },
+  parameters: {
+    position: 'relative',
   },
   openButton: {
     border: '1px solid #A3D2FC',
@@ -89,6 +95,7 @@ const useStyles = makeStyles((theme) => ({
     left: 0,
     top: 44,
   },
+  parametersContainer: { marginTop: 25 },
 }));
 
 function CarInfo() {
@@ -96,6 +103,11 @@ function CarInfo() {
   const [parametersOpen, setParametersOpen] = useState(false);
   const intl = useIntl();
   const classes = useStyles();
+  const radioLabel = selectedCarOwner === 'company car' ? <MaterialInput /> : intl.formatMessage(messages.radioCompanyCar);
+
+  const onRadioChange = useCallback((name) => {
+    setCarOwner(name);
+  }, [setCarOwner]);
 
   return (
     <Grid className={classes.container}>
@@ -146,25 +158,25 @@ function CarInfo() {
         </Grid>
       </Grid>
       <Grid>
-        <p style={{ fontSize: '14px', margin: '25px 0 15px 0' }}><FormattedMessage {...messages.info} /></p>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={4}>
+        <p className={classes.info}><FormattedMessage {...messages.info} /></p>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={3} md={4}>
             <Radio
               label={intl.formatMessage(messages.radioOwnCar)}
               checked={selectedCarOwner === 'own car'}
-              onChange={() => setCarOwner('own car')}
+              onChange={() => onRadioChange('own car')}
               name="own car"
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <Radio
-              label={intl.formatMessage(messages.radioCompanyCar)}
+              label={radioLabel}
               checked={selectedCarOwner === 'company car'}
-              onChange={() => setCarOwner('company car')}
+              onChange={() => onRadioChange('company car')}
               name="company car"
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={3} md={4}>
             <Button className={classes.newAgency}>
               <Suit />
               <FormattedMessage {...messages.agencyButton} />
@@ -177,7 +189,7 @@ function CarInfo() {
         direction="row"
         justify="center"
         alignItems="center"
-        style={{ position: 'relative' }}
+        className={classes.parameters}
       >
         <Button
           onClick={() => setParametersOpen(!parametersOpen)}
@@ -190,7 +202,7 @@ function CarInfo() {
       </Grid>
       {
         parametersOpen && (
-          <Grid container spacing={3} style={{ marginTop: '25px' }}>
+          <Grid container spacing={3} className={classes.parametersContainer}>
             <Grid item xs={12} sm={3}>
               <Input
                 placeholder={intl.formatMessage(messages.odometerInput)}

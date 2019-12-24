@@ -48,7 +48,6 @@ const styles = (theme) => ({
       fontSize: '13px',
     },
   },
-  image: { height: '200px' },
   buttonContainer: { marginTop: '25px' },
 });
 
@@ -95,7 +94,7 @@ class ImageUploader extends Component<Props, State> {
         <Grid container spacing={3}>
           {
             Object.keys(this.state).map((item, index) => (
-              <Grid item xs={12} sm={4} md={4} key={item} className={classes.image}>
+              <Grid item xs={12} sm={4} md={4} key={item}>
                 <CarImageContainer
                   index={index}
                   file={this.state[`imageFile${index}`]}

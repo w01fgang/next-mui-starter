@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { Grid, Typography, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import { FormattedMessage } from 'react-intl';
 
 const useStyles = makeStyles((theme) => ({
   tabContainer: {
@@ -38,11 +37,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type TabProps = {
-  data: {
-    id: string,
-    description: string,
-    defaultMessage: string,
-  },
+  title: string,
   isActive: boolean,
   icon: any,
   activeIcon: any,
@@ -55,17 +50,13 @@ type TabContainerProps = {
     icon: any,
     activeIcon: any,
     component: any,
-    data: {
-      id: string,
-      description: string,
-      defaultMessage: string,
-    },
+    title: string,
   }>
 };
 
 function Tab(props: TabProps) {
   const {
-    data, isActive, icon: Icon, onChange, index, activeIcon: ActiveIcon,
+    title, isActive, icon: Icon, onChange, index, activeIcon: ActiveIcon,
   } = props;
   const styleProps = { borderBottom: isActive ? '2px solid #1E88E5' : '' };
   const classes = useStyles(styleProps);
@@ -73,7 +64,7 @@ function Tab(props: TabProps) {
   return (
     <Grid className={classes.tabContainer} onClick={() => onChange(index)}>
       { isActive ? <ActiveIcon className={classes.icon} /> : <Icon className={classes.icon} /> }
-      <Typography color={isActive ? 'primary' : 'inherit'}><FormattedMessage {...data} /></Typography>
+      <Typography color={isActive ? 'primary' : 'inherit'}>{title}</Typography>
     </Grid>
   );
 }
@@ -91,11 +82,11 @@ function TubContainer(props: TabContainerProps) {
             <Tab
               activeIcon={item.activeIcon}
               onChange={setActiveTab}
-              key={item.data.id}
+              key={item.title}
               index={i}
               isActive={activeTab === i}
               icon={item.icon}
-              data={item.data}
+              title={item.title}
             />
           ))
         }
