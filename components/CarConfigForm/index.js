@@ -3,6 +3,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { useIntl } from 'react-intl';
+import clsx from 'clsx';
 
 import messages from './messages';
 
@@ -50,6 +51,11 @@ const useStyles = makeStyles((theme) => ({
       width: 240,
     },
   },
+  cancelButton: {
+    background: 'white',
+    color: '#455A64',
+  },
+  confirmButton: { marginRight: '16px' },
 }));
 
 const tabs = [
@@ -86,9 +92,15 @@ const tabs = [
   },
 ];
 
-function Form() {
+type Props = {
+  onCancel: () => void,
+  onSubmit: () => void
+};
+
+function Form(props: Props) {
   const classes = useStyles();
   const intl = useIntl();
+  const { onCancel, onSubmit } = props;
 
   return (
     <Box className={classes.formContainer}>
@@ -96,17 +108,15 @@ function Form() {
       <Box className={classes.buttonContainer}>
         <Button
           disabled={false}
-          onClick={() => {}}
-          className={classes.button}
+          onClick={onSubmit}
+          className={clsx(classes.confirmButton, classes.button)}
           title={intl.formatMessage(messages.confirmButton)}
-          style={{ marginRight: '16px' }}
         />
         <Button
+          className={clsx(classes.cancelButton, classes.button)}
           disabled={false}
-          onClick={() => {}}
-          className={classes.button}
+          onClick={onCancel}
           title={intl.formatMessage(messages.cancelButton)}
-          style={{ background: 'white', color: '#455A64' }}
         />
       </Box>
     </Box>

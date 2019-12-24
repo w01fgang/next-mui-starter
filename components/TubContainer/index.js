@@ -46,7 +46,7 @@ type TabProps = {
   isActive: boolean,
   icon: any,
   activeIcon: any,
-  onChange: Function,
+  onChange: (number) => void,
   index: number
 };
 

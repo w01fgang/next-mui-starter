@@ -69,7 +69,6 @@ type State = {
   uploadStatus: string,
   resultImage: string,
   fileName: string,
-  cancelReaderHandler: Function,
 }
 
 class CarSelector extends Component<Props, State> {
@@ -78,7 +77,6 @@ class CarSelector extends Component<Props, State> {
     uploadStatus: 'default',
     fileName: '',
     resultImage: '',
-    cancelReaderHandler: () => {},
   };
 
   componentDidMount() {
@@ -100,6 +98,8 @@ class CarSelector extends Component<Props, State> {
     }
   }
 
+  cancelReaderHandler = () => {};
+
   removeImage = () => {
     const { onRemoveCurrentImage, file } = this.props;
     if (onRemoveCurrentImage) {
@@ -119,8 +119,8 @@ class CarSelector extends Component<Props, State> {
         this.setState({ loadPercent: progress });
       }
     };
+    this.cancelReaderHandler = fileReader.abort;
     this.setState({
-      cancelReaderHandler: fileReader.abort,
       fileName: file.name,
       uploadStatus: 'inProgress',
       // $flow: there are on need to convert file object
@@ -165,7 +165,7 @@ class CarSelector extends Component<Props, State> {
 
   renderLoadingState = () => {
     const { classes, file } = this.props;
-    const { loadPercent, fileName, cancelReaderHandler } = this.state;
+    const { loadPercent, fileName } = this.state;
     const currentFileSize = Math.floor((5 * 10) / 100);
     const fileSize = Math.floor(file ? file.size / 1000000 : 0);
     return (
@@ -185,7 +185,7 @@ class CarSelector extends Component<Props, State> {
         <Box className={classes.fileSize}>{`${currentFileSize} / ${fileSize} mb`}</Box>
         <Grid container alignItems="center" justify="space-between" style={{ marginTop: '35px' }}>
           <Box>{fileName}</Box>
-          <Box style={{ color: '#1E88E5', textDecoration: 'underline', cursor: 'pointer' }} onClick={cancelReaderHandler}>cancel</Box>
+          <Box style={{ color: '#1E88E5', textDecoration: 'underline', cursor: 'pointer' }} onClick={this.cancelReaderHandler}>cancel</Box>
         </Grid>
       </Grid>
     );

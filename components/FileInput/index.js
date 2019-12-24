@@ -50,7 +50,7 @@ const useStyles = makeStyles({
 });
 
 type Props = {
-  handleChange: Function,
+  handleChange: (SyntheticInputEvent<HTMLInputElement>) => void,
   title?: string,
 }
 
@@ -60,6 +60,10 @@ function FileInput({ handleChange, title }: Props) {
     left: iconLeftPosition,
     content: title ? `'${title}'` : "'Choose Photos'",
   };
+  const handleInputChange = React.useCallback((event) => {
+    handleChange(event);
+  }, []);
+
   // $flow: need to pass object
   const classes = useStyles(styleProps);
   return (
@@ -68,7 +72,7 @@ function FileInput({ handleChange, title }: Props) {
         type="file"
         multiple
         className={classes.fileInput}
-        onChange={(e) => handleChange(e.target)}
+        onChange={handleInputChange}
       />
       <ImageIcon className={classes.icon} />
     </Box>

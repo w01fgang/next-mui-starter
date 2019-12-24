@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
 const breadcrumbsData = [
   {
     title: 'Home',
@@ -61,6 +62,9 @@ const breadcrumbsData = [
 function CarConfiguration() {
   const { messages: intlMessages } = useIntl();
   const classes = useStyles();
+  const handleSubmit = () => {};
+  const handleCancel = () => {};
+
   return (
     <Box>
       <Box className={classes.pageTitle}>
@@ -76,7 +80,10 @@ function CarConfiguration() {
           <Select withShadow placeholder={intlMessages['сarConfiguration.vehiclesSelect']} options={[]} />
         </Box>
       </Box>
-      <Form />
+      <Form
+        onSubmit={handleSubmit}
+        onCancel={handleCancel}
+      />
     </Box>
   );
 }

@@ -42,14 +42,19 @@ const useStyles = makeStyles((theme) => ({
   modalBody: {
     padding: '25px 25px 30px',
   },
+  icon: { cursor: 'pointer' },
 }));
 
 type Props = {
   open: boolean,
   title: string,
-  handleClose: Function,
+  handleClose: () => void,
   children: any,
 }
+
+const backdropProps = {
+  timeout: 500,
+};
 
 export default function CustomModal(props: Props) {
   const classes = useStyles();
@@ -65,14 +70,12 @@ export default function CustomModal(props: Props) {
       onClose={handleClose}
       closeAfterTransition
       BackdropComponent={Backdrop}
-      BackdropProps={{
-        timeout: 500,
-      }}
+      BackdropProps={backdropProps}
     >
       <Box className={classes.modalContainer}>
         <Grid container justify="space-between" alignItems="center" className={classes.modalTitle}>
           {title && title}
-          <CloseIcon style={{ cursor: 'pointer' }} onClick={handleClose} />
+          <CloseIcon className={classes.icon} onClick={handleClose} />
         </Grid>
         <Grid className={classes.modalBody}>
           {children}

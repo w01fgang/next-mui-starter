@@ -47,7 +47,7 @@ type Props = {
   icon: React$ComponentType<*>,
   withShadow: boolean,
   prevOpen: any,
-  onChange: Function,
+  onChange: ({}) => void,
 };
 
 type State = {

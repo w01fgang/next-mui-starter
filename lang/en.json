@@ -28,5 +28,21 @@
   "сarConfiguration.form.priceInput": "Base price",
   "сarConfiguration.form.financeInput": "Franchise",
   "сarConfiguration.form.depositInput": "Deposit",
-  "сarConfiguration.imageUpload.choosePhotos": "Choose Photos"
+  "сarConfiguration.imageUpload.choosePhotos": "Choose Photos",
+  "сarConfiguration.damageType.new": "Add Custom Damage",
+  "сarConfiguration.damageType.scratch": "Scratch",
+  "сarConfiguration.damageType.dent": "Dent",
+  "сarConfiguration.damageType.clack": "Clack",
+  "сarConfiguration.damageType.clip": "Clip",
+  "сarConfiguration.damageDegree.low": "Low",
+  "сarConfiguration.damageDegree.high": "High",
+  "сarConfiguration.damageModalTitle": "Add damage",
+  "сarConfiguration.damageModal.typeSelect": "Damage type",
+  "сarConfiguration.damageModal.degreeSelect": "Degree",
+  "сarConfiguration.damageModal.fileButton": "Upload Photos",
+  "сarConfiguration.damageModal.cancelButton": "Add Damage",
+  "сarConfiguration.damageModal.addDamageButton": "Cancel",
+  "сarConfiguration.damageModal.removeImages": "Remove all",
+  "сarConfiguration.damagesTub.carInterior": "Interior",
+  "сarConfiguration.damagesTub.carExterior": "Exterior"
 }

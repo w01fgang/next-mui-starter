@@ -2,9 +2,13 @@
 import React, { Component } from 'react';
 import { Grid, Box } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { FormattedMessage } from 'react-intl';
+import clsx from 'clsx';
 
 import Switch from '../../Switch';
 import AddDamagesModal from './addDamagesModal';
+
+import messages from './messages';
 
 import ExteriorBody from '../../../assets/svg/sedanBody.svg';
 import InteriorBody from '../../../assets/svg/sedanInterior.svg';
@@ -18,8 +22,14 @@ type Props = {
     damagesInfo: {},
     damagesHeader: {},
     damagesInfoRow: {},
+    damageType: {},
+    damageDescription: {},
     damageIcon: {},
     infoTap: {},
+    stateSelector: {},
+    damageIconContainer: {},
+    activeStateSelector: {},
+    inactiveStateSelector: {},
   },
 }
 
@@ -137,6 +147,30 @@ const styles = (theme) => ({
     fontSize: 16,
     color: '#99ABB4',
   },
+  damageType: {
+    fontWeight: '500',
+    textDecoration: 'underline',
+    color: '#1E88E5',
+  },
+  damageDescription: {
+    fontSize: '10px',
+    color: '#99ABB4',
+  },
+  stateSelector: {
+    fontSize: '15px',
+    marginLeft: '30px',
+  },
+  activeStateSelector: {
+    color: '#99ABB4',
+    fonWeight: '500',
+  },
+  inactiveStateSelector: {
+    color: '#455A64',
+    fonWeight: 'bold',
+  },
+  damageIconContainer: {
+    margin: '30px 0',
+  },
 });
 
 class DamagesInfo extends Component<Props, State> {
@@ -149,8 +183,13 @@ class DamagesInfo extends Component<Props, State> {
 
   carBodyRef: any;
 
+  switchHandler = () => {
+    this.setState((prevState) => ({ exterior: !prevState.exterior }));
+  };
+
   renderDamagesStateContainer = () => {
     const { exterior } = this.state;
+    const { classes } = this.props;
     return (
       <Grid
         component="label"
@@ -160,42 +199,35 @@ class DamagesInfo extends Component<Props, State> {
         className={this.props.classes.damagesStateContainer}
       >
         <Grid
-          style={{
-            fontSize: '15px',
-            color: exterior ? '#455A64' : '#99ABB4',
-            fonWeight: exterior ? 'bold' : '500',
-            marginRight: '30px',
-          }}
+          className={clsx(
+            classes.stateSelector,
+            exterior ? classes.activeStateSelector : classes.inactiveStateSelector,
+          )}
           item
         >
-          Exterior
+          <FormattedMessage {...messages.carExterior} />
         </Grid>
         <Grid item>
           <Switch
             checked={!exterior}
-            onChange={() => this.setState((prevState) => ({ exterior: !prevState.exterior }))}
-            value="checkedC"
+            onChange={this.switchHandler}
+            value="checked"
           />
         </Grid>
         <Grid
-          style={{
-            fontSize: '15px',
-            color: !exterior ? '#455A64' : '#99ABB4',
-            fonWeight: !exterior ? 'bold' : '500',
-            marginLeft: '30px',
-          }}
+          className={clsx(
+            classes.stateSelector,
+            !exterior ? classes.activeStateSelector : classes.inactiveStateSelector,
+          )}
           item
         >
-          Interior
+          <FormattedMessage {...messages.carInterior} />
         </Grid>
       </Grid>
     );
   };
 
   selectDamagesHandler = ({ pageX, pageY }) => {
-    // with this code we will receive position relatively to svg
-    // const rect = this.carBodyRef.firstElementChild.getBoundingClientRect();
-    // console.log(Math.floor(event.pageY) - rect.top, Math.floor(event.pageX - rect.left));
     this.setState({ modalOpen: true, clickPosition: { x: pageX, y: pageY } });
   };
 
@@ -205,6 +237,8 @@ class DamagesInfo extends Component<Props, State> {
       modalOpen: false,
     }));
   };
+
+  handleModalClose = () => this.setState({ modalOpen: false });
 
   removeDamage(damageIndex) {
     this.setState((prevState) => this.setState({
@@ -223,13 +257,11 @@ class DamagesInfo extends Component<Props, State> {
         <Grid className={classes.damagesSelector}>
           {this.renderDamagesStateContainer()}
           <Grid
+            className={classes.damageIconContainer}
             container
             alignItems="center"
             justify="center"
             ref={(node) => { this.carBodyRef = node; }}
-            style={{
-              margin: '30px 0',
-            }}
           >
             {
               damages.map((item, index) => {
@@ -249,11 +281,7 @@ class DamagesInfo extends Component<Props, State> {
                 );
               })
             }
-            <CarBody
-              id="car-body-for-selecting-damages"
-              className="testSvg"
-              onClick={this.selectDamagesHandler}
-            />
+            <CarBody onClick={this.selectDamagesHandler} />
           </Grid>
         </Grid>
         <Grid className={classes.damagesInfo}>
@@ -268,8 +296,8 @@ class DamagesInfo extends Component<Props, State> {
               <Grid key={item.position.x} container alignItems="center" className={classes.damagesInfoRow}>
                 <Grid item xs={1} sm={2} md={1} container justify="center">{index + 1}</Grid>
                 <Grid item xs={9} sm={7} md={9}>
-                  <Grid style={{ fontWeight: '500', textDecoration: 'underline', color: '#1E88E5' }}>{item.damageType}</Grid>
-                  <Grid style={{ fontSize: '10px', color: '#99ABB4' }}>{item.damageDescription}</Grid>
+                  <Grid className={classes.damageType}>{item.damageType}</Grid>
+                  <Grid className={classes.damageDescription}>{item.damageDescription}</Grid>
                 </Grid>
                 <Grid item xs={1}>{item.damageDegree}</Grid>
                 <Grid item xs={1} sm={2} md={1} container justify="center"><CloseIcon onClick={() => this.removeDamage(index)} /></Grid>
@@ -283,7 +311,7 @@ class DamagesInfo extends Component<Props, State> {
           clickPosition={clickPosition}
           open={modalOpen}
           onSubmit={this.formHandler}
-          handleClose={() => this.setState({ modalOpen: false })}
+          handleClose={this.handleModalClose}
         />
       </Grid>
     );

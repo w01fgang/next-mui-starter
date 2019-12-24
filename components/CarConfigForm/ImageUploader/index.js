@@ -48,12 +48,16 @@ const styles = (theme) => ({
       fontSize: '13px',
     },
   },
+  image: { height: '200px' },
+  buttonContainer: { marginTop: '25px' },
 });
 
 type Props = {
   classes: {
     container: {},
     fileInput: {},
+    buttonContainer: {},
+    image: {},
     removeButton: {},
   },
 };
@@ -71,7 +75,7 @@ class ImageUploader extends Component<Props, State> {
     imageFile2: null,
   };
 
-  selectThumbnailImage = ({ files }) => {
+  selectThumbnailImage = ({ target: { files } }) => {
     if (files) {
       Array.from(files).map((item, index) => this.setState({ [`imageFile${index}`]: item }));
     }
@@ -91,7 +95,7 @@ class ImageUploader extends Component<Props, State> {
         <Grid container spacing={3}>
           {
             Object.keys(this.state).map((item, index) => (
-              <Grid item xs={12} sm={4} md={4} key={item} style={{ height: '200px' }}>
+              <Grid item xs={12} sm={4} md={4} key={item} className={classes.image}>
                 <CarImageContainer
                   index={index}
                   file={this.state[`imageFile${index}`]}
@@ -100,7 +104,7 @@ class ImageUploader extends Component<Props, State> {
             ))
           }
         </Grid>
-        <Grid container justify="space-between" alignItems="center" style={{ marginTop: '25px' }}>
+        <Grid container justify="space-between" alignItems="center" className={classes.buttonContainer}>
           <Box className={classes.fileInput}>
             <FileInput
               handleChange={this.selectThumbnailImage}

@@ -104,7 +104,6 @@ function CarInfo() {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4} md={4}>
             <Select
-              onChange={() => {}}
               placeholder={intl.formatMessage(messages.brandSelect)}
               isMandatory
               options={brandOptions}
@@ -112,7 +111,6 @@ function CarInfo() {
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
             <Select
-              onChange={() => {}}
               isMandatory
               placeholder={intl.formatMessage(messages.modelSelect)}
               options={carOptions}
@@ -120,7 +118,6 @@ function CarInfo() {
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
             <Select
-              onChange={() => {}}
               isMandatory
               placeholder={intl.formatMessage(messages.bodySelect)}
               options={carOptions}
@@ -128,7 +125,6 @@ function CarInfo() {
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
             <Select
-              onChange={() => {}}
               placeholder={intl.formatMessage(messages.yearSelect)}
               isMandatory
               options={carOptions}
@@ -136,7 +132,6 @@ function CarInfo() {
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
             <Select
-              onChange={() => {}}
               icon={QuestionIcon}
               placeholder={intl.formatMessage(messages.locationSelect)}
               options={carOptions}
@@ -204,28 +199,24 @@ function CarInfo() {
             </Grid>
             <Grid item xs={12} sm={3} md={3}>
               <Select
-                onChange={() => {}}
                 placeholder={intl.formatMessage(messages.colorSelect)}
                 options={colorOption}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={2}>
               <Select
-                onChange={() => {}}
                 placeholder={intl.formatMessage(messages.passengersSelect)}
                 options={[]}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={2}>
               <Select
-                onChange={() => {}}
                 placeholder={intl.formatMessage(messages.fuelTypeSelect)}
                 options={[]}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={2}>
               <Select
-                onChange={() => {}}
                 placeholder={intl.formatMessage(messages.transmissionSelect)}
                 options={[]}
               />

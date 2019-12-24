@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 type Props = {
   style: {},
-  onClick: Function,
+  onClick: () => void,
   disabled: boolean,
   title: string,
   classes: {}

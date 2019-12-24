@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 
 type Props = {
   placeholder?: string,
-  onChange: Function,
+  onChange: (string) => void,
 }
 
 export default function Textarea(props: Props) {

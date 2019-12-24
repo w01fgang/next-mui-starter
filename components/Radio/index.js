@@ -4,7 +4,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Radio, Grid } from '@material-ui/core';
 
 type Props = {
-  onChange: Function,
+  onChange: () => void,
   checked: boolean,
   label: string,
   name: string,
