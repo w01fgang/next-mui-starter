@@ -59,8 +59,14 @@ const breadcrumbsData = [
   },
 ];
 
+const carListSelect = {
+  id: 'сarConfiguration.vehiclesSelect',
+  defaultMessage: 'Last added vehicles',
+  description: 'select',
+};
+
 function CarConfiguration() {
-  const { messages: intlMessages } = useIntl();
+  const intl = useIntl();
   const classes = useStyles();
   const handleSubmit = () => {};
   const handleCancel = () => {};
@@ -77,7 +83,7 @@ function CarConfiguration() {
       <Box className={classes.breadcrumbsContainer}>
         <Breadcrumbs data={breadcrumbsData} />
         <Box className={classes.select}>
-          <Select withShadow placeholder={intlMessages['сarConfiguration.vehiclesSelect']} options={[]} />
+          <Select withShadow placeholder={intl.formatMessage(carListSelect)} options={[]} />
         </Box>
       </Box>
       <Form

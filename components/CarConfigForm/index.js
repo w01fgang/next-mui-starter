@@ -63,31 +63,32 @@ type Props = {
   onSubmit: () => void
 };
 
+
+const tabs = [
+  {
+    title: 'carInfoTab',
+    component: VehicleInformation,
+    icon: CarIcon,
+    activeIcon: CarIconFill,
+  },
+  {
+    title: 'imageUploadTab',
+    component: ImageUploader,
+    icon: ImagePickerIcon,
+    activeIcon: ImagePickerIconFill,
+  },
+  {
+    title: 'damagesInfoTab',
+    component: DamagesInfo,
+    icon: WarninigIconWithPlus,
+    activeIcon: WarninigIconWithPlusFill,
+  },
+];
+
 function Form(props: Props) {
   const classes = useStyles();
   const intl = useIntl();
   const { onCancel, onSubmit } = props;
-  const tabs = [
-    {
-      title: intl.formatMessage(messages.carInfoTab),
-      component: VehicleInformation,
-      icon: CarIcon,
-      activeIcon: CarIconFill,
-    },
-    {
-      title: intl.formatMessage(messages.imageUploadTab),
-      component: ImageUploader,
-      icon: ImagePickerIcon,
-      activeIcon: ImagePickerIconFill,
-    },
-    {
-      title: intl.formatMessage(messages.damagesInfoTab),
-      component: DamagesInfo,
-      icon: WarninigIconWithPlus,
-      activeIcon: WarninigIconWithPlusFill,
-    },
-  ];
-
 
   return (
     <Box className={classes.formContainer}>

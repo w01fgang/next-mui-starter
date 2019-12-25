@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 import { Grid, Typography, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import { FormattedMessage } from 'react-intl';
+
+import messages from '../CarConfigForm/messages';
 
 const useStyles = makeStyles((theme) => ({
   tabContainer: {
@@ -64,7 +67,7 @@ function Tab(props: TabProps) {
   return (
     <Grid className={classes.tabContainer} onClick={() => onChange(index)}>
       { isActive ? <ActiveIcon className={classes.icon} /> : <Icon className={classes.icon} /> }
-      <Typography color={isActive ? 'primary' : 'inherit'}>{title}</Typography>
+      <Typography color={isActive ? 'primary' : 'inherit'}><FormattedMessage {...messages[title]} /></Typography>
     </Grid>
   );
 }
