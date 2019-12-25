@@ -14,16 +14,16 @@ export default defineMessages({
   carInfoTab: {
     id: 'сarConfiguration.carInfoTab',
     description: 'Tab',
-    defaultMessage: 'Tab',
+    defaultMessage: 'Vehicle information',
   },
   imageUploadTab: {
     id: 'сarConfiguration.carImageTab',
     description: 'Tab',
-    defaultMessage: 'Tab',
+    defaultMessage: 'Upload photos',
   },
   damagesInfoTab: {
     id: 'сarConfiguration.carDamagesTab',
     description: 'Tab',
-    defaultMessage: 'Tab',
+    defaultMessage: 'Add damages',
   },
 });
