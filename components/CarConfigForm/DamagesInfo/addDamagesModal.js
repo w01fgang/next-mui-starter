@@ -123,6 +123,7 @@ class AddDamages extends Component<Props, State> {
       exterior,
       position: { ...clickPosition },
     });
+    this.removeImages();
   };
 
   typeDamageHandler = ({ value }) => {
@@ -141,9 +142,15 @@ class AddDamages extends Component<Props, State> {
     this.setState({ selectedImages: [] });
   };
 
+  handleClose = () => {
+    const { handleClose } = this.props;
+    handleClose();
+    this.removeImages();
+  };
+
   render() {
     const {
-      open, handleClose, classes, intl,
+      open, classes, intl,
     } = this.props;
     const { selectedImages } = this.state;
     const damagesOptions = [
@@ -163,7 +170,7 @@ class AddDamages extends Component<Props, State> {
         <Modal
           title={intl.formatMessage(messages.damageModalTitle)}
           open={open}
-          handleClose={handleClose}
+          handleClose={this.handleClose}
         >
           <Grid>
             <Grid container spacing={2}>
@@ -231,7 +238,7 @@ class AddDamages extends Component<Props, State> {
             <Grid item xs={6}>
               <Button
                 disabled={false}
-                onClick={handleClose}
+                onClick={this.handleClose}
                 title={intl.formatMessage(messages.cancelButton)}
                 className={classes.cancelButton}
               />
