@@ -233,6 +233,9 @@ class DamagesInfo extends Component<Props, State> {
   };
 
   selectDamagesHandler = ({ pageX, pageY }) => {
+    const viewport: ?HTMLElement = document.querySelector('meta[name="viewport"]');
+    // $flow: content field exist in meta tag
+    viewport.content = 'minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no';
     this.setState({ modalOpen: true, clickPosition: { x: pageX, y: pageY } });
   };
 

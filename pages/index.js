@@ -1,16 +1,16 @@
 // @flow
 import React, { Component } from 'react';
 
-import NewCarConfiguration from './newCarConfiguration';
-
 type Props = {};
 
 class Index extends Component<Props> {
-  static displayName = 'Index';
+  static displayName = 'Index'
 
   render() {
     return (
-      <NewCarConfiguration />
+      <div>
+        Home page
+      </div>
     );
   }
 }
