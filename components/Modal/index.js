@@ -20,12 +20,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   root: {
-
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
   modalContainer: {
+    maxHeight: '100%',
+    overflow: 'scroll',
     width: 670,
     background: 'white',
     borderRadius: 4,
