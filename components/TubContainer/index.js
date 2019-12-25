@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '14px',
     boxSizing: 'border-box',
     borderBottom: (props) => props.borderBottom,
+    [theme.breakpoints.up('xs')]: {
+      textAlign: 'center',
+    },
   },
   container: {
     display: 'flex',

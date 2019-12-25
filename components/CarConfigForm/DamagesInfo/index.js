@@ -206,7 +206,7 @@ class DamagesInfo extends Component<Props, State> {
         <Grid
           className={clsx(
             classes.stateLeftSelector,
-            exterior ? classes.activeStateSelector : classes.inactiveStateSelector,
+            exterior ? classes.inactiveStateSelector : classes.activeStateSelector,
           )}
           item
         >
@@ -222,7 +222,7 @@ class DamagesInfo extends Component<Props, State> {
         <Grid
           className={clsx(
             classes.stateSelector,
-            !exterior ? classes.activeStateSelector : classes.inactiveStateSelector,
+            exterior ? classes.activeStateSelector : classes.inactiveStateSelector,
           )}
           item
         >
