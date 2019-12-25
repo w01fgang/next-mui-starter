@@ -8,6 +8,7 @@ import {
 import { withStyles } from '@material-ui/core/styles';
 
 import DownArrowIcon from '../../assets/svg/downArrowIcon.svg';
+import Modal from './customOptionModal';
 
 const styles = {
   root: {
@@ -38,7 +39,7 @@ const styles = {
 type Props = {
   placeholder: any,
   options: Array<{
-    value: number,
+    value: string | number,
     title: string,
     comp: React$ComponentType<*>,
   }>,
@@ -54,10 +55,12 @@ type Props = {
   withShadow: boolean,
   prevOpen: any,
   onChange?: ({}) => void,
+  onNewOption?: (string) => void,
 };
 
 type State = {
   open: boolean | string,
+  modalOpen: boolean,
   value: any,
   clientWidth: number,
 }
@@ -66,6 +69,7 @@ const DownIcon = withStyles({
   container: { marginLeft: '10px' },
 })(({ classes }) => <DownArrowIcon className={classes.container} />);
 
+// for castom option paste option with value = 'custom'
 class Select extends Component<Props, State> {
   anchorRef: any;
 
@@ -73,6 +77,7 @@ class Select extends Component<Props, State> {
 
   static defaultProps = {
     onChange: () => {},
+    onNewOption: () => {},
   };
 
   constructor(props) {
@@ -81,6 +86,7 @@ class Select extends Component<Props, State> {
       open: false,
       value: null,
       clientWidth: 0,
+      modalOpen: false,
     };
   }
 
@@ -137,18 +143,35 @@ class Select extends Component<Props, State> {
     );
   };
 
-  onChange = (item) => {
+  onChange = (option) => {
     const { onChange } = this.props;
+    if (option.value === 'custom') {
+      this.setState({ modalOpen: true, open: 'false' });
+    } else {
+      // $flow: add on callback to all instance
+      onChange(option);
+      this.setState({ value: option.title, open: 'false' });
+    }
+  };
+
+  handleModalClose = () => {
+    this.setState({ modalOpen: false });
+  };
+
+  handleModalSubmit = (value) => {
+    const { onNewOption, onChange } = this.props;
     // $flow: add on callback to all instance
-    onChange(item);
-    this.setState({ value: item.title, open: 'false' });
+    onNewOption(value);
+    // $flow: add on callback to all instance
+    onChange({ value });
+    this.setState({ value, modalOpen: false });
   };
 
   render() {
     const {
       placeholder, classes, isMandatory, icon: Icon, withShadow,
     } = this.props;
-    const { open, value } = this.state;
+    const { open, value, modalOpen } = this.state;
 
     // $flow: React.createRef
     this.prevOpen = React.createRef(open);
@@ -176,6 +199,11 @@ class Select extends Component<Props, State> {
           <DownIcon />
           { this.renderMenu() }
         </Box>
+        <Modal
+          onSubmit={this.handleModalSubmit}
+          open={modalOpen}
+          onClose={this.handleModalClose}
+        />
       </Box>
     );
   }

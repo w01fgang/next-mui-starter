@@ -50,6 +50,7 @@ type Props = {
   open: boolean,
   title: string,
   handleClose: () => void,
+  onClick?: Function,
   children: any,
 }
 
@@ -60,11 +61,12 @@ const backdropProps = {
 export default function CustomModal(props: Props) {
   const classes = useStyles();
   const {
-    open, handleClose, children, title,
+    open, handleClose, children, title, onClick,
   } = props;
 
   return (
     <Modal
+      onClick={onClick}
       className={classes.modal}
       classes={classes.root}
       open={open}
@@ -85,3 +87,7 @@ export default function CustomModal(props: Props) {
     </Modal>
   );
 }
+
+CustomModal.defaultProps = {
+  onClick: () => {},
+};

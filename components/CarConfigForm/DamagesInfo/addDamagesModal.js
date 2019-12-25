@@ -154,7 +154,7 @@ class AddDamages extends Component<Props, State> {
     } = this.props;
     const { selectedImages } = this.state;
     const damagesOptions = [
-      { title: intl.formatMessage(messages.newDamage), comp: () => <AddSelectorOption title={intl.formatMessage(messages.newDamage)} />, value: 'new' },
+      { title: intl.formatMessage(messages.newDamage), comp: () => <AddSelectorOption title={intl.formatMessage(messages.newDamage)} />, value: 'custom' },
       { title: intl.formatMessage(messages.damageScratch), comp: () => <p>{intl.formatMessage(messages.damageScratch)}</p>, value: 'Scratch' },
       { title: intl.formatMessage(messages.damageDent), comp: () => <p>{intl.formatMessage(messages.damageDent)}</p>, value: 'Dent' },
       { title: intl.formatMessage(messages.damageClack), comp: () => <p>{intl.formatMessage(messages.damageClack)}</p>, value: 'Clack' },
@@ -166,86 +166,84 @@ class AddDamages extends Component<Props, State> {
     ];
 
     return (
-      <div>
-        <Modal
-          title={intl.formatMessage(messages.damageModalTitle)}
-          open={open}
-          handleClose={this.handleClose}
-        >
-          <Grid>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={8}>
-                <Select
-                  onChange={this.typeDamageHandler}
-                  placeholder={intl.formatMessage(messages.typeSelect)}
-                  options={damagesOptions}
-                />
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <Select
-                  onChange={this.damageDegreeHandler}
-                  placeholder={intl.formatMessage(messages.degreeSelect)}
-                  options={damagesDegreeOptions}
-                />
-              </Grid>
-            </Grid>
-            <Box className={classes.textarea}>
-              <Textarea
-                onChange={this.descriptionHandler}
-              />
-            </Box>
-          </Grid>
-          <Grid container spacing={2} className={classes.photoContainer}>
-            {
-              selectedImages.map((item) => (
-                <Grid item xs={12} key={item.lastModified} sm={6} className={classes.image}>
-                  <CarImageContainer
-                    onRemoveCurrentImage={this.removeImage}
-                    index={1}
-                    file={item}
-                  />
-                </Grid>
-              ))
-            }
-          </Grid>
-          <Grid container spacing={2} className={classes.imageButtons}>
-            <Grid item xs={12} sm={selectedImages.length !== 0 ? 6 : 12}>
-              <FileInput
-                title={intl.formatMessage(messages.fileButton)}
-                handleChange={this.selectImage}
-              />
-            </Grid>
-            {
-              selectedImages.length !== 0 && (
-                <Grid item xs={12} sm={6}>
-                  <Box className={classes.removeButton} onClick={this.removeImages}>
-                    <TrashIcon />
-                    <FormattedMessage {...messages.removeImages} />
-                  </Box>
-                </Grid>
-              )
-            }
-          </Grid>
+      <Modal
+        title={intl.formatMessage(messages.damageModalTitle)}
+        open={open}
+        handleClose={this.handleClose}
+      >
+        <Grid>
           <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <Button
-                className={classes.addDamagesButton}
-                disabled={false}
-                onClick={this.handleSubmit}
-                title={intl.formatMessage(messages.addDamagesButton)}
+            <Grid item xs={12} sm={8}>
+              <Select
+                onChange={this.typeDamageHandler}
+                placeholder={intl.formatMessage(messages.typeSelect)}
+                options={damagesOptions}
               />
             </Grid>
-            <Grid item xs={6}>
-              <Button
-                disabled={false}
-                onClick={this.handleClose}
-                title={intl.formatMessage(messages.cancelButton)}
-                className={classes.cancelButton}
+            <Grid item xs={12} sm={4}>
+              <Select
+                onChange={this.damageDegreeHandler}
+                placeholder={intl.formatMessage(messages.degreeSelect)}
+                options={damagesDegreeOptions}
               />
             </Grid>
           </Grid>
-        </Modal>
-      </div>
+          <Box className={classes.textarea}>
+            <Textarea
+              onChange={this.descriptionHandler}
+            />
+          </Box>
+        </Grid>
+        <Grid container spacing={2} className={classes.photoContainer}>
+          {
+            selectedImages.map((item) => (
+              <Grid item xs={12} key={item.lastModified} sm={6} className={classes.image}>
+                <CarImageContainer
+                  onRemoveCurrentImage={this.removeImage}
+                  index={1}
+                  file={item}
+                />
+              </Grid>
+            ))
+          }
+        </Grid>
+        <Grid container spacing={2} className={classes.imageButtons}>
+          <Grid item xs={12} sm={selectedImages.length !== 0 ? 6 : 12}>
+            <FileInput
+              title={intl.formatMessage(messages.fileButton)}
+              handleChange={this.selectImage}
+            />
+          </Grid>
+          {
+            selectedImages.length !== 0 && (
+              <Grid item xs={12} sm={6}>
+                <Box className={classes.removeButton} onClick={this.removeImages}>
+                  <TrashIcon />
+                  <FormattedMessage {...messages.removeImages} />
+                </Box>
+              </Grid>
+            )
+          }
+        </Grid>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Button
+              className={classes.addDamagesButton}
+              disabled={false}
+              onClick={this.handleSubmit}
+              title={intl.formatMessage(messages.addDamagesButton)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Button
+              disabled={false}
+              onClick={this.handleClose}
+              title={intl.formatMessage(messages.cancelButton)}
+              className={classes.cancelButton}
+            />
+          </Grid>
+        </Grid>
+      </Modal>
     );
   }
 }

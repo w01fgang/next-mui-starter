@@ -5,8 +5,9 @@ import { Input, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
 type Props = {
-  placeholder: string,
-  icon: any,
+  placeholder?: string,
+  icon?: any,
+  onChange?: (SyntheticInputEvent<HTMLInputElement>) => void
 }
 
 const useStyles = makeStyles({
@@ -33,14 +34,25 @@ const useStyles = makeStyles({
 });
 
 function CustomInput(props: Props) {
-  const { placeholder, icon: Icon } = props;
+  const { placeholder, icon: Icon, onChange } = props;
   const classes = useStyles();
   return (
     <Grid className={classes.container}>
-      <Input disableUnderline className={classes.placeholder} placeholder={placeholder} />
+      <Input
+        disableUnderline
+        className={classes.placeholder}
+        placeholder={placeholder}
+        onChange={onChange}
+      />
       { Icon && <Icon className={classes.icon} /> }
     </Grid>
   );
 }
+
+CustomInput.defaultProps = {
+  icon: null,
+  placeholder: '',
+  onChange: () => {},
+};
 
 export default CustomInput;

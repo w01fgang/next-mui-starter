@@ -48,5 +48,6 @@
   "сarConfiguration.damagesTub.clickInfo": "Tap on vehicle part for add damage",
   "сarConfiguration.damagesTub.tableHeaderNumber": "No",
   "сarConfiguration.damagesTub.tableHeaderName": "Damage name",
-  "сarConfiguration.damagesTub.tableHeaderDegree": "Degree"
+  "сarConfiguration.damagesTub.tableHeaderDegree": "Degree",
+  "сarConfiguration.select.addSelectOptionTitle": "Add new option"
 }
