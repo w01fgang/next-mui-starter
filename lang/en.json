@@ -45,5 +45,8 @@
   "сarConfiguration.damageModal.removeImages": "Remove all",
   "сarConfiguration.damagesTub.carInterior": "Interior",
   "сarConfiguration.damagesTub.carExterior": "Exterior",
-  "сarConfiguration.damagesTub.clickInfo": "Tap on vehicle part for add damage"
+  "сarConfiguration.damagesTub.clickInfo": "Tap on vehicle part for add damage",
+  "сarConfiguration.damagesTub.tableHeaderNumber": "No",
+  "сarConfiguration.damagesTub.tableHeaderName": "Damage name",
+  "сarConfiguration.damagesTub.tableHeaderDegree": "Degree"
 }

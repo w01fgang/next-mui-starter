@@ -86,4 +86,19 @@ export default defineMessages({
     defaultMessage: 'Tap on vehicle part for add damage',
     description: 'info how to tap',
   },
+  tableHeaderNumber: {
+    id: 'сarConfiguration.damagesTub.tableHeaderNumber',
+    defaultMessage: 'TNo',
+    description: 'table header title',
+  },
+  tableHeaderName: {
+    id: 'сarConfiguration.damagesTub.tableHeaderName',
+    defaultMessage: 'Damage name',
+    description: 'table header title',
+  },
+  tableHeaderDegree: {
+    id: 'сarConfiguration.damagesTub.tableHeaderDegree',
+    defaultMessage: 'Degree',
+    description: 'itable header title',
+  },
 });

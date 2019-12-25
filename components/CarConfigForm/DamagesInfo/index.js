@@ -141,9 +141,9 @@ const styles = (theme) => ({
     width: '100%',
     display: 'flex',
     textAlign: 'center',
-    padding: 'auto',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: '15px 0',
     fontWeight: '600',
     fontSize: 16,
     color: '#99ABB4',
@@ -296,9 +296,9 @@ class DamagesInfo extends Component<Props, State> {
         </Grid>
         <Grid className={classes.damagesInfo}>
           <Grid container className={classes.damagesHeader} alignItems="center">
-            <Grid item xs={1} sm={2} md={1} container justify="center">No</Grid>
-            <Grid item xs={9} sm={7} md={9}>Damage name</Grid>
-            <Grid item xs={1}>Degree</Grid>
+            <Grid item xs={1} sm={2} md={1} container justify="center"><FormattedMessage {...messages.tableHeaderNumber} /></Grid>
+            <Grid item xs={9} sm={7} md={9}><FormattedMessage {...messages.tableHeaderName} /></Grid>
+            <Grid item xs={1}><FormattedMessage {...messages.tableHeaderDegree} /></Grid>
             <Grid item xs={1} sm={2} md={1} container justify="center" />
           </Grid>
           {
