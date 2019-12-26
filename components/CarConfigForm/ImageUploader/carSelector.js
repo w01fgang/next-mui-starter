@@ -16,7 +16,6 @@ const styles = {
     padding: '0 15px',
     width: '100%',
     minHeight: 160,
-    maxHeight: 220,
     height: '100%',
     borderRadius: '8px',
     border: '1px solid #EEF4F8',
@@ -24,7 +23,6 @@ const styles = {
   progressPhoto: {
     padding: '0 15px',
     minHeight: 160,
-    maxHeight: 220,
     width: '100%',
     height: '100%',
     borderRadius: '8px',
@@ -32,6 +30,7 @@ const styles = {
   },
   completeContainer: {
     padding: 0,
+    textAlign: 'center',
   },
   loaderContainer: {
     marginTop: 45,
@@ -53,7 +52,17 @@ const styles = {
     fontWeight: 'bold',
     fontSize: 10,
   },
-  infoSection: { padding: '0 15px' },
+  fileName: {
+    maxWidth: 'calc(100% - 30px)',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    height: '100%',
+  },
+  infoSection: {
+    padding: '0 15px',
+    flexWrap: 'nowrap',
+    height: 35,
+  },
   removeButton: {
     color: '#1E88E5',
     textDecoration: 'underline',
@@ -64,7 +73,11 @@ const styles = {
     textDecoration: 'underline',
     cursor: 'pointer',
   },
-  image: { width: '100%', height: '80%' },
+  image: {
+    maxWidth: '100%',
+    textAlign: 'center',
+    maxHeight: 200,
+  },
   loadingButtons: { marginTop: '35px' },
 };
 
@@ -72,6 +85,7 @@ type Props = {
   classes: {
     container: {},
     emptyPhoto: {},
+    fileName: {},
     progressPhoto: {},
     fileSize: {},
     loaderContainer: {},
@@ -156,7 +170,7 @@ class CarSelector extends Component<Props, State> {
 
   renderDefaultState() {
     const { classes, index } = this.props;
-    const CarView = carViews[index];
+    const CarView = carViews[index] || carViews[0];
     return (
       <Grid
         alignItems="center"
@@ -175,7 +189,7 @@ class CarSelector extends Component<Props, State> {
       <Box className={clsx(classes.progressPhoto, classes.completeContainer)}>
         <img className={classes.image} src={this.state.resultImage} alt="" />
         <Grid container alignItems="center" justify="space-between" className={classes.infoSection}>
-          <Box>{this.state.fileName}</Box>
+          <Box className={classes.fileName} title={this.state.fileName}>{this.state.fileName}</Box>
           <Box
             className={classes.removeButton}
             onClick={this.removeImage}

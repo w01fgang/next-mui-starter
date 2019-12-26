@@ -54,7 +54,7 @@ type Props = {
   title?: string,
 }
 
-function FileInput({ handleChange, title }: Props) {
+function FileInput({ handleChange, title, ...rest }: Props) {
   const iconLeftPosition = `calc(50% - ${(((title && title.length) || 'Choose Photos'.length) * 4) + 10}px)`;
   const styleProps = {
     left: iconLeftPosition,
@@ -69,6 +69,7 @@ function FileInput({ handleChange, title }: Props) {
   return (
     <Box className={classes.container}>
       <input
+        {...rest}
         type="file"
         multiple
         className={classes.fileInput}

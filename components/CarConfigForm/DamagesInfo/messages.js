@@ -88,7 +88,7 @@ export default defineMessages({
   },
   tableHeaderNumber: {
     id: 'сarConfiguration.damagesTub.tableHeaderNumber',
-    defaultMessage: 'TNo',
+    defaultMessage: 'No',
     description: 'table header title',
   },
   tableHeaderName: {

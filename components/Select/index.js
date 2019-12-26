@@ -37,7 +37,13 @@ const styles = {
     padding: '0 4px',
   },
   propsIcon: { marginRight: '10px' },
-  popper: { zIndex: 2 },
+  popper: {
+    zIndex: 2,
+    maxHeight: 500,
+    overflow: 'auto',
+    border: '1px solid #EEF4F8',
+    boxShadow: '0px 5px 15px rgba(63, 63, 68, 0.1)',
+  },
 };
 
 type Props = {

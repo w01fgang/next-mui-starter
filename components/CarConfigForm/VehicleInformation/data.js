@@ -16,30 +16,12 @@ export const brandOptions = [
 ];
 
 export const bodyTypeOptions = [
-  { title: 'Acura', comp: () => <p>Wagon/Estate</p>, value: 1974 },
-  { title: 'BMW', comp: () => <p>Passenger Van</p>, value: 2008 },
-  { title: 'Cirtoen', comp: () => <p>Sedan/Limousine</p>, value: 1957 },
-  { title: 'Dodge', comp: () => <p>Convertible</p>, value: 1993 },
-  { title: 'Dodge', comp: () => <p>Sport</p>, value: 19932 },
-  { title: 'Dodge', comp: () => <p>SUV / 4x4</p>, value: 19293 },
-  { title: 'Acura', comp: () => <p>Wagon/Estate</p>, value: 1974 },
-  { title: 'BMW', comp: () => <p>Passenger Van</p>, value: 2008 },
-  { title: 'Cirtoen', comp: () => <p>Sedan/Limousine</p>, value: 1957 },
-  { title: 'Dodge', comp: () => <p>Convertible</p>, value: 1993 },
-  { title: 'Dodge', comp: () => <p>Sport</p>, value: 19932 },
-  { title: 'Dodge', comp: () => <p>SUV / 4x4</p>, value: 19293 },
-  { title: 'Acura', comp: () => <p>Wagon/Estate</p>, value: 1974 },
-  { title: 'BMW', comp: () => <p>Passenger Van</p>, value: 2008 },
-  { title: 'Cirtoen', comp: () => <p>Sedan/Limousine</p>, value: 1957 },
-  { title: 'Dodge', comp: () => <p>Convertible</p>, value: 1993 },
-  { title: 'Dodge', comp: () => <p>Sport</p>, value: 19932 },
-  { title: 'Dodge', comp: () => <p>SUV / 4x4</p>, value: 19293 },
-  { title: 'Acura', comp: () => <p>Wagon/Estate</p>, value: 1974 },
-  { title: 'BMW', comp: () => <p>Passenger Van</p>, value: 2008 },
-  { title: 'Cirtoen', comp: () => <p>Sedan/Limousine</p>, value: 1957 },
-  { title: 'Dodge', comp: () => <p>Convertible</p>, value: 1993 },
-  { title: 'Dodge', comp: () => <p>Sport</p>, value: 19932 },
-  { title: 'Dodge', comp: () => <p>SUV / 4x4</p>, value: 19293 },
+  { title: 'Wagon/Estate', comp: () => <p>Wagon/Estate</p>, value: 1974 },
+  { title: 'Passenger Van', comp: () => <p>Passenger Van</p>, value: 2008 },
+  { title: 'Sedan/Limousine', comp: () => <p>Sedan/Limousine</p>, value: 1957 },
+  { title: 'Convertible', comp: () => <p>Convertible</p>, value: 1993 },
+  { title: 'Sport', comp: () => <p>Sport</p>, value: 19932 },
+  { title: 'SUV / 4x4', comp: () => <p>SUV / 4x4</p>, value: 19293 },
 ];
 
 const colorsSet = [
@@ -75,4 +57,31 @@ export const colorOption = colorsSet.map(({ title, value }) => ({
       {title}
     </div>
   ),
+}));
+
+const currentYear = new Date().getFullYear() + 1;
+
+export const YearOptions = Array(40).fill().map((item, index) => ({
+  title: `${currentYear - index}`, comp: () => <p>{currentYear - index}</p>, value: currentYear - index,
+}));
+
+export const locationOptions = [
+  { title: 'Add Your Location', comp: () => <p style={{ fontWeight: 'bold', color: '#1E88E5' }}>Add Your Location</p>, value: 'custom' },
+];
+
+export const fuelTypeOptions = [
+  { title: 'Diesel', comp: () => <p>Diesel</p>, value: 'Diesel' },
+  { title: 'Petrol', comp: () => <p>Petrol</p>, value: 'Petrol' },
+  { title: 'Electric', comp: () => <p>Electric</p>, value: 'Electric' },
+  { title: 'GPL', comp: () => <p>GPL</p>, value: 'GPL' },
+  { title: 'Hybrid', comp: () => <p>Hybrid</p>, value: 'Hybrid' },
+];
+
+export const transmissionOptions = [
+  { title: 'Automatic', comp: () => <p>Automatic</p>, value: 'Automatic' },
+  { title: 'Manual', comp: () => <p>Manual</p>, value: 'Manual' },
+];
+
+export const passengersOptions = Array(8).fill().map((item, index) => ({
+  title: `${1 + index}`, comp: () => <p>{1 + index}</p>, value: 1 + index,
 }));

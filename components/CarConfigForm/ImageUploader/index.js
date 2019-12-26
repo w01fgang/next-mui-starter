@@ -2,9 +2,14 @@
 import React, { Component } from 'react';
 import { Box, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 
 import CarImageContainer from './carSelector';
 import FileInput from '../../FileInput';
+import Button from '../../TestButton';
+
+import { isMobileDevice } from '../../../scripts/helpers/global';
+import messages from './messages';
 
 const styles = (theme) => ({
   container: {
@@ -12,7 +17,16 @@ const styles = (theme) => ({
     margin: '25px',
     paddingBottom: '25px',
   },
-  photoButtonText: { display: 'flex', alignItems: 'center' },
+  photoButtonText: {
+    display: 'flex',
+    alignItems: 'center',
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+    },
+
+  },
   photoButton: {
     marginTop: '25px',
     background: 'white',
@@ -21,13 +35,15 @@ const styles = (theme) => ({
     boxShadow: 'none',
   },
   fileInput: {
+    marginTop: '25px',
     [theme.breakpoints.down('xs')]: {
       width: '100%',
     },
     [theme.breakpoints.up('sm')]: {
       width: 190,
+      marginRight: 25,
     },
-    [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.up('md')]: {
       width: 240,
     },
   },
@@ -48,16 +64,17 @@ const styles = (theme) => ({
       fontSize: '13px',
     },
   },
-  buttonContainer: { marginTop: '25px' },
 });
 
 type Props = {
+  intl: IntlShape,
   classes: {
     container: {},
     fileInput: {},
     buttonContainer: {},
     image: {},
     removeButton: {},
+    photoButtonText: {},
   },
 };
 
@@ -65,7 +82,7 @@ type State = {
   imageFile0: null,
   imageFile1: null,
   imageFile2: null,
-}
+};
 
 class ImageUploader extends Component<Props, State> {
   state = {
@@ -87,7 +104,7 @@ class ImageUploader extends Component<Props, State> {
   });
 
   render() {
-    const { classes } = this.props;
+    const { classes, intl } = this.props;
 
     return (
       <Box className={classes.container}>
@@ -104,16 +121,39 @@ class ImageUploader extends Component<Props, State> {
           }
         </Grid>
         <Grid container justify="space-between" alignItems="center" className={classes.buttonContainer}>
-          <Box className={classes.fileInput}>
-            <FileInput
-              handleChange={this.selectThumbnailImage}
+          <Box className={classes.photoButtonText}>
+            <Box className={classes.fileInput}>
+              <FileInput
+                handleChange={this.selectThumbnailImage}
+              />
+            </Box>
+            {
+              isMobileDevice() && (
+                <Box className={classes.fileInput}>
+                  <FileInput
+                    accept="image/*"
+                    capture="camera"
+                    title={intl.formatMessage(messages.makePhotos)}
+                    handleChange={this.selectThumbnailImage}
+                  />
+                </Box>
+              )
+            }
+            <Button
+              className={classes.fileInput}
+              title="Save"
             />
           </Box>
-          { this.state.imageFile0 && <Box className={classes.removeButton} onClick={this.removeImages}>Remove all</Box> }
+
+          { this.state.imageFile0 && (
+            <Box className={classes.removeButton} onClick={this.removeImages}>
+              <FormattedMessage {...messages.removeButton} />
+            </Box>
+          )}
         </Grid>
       </Box>
     );
   }
 }
 
-export default withStyles(styles)(ImageUploader);
+export default injectIntl(withStyles(styles)(ImageUploader));

@@ -2,13 +2,23 @@
 import React from 'react';
 
 import { Input, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles, withStyles } from '@material-ui/styles';
 
 type Props = {
   placeholder?: string,
   icon?: any,
   onChange?: (SyntheticInputEvent<HTMLInputElement>) => void
 }
+
+const StyledInput = withStyles({
+  input: {
+    '&::placeholder': {
+      fontWeight: '500',
+      fontSize: '14px',
+      color: '#455A64',
+    },
+  },
+})(Input);
 
 const useStyles = makeStyles({
   container: {
@@ -22,12 +32,6 @@ const useStyles = makeStyles({
     borderRadius: 4,
     width: '100%',
   },
-  placeholder: {
-    '&::placeholder': {
-      textOverflow: 'ellipsis !important',
-      color: 'blue',
-    },
-  },
   icon: {
     marginLeft: 5,
   },
@@ -38,10 +42,9 @@ function CustomInput(props: Props) {
   const classes = useStyles();
   return (
     <Grid className={classes.container}>
-      <Input
+      <StyledInput
         disableUnderline
         fullWidth
-        className={classes.placeholder}
         placeholder={placeholder}
         onChange={onChange}
         inputProps={{ classes: { input: classes.input } }}

@@ -22,9 +22,7 @@ import KmIcon from '../../../assets/svg/kmIcon.svg';
 
 import messages from './messages';
 
-import {
-  brandOptions, carOptions, colorOption, bodyTypeOptions, 
-} from './data';
+import * as options from './data';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -153,35 +151,35 @@ function CarInfo() {
             <Select
               placeholder={intl.formatMessage(messages.brandSelect)}
               isMandatory
-              options={brandOptions}
+              options={options.brandOptions}
             />
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
             <Select
               isMandatory
               placeholder={intl.formatMessage(messages.modelSelect)}
-              options={carOptions}
+              options={options.carOptions}
             />
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
             <Select
               isMandatory
               placeholder={intl.formatMessage(messages.bodySelect)}
-              options={bodyTypeOptions}
+              options={options.bodyTypeOptions}
             />
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
             <Select
               placeholder={intl.formatMessage(messages.yearSelect)}
               isMandatory
-              options={carOptions}
+              options={options.YearOptions}
             />
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
             <Select
               icon={LocationQuestionIcon}
               placeholder={intl.formatMessage(messages.locationSelect)}
-              options={carOptions}
+              options={options.locationOptions}
             />
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
@@ -246,25 +244,25 @@ function CarInfo() {
             <Grid item xs={12} sm={3} md={3}>
               <Select
                 placeholder={intl.formatMessage(messages.colorSelect)}
-                options={colorOption}
+                options={options.colorOption}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={2}>
               <Select
                 placeholder={intl.formatMessage(messages.passengersSelect)}
-                options={[]}
+                options={options.passengersOptions}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={2}>
               <Select
                 placeholder={intl.formatMessage(messages.fuelTypeSelect)}
-                options={[]}
+                options={options.fuelTypeOptions}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={2}>
               <Select
                 placeholder={intl.formatMessage(messages.transmissionSelect)}
-                options={[]}
+                options={options.transmissionOptions}
               />
             </Grid>
             <Grid item xs={12} sm={3} md={3}>

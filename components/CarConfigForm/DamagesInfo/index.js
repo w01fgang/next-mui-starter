@@ -29,6 +29,7 @@ type Props = {
     infoTap: {},
     stateSelector: {},
     damageIconContainer: {},
+    carBody: {},
     activeStateSelector: {},
     inactiveStateSelector: {},
   },
@@ -73,10 +74,10 @@ const styles = (theme) => ({
       borderBottom: '1px solid #EEF4F8',
     },
     [theme.breakpoints.up('sm')]: {
-      width: '43%',
+      width: '55%',
     },
     [theme.breakpoints.up('md')]: {
-      width: '35%',
+      width: '38%',
     },
   },
   damagesInfo: {
@@ -90,10 +91,10 @@ const styles = (theme) => ({
       marginBottom: 25,
     },
     [theme.breakpoints.up('sm')]: {
-      width: '57%',
+      width: '45%',
     },
     [theme.breakpoints.up('md')]: {
-      width: '65%',
+      width: '62%',
     },
   },
   damagesStateContainer: {
@@ -135,6 +136,7 @@ const styles = (theme) => ({
     borderRadius: '50%',
     alignItems: 'center',
     justifyContent: 'center',
+    userSelect: 'none',
   },
   infoTap: {
     flex: 1,
@@ -174,7 +176,12 @@ const styles = (theme) => ({
     fontWeight: 'bold',
   },
   damageIconContainer: {
+    position: 'relative',
     margin: '30px 0',
+  },
+  carBody: {
+    minHeight: 414,
+    minWidth: 295,
   },
 });
 
@@ -232,13 +239,14 @@ class DamagesInfo extends Component<Props, State> {
     );
   };
 
-  selectDamagesHandler = ({ pageX, pageY }) => {
+  selectDamagesHandler = ({ clientY, clientX }) => {
+    const { x, y } = this.carBodyRef.lastElementChild.getBoundingClientRect();
     const viewport: ?HTMLElement = document.querySelector('meta[name="viewport"]');
     // $flow: content field exist in meta tag
     viewport.content = 'initial-scale=0.1';
     // $flow: content field exist in meta tag
     viewport.content = 'minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no';
-    this.setState({ modalOpen: true, clickPosition: { x: pageX, y: pageY } });
+    this.setState({ modalOpen: true, clickPosition: { x: clientX - x - 8, y: clientY - y - 8 } });
   };
 
   formHandler = (damage) => {
@@ -267,31 +275,31 @@ class DamagesInfo extends Component<Props, State> {
         <Grid className={classes.damagesSelector}>
           {this.renderDamagesStateContainer()}
           <Grid
-            className={classes.damageIconContainer}
             container
             alignItems="center"
             justify="center"
-            ref={(node) => { this.carBodyRef = node; }}
           >
-            {
-              damages.map((item, index) => {
-                if (item.exterior !== exterior) return null;
-                return (
-                  <Box
-                    style={{
-                      left: item.position.x,
-                      top: item.position.y,
-                    }}
-                    className={classes.damageIcon}
-                    key={item.position.x}
-                    index
-                  >
-                    {index + 1}
-                  </Box>
-                );
-              })
-            }
-            <CarBody onClick={this.selectDamagesHandler} />
+            <Box className={classes.damageIconContainer} ref={(node) => { this.carBodyRef = node; }}>
+              {
+                damages.map((item, index) => {
+                  if (item.exterior !== exterior) return null;
+                  return (
+                    <Box
+                      style={{
+                        left: item.position.x,
+                        top: item.position.y,
+                      }}
+                      className={classes.damageIcon}
+                      key={item.position.x}
+                    >
+                      {index + 1}
+                    </Box>
+                  );
+                })
+              }
+              <CarBody className={classes.carBody} onClick={this.selectDamagesHandler} />
+            </Box>
+
           </Grid>
         </Grid>
         <Grid className={classes.damagesInfo}>
