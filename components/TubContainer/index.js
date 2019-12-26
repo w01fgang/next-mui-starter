@@ -12,10 +12,14 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     height: '64px',
     alignItems: 'center',
-    padding: '0 25px',
     fontWeight: 'bold',
     fontSize: '14px',
+    justifyContent: 'center',
+    borderRight: '#F2F0F0 1px solid',
     boxSizing: 'border-box',
+    '&:last-child': {
+      borderRight: 'none',
+    },
     borderBottom: (props) => props.borderBottom,
     [theme.breakpoints.up('xs')]: {
       textAlign: 'center',
@@ -24,12 +28,6 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
     borderBottom: '#F2F0F0 1px solid',
-    [theme.breakpoints.up('xs')]: {
-      justifyContent: 'space-between',
-    },
-    [theme.breakpoints.up('sm')]: {
-      justifyContent: 'flex-start',
-    },
   },
   icon: {
     marginRight: '14px',
@@ -68,7 +66,7 @@ function Tab(props: TabProps) {
   const classes = useStyles(styleProps);
 
   return (
-    <Grid className={classes.tabContainer} onClick={() => onChange(index)}>
+    <Grid item xs={3} className={classes.tabContainer} onClick={() => onChange(index)}>
       { isActive ? <ActiveIcon className={classes.icon} /> : <Icon className={classes.icon} /> }
       <Typography color={isActive ? 'primary' : 'inherit'}><FormattedMessage {...messages[title]} /></Typography>
     </Grid>
@@ -82,7 +80,7 @@ function TubContainer(props: TabContainerProps) {
   const Component = data[activeTab].component;
   return (
     <Box>
-      <Box className={classes.container}>
+      <Grid container className={classes.container}>
         {
           data.map((item, i) => (
             <Tab
@@ -96,7 +94,7 @@ function TubContainer(props: TabContainerProps) {
             />
           ))
         }
-      </Box>
+      </Grid>
       <Component />
     </Box>
   );

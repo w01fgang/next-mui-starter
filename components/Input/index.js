@@ -40,9 +40,11 @@ function CustomInput(props: Props) {
     <Grid className={classes.container}>
       <Input
         disableUnderline
+        fullWidth
         className={classes.placeholder}
         placeholder={placeholder}
         onChange={onChange}
+        inputProps={{ classes: { input: classes.input } }}
       />
       { Icon && <Icon className={classes.icon} /> }
     </Grid>

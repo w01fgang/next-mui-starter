@@ -19,6 +19,8 @@ import ImagePickerIcon from '../../assets/svg/imagePickerIcon.svg';
 import ImagePickerIconFill from '../../assets/svg/imagePickerIconFill.svg';
 import WarninigIconWithPlus from '../../assets/svg/warninigIconWithPlus.svg';
 import WarninigIconWithPlusFill from '../../assets/svg/warninigIconWithPlusFill.svg';
+import shieldIconFill from '../../assets/svg/shieldIconFill.svg';
+import shieldIcon from '../../assets/svg/shieldIcon.svg';
 
 const useStyles = makeStyles((theme) => ({
   buttonContainer: {
@@ -82,6 +84,12 @@ const tabs = [
     component: DamagesInfo,
     icon: WarninigIconWithPlus,
     activeIcon: WarninigIconWithPlusFill,
+  },
+  {
+    title: 'ensuranceTab',
+    component: () => <p>fsdfsa</p>,
+    icon: shieldIcon,
+    activeIcon: shieldIconFill,
   },
 ];
 

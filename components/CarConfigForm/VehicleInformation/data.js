@@ -15,6 +15,33 @@ export const brandOptions = [
   { title: 'Dodge', comp: () => <p>Dodge</p>, value: 1993 },
 ];
 
+export const bodyTypeOptions = [
+  { title: 'Acura', comp: () => <p>Wagon/Estate</p>, value: 1974 },
+  { title: 'BMW', comp: () => <p>Passenger Van</p>, value: 2008 },
+  { title: 'Cirtoen', comp: () => <p>Sedan/Limousine</p>, value: 1957 },
+  { title: 'Dodge', comp: () => <p>Convertible</p>, value: 1993 },
+  { title: 'Dodge', comp: () => <p>Sport</p>, value: 19932 },
+  { title: 'Dodge', comp: () => <p>SUV / 4x4</p>, value: 19293 },
+  { title: 'Acura', comp: () => <p>Wagon/Estate</p>, value: 1974 },
+  { title: 'BMW', comp: () => <p>Passenger Van</p>, value: 2008 },
+  { title: 'Cirtoen', comp: () => <p>Sedan/Limousine</p>, value: 1957 },
+  { title: 'Dodge', comp: () => <p>Convertible</p>, value: 1993 },
+  { title: 'Dodge', comp: () => <p>Sport</p>, value: 19932 },
+  { title: 'Dodge', comp: () => <p>SUV / 4x4</p>, value: 19293 },
+  { title: 'Acura', comp: () => <p>Wagon/Estate</p>, value: 1974 },
+  { title: 'BMW', comp: () => <p>Passenger Van</p>, value: 2008 },
+  { title: 'Cirtoen', comp: () => <p>Sedan/Limousine</p>, value: 1957 },
+  { title: 'Dodge', comp: () => <p>Convertible</p>, value: 1993 },
+  { title: 'Dodge', comp: () => <p>Sport</p>, value: 19932 },
+  { title: 'Dodge', comp: () => <p>SUV / 4x4</p>, value: 19293 },
+  { title: 'Acura', comp: () => <p>Wagon/Estate</p>, value: 1974 },
+  { title: 'BMW', comp: () => <p>Passenger Van</p>, value: 2008 },
+  { title: 'Cirtoen', comp: () => <p>Sedan/Limousine</p>, value: 1957 },
+  { title: 'Dodge', comp: () => <p>Convertible</p>, value: 1993 },
+  { title: 'Dodge', comp: () => <p>Sport</p>, value: 19932 },
+  { title: 'Dodge', comp: () => <p>SUV / 4x4</p>, value: 19293 },
+];
+
 const colorsSet = [
   { title: 'Black', value: '#455A64' },
   { title: 'Gray', value: '#CED4DA' },

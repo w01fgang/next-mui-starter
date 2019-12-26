@@ -24,7 +24,11 @@ const styles = {
     padding: 15,
     background: 'white',
   },
-  container: { display: 'flex', alignItems: 'center' },
+  container: {
+    display: 'flex',
+    alignItems: 'center',
+    fontSize: 14,
+  },
   placeholder: {
     transition: 'all 0.5s ease',
     position: 'absolute',

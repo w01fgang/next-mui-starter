@@ -8,8 +8,8 @@ export default defineMessages({
   },
   cancelButton: {
     id: 'сarConfiguration.form.cancelButton',
-    defaultMessage: 'Brand Logo',
-    description: 'Brand Logo',
+    defaultMessage: 'Cancel',
+    description: 'cancel button',
   },
   carInfoTab: {
     id: 'сarConfiguration.carInfoTab',
@@ -25,5 +25,10 @@ export default defineMessages({
     id: 'сarConfiguration.carDamagesTab',
     description: 'Tab',
     defaultMessage: 'Add damages',
+  },
+  ensuranceTab: {
+    id: 'сarConfiguration.ensuranceTab',
+    description: 'Tab',
+    defaultMessage: 'Ensurance Types',
   },
 });

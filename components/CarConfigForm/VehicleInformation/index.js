@@ -22,7 +22,9 @@ import KmIcon from '../../../assets/svg/kmIcon.svg';
 
 import messages from './messages';
 
-import { brandOptions, carOptions, colorOption } from './data';
+import {
+  brandOptions, carOptions, colorOption, bodyTypeOptions, 
+} from './data';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -98,12 +100,45 @@ const useStyles = makeStyles((theme) => ({
   parametersContainer: { marginTop: 25 },
 }));
 
+const LocationQuestionIcon = () => {
+  const intl = useIntl();
+  return (
+    <Box title={intl.formatMessage(messages.locationSelectTitle)}>
+      <QuestionIcon />
+    </Box>
+  );
+};
+
+const CompanyRadio = (props) => {
+  const [textInputRef, setTextInputRef] = useState(null);
+  // eslint-disable-next-line react/prop-types
+  const { checked, onChange, name } = props;
+  const intl = useIntl();
+
+  const radioLabel = checked ? <MaterialInput inputRef={(ref) => setTextInputRef(ref)} /> : intl.formatMessage(messages.radioCompanyCar);
+  const handleChange = useCallback(() => {
+    onChange(name);
+  }, []);
+
+  if (textInputRef) {
+    textInputRef.focus();
+  }
+
+  return (
+    <Radio
+      label={radioLabel}
+      checked={checked}
+      onChange={handleChange}
+      name={name}
+    />
+  );
+};
+
 function CarInfo() {
-  const [selectedCarOwner, setCarOwner] = React.useState(null);
+  const [selectedCarOwner, setCarOwner] = React.useState('own car');
   const [parametersOpen, setParametersOpen] = useState(false);
   const intl = useIntl();
   const classes = useStyles();
-  const radioLabel = selectedCarOwner === 'company car' ? <MaterialInput /> : intl.formatMessage(messages.radioCompanyCar);
 
   const onRadioChange = useCallback((name) => {
     setCarOwner(name);
@@ -132,7 +167,7 @@ function CarInfo() {
             <Select
               isMandatory
               placeholder={intl.formatMessage(messages.bodySelect)}
-              options={carOptions}
+              options={bodyTypeOptions}
             />
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
@@ -144,7 +179,7 @@ function CarInfo() {
           </Grid>
           <Grid item xs={12} sm={4} md={4}>
             <Select
-              icon={QuestionIcon}
+              icon={LocationQuestionIcon}
               placeholder={intl.formatMessage(messages.locationSelect)}
               options={carOptions}
             />
@@ -169,8 +204,7 @@ function CarInfo() {
             />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <Radio
-              label={radioLabel}
+            <CompanyRadio
               checked={selectedCarOwner === 'company car'}
               onChange={() => onRadioChange('company car')}
               name="company car"

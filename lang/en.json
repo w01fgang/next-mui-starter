@@ -4,6 +4,7 @@
   "сarConfiguration.carInfoTab": "Vehicle information",
   "сarConfiguration.carImageTab": "Upload photos",
   "сarConfiguration.carDamagesTab": "Add damages",
+  "сarConfiguration.ensuranceTab": "Ensurance Types",
   "сarConfiguration.form.confirmButton": "Add Vehicle",
   "сarConfiguration.form.cancelButton": "Cancel",
   "сarConfiguration.form.agencyButton": "Add new Agency",
@@ -49,5 +50,6 @@
   "сarConfiguration.damagesTub.tableHeaderNumber": "No",
   "сarConfiguration.damagesTub.tableHeaderName": "Damage name",
   "сarConfiguration.damagesTub.tableHeaderDegree": "Degree",
-  "сarConfiguration.select.addSelectOptionTitle": "Add new option"
+  "сarConfiguration.select.addSelectOptionTitle": "Add new option",
+  "сarConfiguration.locationSelect.tooltip": "Choose or insert base where generally this car is located"
 }

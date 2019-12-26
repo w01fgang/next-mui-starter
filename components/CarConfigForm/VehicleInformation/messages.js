@@ -111,4 +111,9 @@ export default defineMessages({
     defaultMessage: 'Deposit',
     description: 'input',
   },
+  locationSelectTitle: {
+    id: 'сarConfiguration.locationSelect.tooltip',
+    defaultMessage: '',
+    description: 'tooltip',
+  },
 });
