@@ -69,12 +69,6 @@ type Props = {
 
 const tabs = [
   {
-    title: 'ensuranceTab',
-    component: EnsuranceTypes,
-    icon: shieldIcon,
-    activeIcon: shieldIconFill,
-  },
-  {
     title: 'carInfoTab',
     component: VehicleInformation,
     icon: CarIcon,
@@ -91,6 +85,12 @@ const tabs = [
     component: DamagesInfo,
     icon: WarninigIconWithPlus,
     activeIcon: WarninigIconWithPlusFill,
+  },
+  {
+    title: 'ensuranceTab',
+    component: EnsuranceTypes,
+    icon: shieldIcon,
+    activeIcon: shieldIconFill,
   },
 ];
 
