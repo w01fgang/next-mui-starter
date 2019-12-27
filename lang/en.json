@@ -52,5 +52,11 @@
   "сarConfiguration.damagesTub.tableHeaderName": "Damage name",
   "сarConfiguration.damagesTub.tableHeaderDegree": "Degree",
   "сarConfiguration.select.addSelectOptionTitle": "Add new option",
-  "сarConfiguration.locationSelect.tooltip": "Choose or insert base where generally this car is located"
+  "сarConfiguration.locationSelect.tooltip": "Choose or insert base where generally this car is located",
+  "сarConfiguration.ensuranceTypes.title": "Here you can specify Ensurance Types, their descrtptions and values",
+  "сarConfiguration.ensuranceTypes.modalTitle": "Basic Ensurance",
+  "сarConfiguration.ensuranceTypes.modalNameInput": "Ensurance name",
+  "сarConfiguration.ensuranceTypes.modalFranchiseInput": "Franchise",
+  "сarConfiguration.ensuranceTypes.modalPriceInput": "Price per day",
+  "сarConfiguration.ensuranceTypes.modalDescriptionInput": "Description"
 }

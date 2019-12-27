@@ -8,6 +8,7 @@ import clsx from 'clsx';
 import messages from './messages';
 
 import VehicleInformation from './VehicleInformation';
+import EnsuranceTypes from './EnsuranceTypes';
 import ImageUploader from './ImageUploader';
 import DamagesInfo from './DamagesInfo';
 
@@ -68,6 +69,12 @@ type Props = {
 
 const tabs = [
   {
+    title: 'ensuranceTab',
+    component: EnsuranceTypes,
+    icon: shieldIcon,
+    activeIcon: shieldIconFill,
+  },
+  {
     title: 'carInfoTab',
     component: VehicleInformation,
     icon: CarIcon,
@@ -84,12 +91,6 @@ const tabs = [
     component: DamagesInfo,
     icon: WarninigIconWithPlus,
     activeIcon: WarninigIconWithPlusFill,
-  },
-  {
-    title: 'ensuranceTab',
-    component: () => <p>fsdfsa</p>,
-    icon: shieldIcon,
-    activeIcon: shieldIconFill,
   },
 ];
 

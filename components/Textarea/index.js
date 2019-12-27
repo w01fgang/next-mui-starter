@@ -1,7 +1,7 @@
 // @flow
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 // $flow: TextareaAutosize exist in @material-ui/core package
-import { TextareaAutosize } from '@material-ui/core';
+import { Grid, TextareaAutosize } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 // $flow: flow error with colling useStyles
@@ -14,28 +14,59 @@ const useStyles = makeStyles({
     width: '100%',
     outline: 'none',
     padding: 15,
+    fontFamily: 'Montserrat',
+    '&::placeholder': {
+      fontWeight: '500',
+      fontSize: '14px',
+      letterSpacing: 0,
+      color: '#455A64',
+    },
   },
+  placeholder: {
+    transition: 'all 0.5s ease',
+    position: 'absolute',
+    top: '-22px',
+    left: 15,
+    background: 'white',
+    padding: '0 4px',
+  },
+  container: { position: 'relative' },
 });
 
 type Props = {
   placeholder?: string,
+  outlinePlaceholder?: boolean,
+  value?: string,
   onChange: (string) => void,
 }
 
 export default function Textarea(props: Props) {
-  const { placeholder, onChange } = props;
+  const {
+    placeholder, onChange, value, outlinePlaceholder, 
+  } = props;
   const classes = useStyles();
+  const [areaValue, setValue] = useState(value);
+
+  const handleChange = useCallback(({ target }) => {
+    setValue(target.value);
+    onChange(target.value);
+  }, [setValue]);
 
   return (
-    <TextareaAutosize
-      onChange={({ target }) => onChange(target.value)}
-      aria-label="empty textarea"
-      placeholder={placeholder}
-      className={classes.root}
-    />
+    <Grid className={classes.container}>
+      { areaValue && outlinePlaceholder && <p className={classes.placeholder}>{placeholder}</p>}
+      <TextareaAutosize
+        value={areaValue}
+        onChange={handleChange}
+        placeholder={placeholder}
+        className={classes.root}
+      />
+    </Grid>
   );
 }
 
 Textarea.defaultProps = {
   placeholder: '',
+  outlinePlaceholder: false,
+  value: '',
 };
