@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, Box } from '@material-ui/core';
-import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
+import { injectIntl, type IntlShape } from 'react-intl';
 
 import messages from './messages';
 
@@ -54,13 +54,13 @@ const styles = {
 type Props = {
   open: boolean,
   intl: IntlShape,
-  exterior: boolean,
+  title: string,
+  description: string,
+  price: string,
+  franchise: string,
+  id: number,
   handleClose: () => void,
   onSubmit: Function,
-  clickPosition: {
-    x: number,
-    y: number,
-  },
   classes: {
     imageButtons: {},
     photoContainer: {},
@@ -73,10 +73,10 @@ type Props = {
 }
 
 type State = {
-  name: void,
-  description: void,
-  price: void,
-  franchise: void,
+  name: string | void,
+  description: string | void,
+  price: string | void,
+  franchise: string | void,
 }
 // todo replace this form functionality with some form library
 class AddDamages extends Component<Props, State> {
@@ -91,7 +91,7 @@ class AddDamages extends Component<Props, State> {
   handleSubmit = () => {
     const { onSubmit, id, title } = this.props;
     const {
-      name, description, price, franchise, 
+      name, description, price, franchise,
     } = this.state;
     onSubmit({
       title: name || title,
@@ -105,7 +105,6 @@ class AddDamages extends Component<Props, State> {
   nameHandler = (value) => {
     this.setState({ name: value });
   };
-
 
   priceHandler = (value) => {
     this.setState({ price: value });
@@ -126,9 +125,9 @@ class AddDamages extends Component<Props, State> {
 
   render() {
     const {
-      open, classes, intl,
-    } = this.props;
-    const {
+      open,
+      classes,
+      intl,
       title,
       description,
       price,
@@ -154,6 +153,7 @@ class AddDamages extends Component<Props, State> {
             <Grid item xs={12} sm={3}>
               <Input
                 value={franchise}
+                outlinePlaceholder
                 onChange={this.franchiseHandler}
                 placeholder={intl.formatMessage(messages.modalFranchiseInput)}
               />
@@ -161,6 +161,7 @@ class AddDamages extends Component<Props, State> {
             <Grid item xs={12} sm={3}>
               <Input
                 value={price}
+                outlinePlaceholder
                 onChange={this.priceHandler}
                 placeholder={intl.formatMessage(messages.modalPriceInput)}
               />

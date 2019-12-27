@@ -9,7 +9,7 @@ type Props = {
   outlinePlaceholder?: boolean,
   icon?: any,
   value?: string,
-  onChange?: (SyntheticInputEvent<HTMLInputElement>) => void
+  onChange?: (string) => void
 }
 
 const StyledInput = withStyles({
@@ -49,14 +49,16 @@ const useStyles = makeStyles({
 
 function CustomInput(props: Props) {
   const {
-    placeholder, icon: Icon, onChange, outlinePlaceholder, value, 
+    placeholder, icon: Icon, onChange, outlinePlaceholder, value,
   } = props;
   const classes = useStyles();
   const [inputValue, setValue] = useState(value);
 
-  const handleChange = useCallback(({ target }) => {
-    setValue(target.value);
-    onChange(target.value);
+  const handleChange = useCallback((event) => {
+    setValue(event.target.value);
+    if (onChange) {
+      onChange(event.target.value);
+    }
   }, [setValue]);
 
   return (

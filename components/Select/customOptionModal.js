@@ -33,8 +33,8 @@ function CustomOptionModal(props: Props) {
   const { open, onClose, onSubmit } = props;
   const [value, setValue] = useState('');
 
-  const handleChange = useCallback(({ target }: SyntheticInputEvent<HTMLInputElement>) => {
-    setValue(target.value);
+  const handleChange = useCallback((input) => {
+    setValue(input);
   }, [setValue]);
 
   const handleSubmit = useCallback(() => {
