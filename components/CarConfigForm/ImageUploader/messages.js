@@ -6,9 +6,4 @@ export default defineMessages({
     defaultMessage: 'Remove all',
     description: 'remove button',
   },
-  makePhotos: {
-    id: 'сarConfiguration.imageUpload.makePhotos',
-    defaultMessage: 'Make Pictures Now',
-    description: 'remove button',
-  },
 });

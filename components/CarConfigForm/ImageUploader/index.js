@@ -2,13 +2,12 @@
 import React, { Component } from 'react';
 import { Box, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import CarImageContainer from './carSelector';
 import FileInput from '../../FileInput';
 import Button from '../../TestButton';
 
-import { isMobileDevice } from '../../../scripts/helpers/global';
 import messages from './messages';
 
 const styles = (theme) => ({
@@ -67,7 +66,6 @@ const styles = (theme) => ({
 });
 
 type Props = {
-  intl: IntlShape,
   classes: {
     container: {},
     fileInput: {},
@@ -104,7 +102,7 @@ class ImageUploader extends Component<Props, State> {
   });
 
   render() {
-    const { classes, intl } = this.props;
+    const { classes } = this.props;
 
     return (
       <Box className={classes.container}>
@@ -127,18 +125,6 @@ class ImageUploader extends Component<Props, State> {
                 handleChange={this.selectThumbnailImage}
               />
             </Box>
-            {
-              isMobileDevice() && (
-                <Box className={classes.fileInput}>
-                  <FileInput
-                    accept="image/*"
-                    capture="camera"
-                    title={intl.formatMessage(messages.makePhotos)}
-                    handleChange={this.selectThumbnailImage}
-                  />
-                </Box>
-              )
-            }
             <Button
               className={classes.fileInput}
               title="Save"
@@ -156,4 +142,4 @@ class ImageUploader extends Component<Props, State> {
   }
 }
 
-export default injectIntl(withStyles(styles)(ImageUploader));
+export default withStyles(styles)(ImageUploader);

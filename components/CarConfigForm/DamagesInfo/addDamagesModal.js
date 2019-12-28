@@ -5,6 +5,7 @@ import { Grid, Box } from '@material-ui/core';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 
 import messages from './messages';
+import { isMobileDevice } from '../../../scripts/helpers/global';
 
 import Select from '../../Select';
 import Modal from '../../Modal';
@@ -249,6 +250,18 @@ class AddDamages extends Component<Props, State> {
               handleChange={this.selectImage}
             />
           </Grid>
+          {
+            isMobileDevice() && (
+              <Grid item xs={12}>
+                <FileInput
+                  accept="image/*"
+                  capture="camera"
+                  title={intl.formatMessage(messages.makePhotos)}
+                  handleChange={this.selectImage}
+                />
+              </Grid>
+            )
+          }
           {
             selectedImages.length !== 0 && (
               <Grid item xs={12} sm={6}>

@@ -101,4 +101,9 @@ export default defineMessages({
     defaultMessage: 'Degree',
     description: 'itable header title',
   },
+  makePhotos: {
+    id: 'сarConfiguration.imageUpload.makePhotos',
+    defaultMessage: 'Make Pictures Now',
+    description: 'remove button',
+  },
 });
