@@ -42,7 +42,7 @@ const styles = {
     cursor: 'pointer',
   },
   image: {
-    height: 150,
+    minHeight: 150,
   },
   addDamagesButton: {
     width: '100%',
@@ -64,15 +64,17 @@ type Props = {
     x: number,
     y: number,
   },
-  classes: {
-    imageButtons: {},
-    photoContainer: {},
-    removeButton: {},
-    addDamagesButton: {},
-    cancelButton: {},
-    image: {},
-    textarea: {},
-  },
+  classes: { [key: $Keys<typeof styles>]: string },
+  editedDamage: {
+    damageType: string,
+    damageDegree: string,
+    damageDescription: string,
+    exterior: boolean,
+    position: {
+      x: number,
+      y: number,
+    },
+  }
 }
 
 type State = {
@@ -100,6 +102,20 @@ class AddDamages extends Component<Props, State> {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (Object.keys(this.props.editedDamage).length > 0 && Object.keys(prevProps.editedDamage).length === 0) {
+      this.setValues();
+    }
+  }
+
+  setValues = () => {
+    this.setState({
+      damageType: this.props.editedDamage.damageType,
+      damageDegree: this.props.editedDamage.damageDegree,
+      damageDescription: this.props.editedDamage.damageDescription,
+    });
+  };
+
   selectImage = ({ target: { files } }) => {
     if (files) {
       const images = Array.from(files);
@@ -114,16 +130,21 @@ class AddDamages extends Component<Props, State> {
   };
 
   handleSubmit = () => {
-    const { onSubmit, clickPosition, exterior } = this.props;
+    const {
+      onSubmit, clickPosition, exterior, editedDamage, 
+    } = this.props;
     const { damageDescription, damageDegree, damageType } = this.state;
+    const values = {
+      exterior: Object.keys(editedDamage).length === 0 ? exterior : editedDamage.exterior,
+      position: Object.keys(editedDamage).length === 0 ? { ...clickPosition } : { ...editedDamage.position },
+    };
     onSubmit({
       damageDescription,
       damageDegree,
       damageType,
-      exterior,
-      position: { ...clickPosition },
+      ...values,
     });
-    this.removeImages();
+    this.setInitial();
   };
 
   typeDamageHandler = ({ value }) => {
@@ -142,17 +163,28 @@ class AddDamages extends Component<Props, State> {
     this.setState({ selectedImages: [] });
   };
 
+  setInitial = () => {
+    this.setState({
+      selectedImages: [],
+      damageType: '',
+      damageDegree: '',
+      damageDescription: '',
+    });
+  };
+
   handleClose = () => {
     const { handleClose } = this.props;
     handleClose();
-    this.removeImages();
+    this.setInitial();
   };
 
   render() {
     const {
       open, classes, intl,
     } = this.props;
-    const { selectedImages } = this.state;
+    const {
+      selectedImages, damageType, damageDegree, damageDescription, 
+    } = this.state;
     const damagesOptions = [
       { title: intl.formatMessage(messages.newDamage), comp: () => <AddSelectorOption title={intl.formatMessage(messages.newDamage)} />, value: 'custom' },
       { title: intl.formatMessage(messages.damageScratch), comp: () => <p>{intl.formatMessage(messages.damageScratch)}</p>, value: 'Scratch' },
@@ -178,6 +210,7 @@ class AddDamages extends Component<Props, State> {
                 onChange={this.typeDamageHandler}
                 placeholder={intl.formatMessage(messages.typeSelect)}
                 options={damagesOptions}
+                value={damageType}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -185,11 +218,13 @@ class AddDamages extends Component<Props, State> {
                 onChange={this.damageDegreeHandler}
                 placeholder={intl.formatMessage(messages.degreeSelect)}
                 options={damagesDegreeOptions}
+                value={damageDegree}
               />
             </Grid>
           </Grid>
           <Box className={classes.textarea}>
             <Textarea
+              value={damageDescription}
               onChange={this.descriptionHandler}
             />
           </Box>

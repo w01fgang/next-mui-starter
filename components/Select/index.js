@@ -53,17 +53,12 @@ type Props = {
     title: string,
     comp: React$ComponentType<*>,
   }>,
-  classes: {
-    root: {},
-    popper: {},
-    placeholder: {},
-    propsIcon: {},
-    container: {},
-  },
+  classes: { [key: $Keys<typeof styles>]: string },
   isMandatory: boolean,
   icon: React$ComponentType<*>,
   withShadow: boolean,
   prevOpen: any,
+  value: any,
   onChange?: ({}) => void,
   onNewOption?: (string) => void,
 };
@@ -94,7 +89,7 @@ class Select extends Component<Props, State> {
     super(props);
     this.state = {
       open: false,
-      value: null,
+      value: props.value,
       clientWidth: 0,
       modalOpen: false,
     };

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Grid, Box } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { FormattedMessage } from 'react-intl';
+import CreateIcon from '@material-ui/icons/Create';
 import clsx from 'clsx';
 
 import Switch from '../../Switch';
@@ -13,6 +14,17 @@ import messages from './messages';
 import ExteriorBody from '../../../assets/svg/sedanBody.svg';
 import InteriorBody from '../../../assets/svg/sedanInterior.svg';
 import CloseIcon from '../../../assets/svg/closeIcon.svg';
+
+const PensilIcon = withStyles({
+  root: {
+    color: '#1E88E5',
+    fontSize: 25,
+    background: '#EEF4F8',
+    borderRadius: '50%',
+    padding: 4,
+    cursor: 'pointer',
+  },
+})(CreateIcon);
 
 type Props = {
   classes: {
@@ -50,7 +62,12 @@ type State = {
   clickPosition: null | {
     x: number,
     y: number,
-  }
+  },
+  editedDamage: {
+    damageDescription: string,
+    damageDegree: string,
+    damageType: string,
+  } | {},
 };
 
 const styles = (theme) => ({
@@ -191,6 +208,7 @@ class DamagesInfo extends Component<Props, State> {
     modalOpen: false,
     damages: [],
     clickPosition: null,
+    editedDamage: {},
   };
 
   carBodyRef: any;
@@ -250,13 +268,32 @@ class DamagesInfo extends Component<Props, State> {
   };
 
   formHandler = (damage) => {
-    this.setState((prevState) => this.setState({
-      damages: [...prevState.damages, damage],
-      modalOpen: false,
-    }));
+    if (this.state.damages.find((item) => item.position.x === damage.position.x)) {
+      this.setState((prevState) => this.setState({
+        damages: [
+          damage,
+          ...prevState.damages.filter((item) => item.position.x !== damage.position.x),
+        ],
+        modalOpen: false,
+        editedDamage: {},
+      }));
+    } else {
+      this.setState((prevState) => this.setState({
+        damages: [...prevState.damages, damage],
+        modalOpen: false,
+        editedDamage: {},
+      }));
+    }
   };
 
-  handleModalClose = () => this.setState({ modalOpen: false });
+  handleModalClose = () => this.setState({ modalOpen: false, editedDamage: {} });
+
+  editDamage = (index: number) => {
+    this.setState(({ damages }) => ({
+      modalOpen: true,
+      editedDamage: { ...damages[index] },
+    }));
+  };
 
   removeDamage(damageIndex) {
     this.setState((prevState) => this.setState({
@@ -267,7 +304,7 @@ class DamagesInfo extends Component<Props, State> {
   render() {
     const { classes } = this.props;
     const {
-      clickPosition, modalOpen, damages, exterior,
+      clickPosition, modalOpen, damages, exterior, editedDamage,
     } = this.state;
     const CarBody = exterior ? ExteriorBody : InteriorBody;
     return (
@@ -305,20 +342,22 @@ class DamagesInfo extends Component<Props, State> {
         <Grid className={classes.damagesInfo}>
           <Grid container className={classes.damagesHeader} alignItems="center">
             <Grid item xs={1} sm={2} md={1} container justify="center"><FormattedMessage {...messages.tableHeaderNumber} /></Grid>
-            <Grid item xs={9} sm={7} md={9}><FormattedMessage {...messages.tableHeaderName} /></Grid>
+            <Grid item xs={8} sm={7} md={8}><FormattedMessage {...messages.tableHeaderName} /></Grid>
             <Grid item xs={1}><FormattedMessage {...messages.tableHeaderDegree} /></Grid>
-            <Grid item xs={1} sm={2} md={1} container justify="center" />
+            <Grid item xs={1} container justify="center" />
+            <Grid item xs={1} container justify="center" />
           </Grid>
           {
             damages.map((item, index) => (
               <Grid key={item.position.x} container alignItems="center" className={classes.damagesInfoRow}>
                 <Grid item xs={1} sm={2} md={1} container justify="center">{index + 1}</Grid>
-                <Grid item xs={9} sm={7} md={9}>
+                <Grid item xs={8} sm={7} md={8}>
                   <Grid className={classes.damageType}>{item.damageType}</Grid>
                   <Grid className={classes.damageDescription}>{item.damageDescription}</Grid>
                 </Grid>
                 <Grid item xs={1}>{item.damageDegree}</Grid>
-                <Grid item xs={1} sm={2} md={1} container justify="center"><CloseIcon onClick={() => this.removeDamage(index)} /></Grid>
+                <Grid item xs={1} container justify="center"><PensilIcon onClick={() => this.editDamage(index)} /></Grid>
+                <Grid item xs={1} container justify="center"><CloseIcon onClick={() => this.removeDamage(index)} /></Grid>
               </Grid>
             ))
           }
@@ -330,6 +369,7 @@ class DamagesInfo extends Component<Props, State> {
           open={modalOpen}
           onSubmit={this.formHandler}
           handleClose={this.handleModalClose}
+          editedDamage={editedDamage}
         />
       </Grid>
     );

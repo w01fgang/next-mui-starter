@@ -82,26 +82,9 @@ const styles = {
 };
 
 type Props = {
-  classes: {
-    container: {},
-    emptyPhoto: {},
-    fileName: {},
-    progressPhoto: {},
-    fileSize: {},
-    loaderContainer: {},
-    cancelLoading: {},
-    loadingButtons: {},
-    image: {},
-    infoSection: {},
-    loadPercent: {},
-    completeContainer: {},
-    removeButton: {},
-  },
-  onRemoveCurrentImage: Function,
-  file: {
-    size: number,
-    name: string
-  },
+  classes: { [key: $Keys<typeof styles>]: string },
+  onRemoveCurrentImage: (File) => void,
+  file: File,
   index: number
 };
 
@@ -148,7 +131,7 @@ class CarSelector extends Component<Props, State> {
     } else this.setState({ uploadStatus: 'default' });
   };
 
-  readFile = (file) => {
+  readFile = (file: File) => {
     const fileReader = new FileReader();
     fileReader.onload = ({ target }) => {
       // $flow: result doesn't exist in EventTarget
