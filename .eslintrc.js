@@ -36,6 +36,7 @@ module.exports = {
     "react/static-property-placement": "off",
     "react/jsx-props-no-spreading": "off",
     "react/state-in-constructor": "off",
+    "react/require-default-props": 0,
     "import/no-extraneous-dependencies": [
       "error",
       {

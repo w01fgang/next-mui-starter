@@ -1,8 +1,9 @@
 // @flow
 import { UrlObject, URLFormatOptions } from 'url';
 import { ServerResponse, IncomingMessage } from 'http';
-import { ComponentType } from 'react';
+import React, { ComponentType } from 'react';
 import { ParsedUrlQuery } from 'querystring';
+import { DynamicOptions, Loader } from 'next/dist/next-server/lib/dynamic';
 
 declare module "next" {
   declare type NextApp = {
@@ -22,6 +23,10 @@ declare module "next/head" {
 
 declare module "next/app" {
   declare module.exports: Class<React$Component<any, any>>;
+}
+
+declare module "next/dynamic" {
+  declare module.exports: (dynamicOptions: any, options: any) => ComponentType<any>;
 }
 
 declare module "next/router" {
@@ -112,6 +117,7 @@ declare module "next/router" {
 
   declare export function useRouter(): NextRouter;
 
+
   declare export default class Router {
     route: string;
     pathname: string;
@@ -146,36 +152,36 @@ declare module "next/router" {
     ): this;
     static _rewriteUrlForNextExport(url: string): string;
     onPopState: (e: PopStateEvent) => void;
-    update(route: string, mod: any): void;
-    reload(): void;
-    back(): void;
-    push(url: Url, as?: Url, options?: { ... }): Promise<boolean>;
-    replace(url: Url, as?: Url, options?: { ... }): Promise<boolean>;
-    change(method: string, _url: Url, _as: Url, options: any): Promise<boolean>;
-    changeState(method: string, url: string, as: string, options?: { ... }): void;
-    getRouteInfo(
+    static update(route: string, mod: any): void;
+    static reload(): void;
+    static back(): void;
+    static push(url: Url, as?: Url, options?: { ... }): Promise<boolean>;
+    static replace(url: Url, as?: Url, options?: { ... }): Promise<boolean>;
+    static change(method: string, _url: Url, _as: Url, options: any): Promise<boolean>;
+    static changeState(method: string, url: string, as: string, options?: { ... }): void;
+    static getRouteInfo(
       route: string,
       pathname: string,
       query: any,
       as: string,
       shallow?: boolean
     ): Promise<RouteInfo>;
-    set(
+    static set(
       route: string,
       pathname: string,
       query: any,
       as: string,
       data: RouteInfo
     ): void;
-    beforePopState(cb: BeforePopStateCallback): void;
-    onlyAHashChange(as: string): boolean;
-    scrollToHash(as: string): void;
-    urlIsNew(asPath: string): boolean;
-    prefetch(url: string): Promise<void>;
-    fetchComponent(route: string): Promise<ComponentType>;
-    getInitialProps(Component: ComponentType, ctx: NextPageContext): Promise<any>;
-    abortComponentLoad(as: string): void;
-    notify(data: RouteInfo): void;
+    static beforePopState(cb: BeforePopStateCallback): void;
+    static onlyAHashChange(as: string): boolean;
+    static scrollToHash(as: string): void;
+    static urlIsNew(asPath: string): boolean;
+    static prefetch(url: string): Promise<void>;
+    static fetchComponent(route: string): Promise<ComponentType>;
+    static getInitialProps(Component: ComponentType, ctx: NextPageContext): Promise<any>;
+    static abortComponentLoad(as: string): void;
+    static notify(data: RouteInfo): void;
   }
 }
 
@@ -185,4 +191,8 @@ declare module "next/link" {
 
 declare module "next/error" {
   declare module.exports: Class<React$Component<{statusCode: number}, any>>;
+}
+
+declare module "next/config" {
+  declare module.exports: () => { serverRuntimeConfig: { [key: string]: string }, publicRuntimeConfig: { [key: string]: string } };
 }

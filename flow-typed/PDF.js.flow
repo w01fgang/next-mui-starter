@@ -1,0 +1,7 @@
+// @flow
+
+declare type DamageType = {|
+  +damageName: string,
+  +note: string,
+  +degree: string
+|};

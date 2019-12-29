@@ -386,7 +386,7 @@ declare module 'react-relay' {
     | void
     | Array<Variable>
     | $ReadOnlyArray<Variable>;
-  declare export type Variables = ?{[string]: Variable};
+  declare export type Variables = {+[string]: Variable, ...};
   declare export type DataID = string;
 
   declare type TEnvironment = Environment;

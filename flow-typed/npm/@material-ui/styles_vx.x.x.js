@@ -50,3 +50,13 @@ declare module '@material-ui/styles' {
     useTheme: () => Theme,
   };
 };
+
+declare module '@material-ui/styles/withStyles' {
+  import type { MuiWithStyles } from '@material-ui/styles';
+  declare export default MuiWithStyles;
+}
+
+declare module '@material-ui/styles/makeStyles' {
+  import type { makeStyles } from '@material-ui/styles';
+  declare export default makeStyles;
+}

@@ -1,14 +1,17 @@
 // @flow
+import type { DateTime } from 'luxon';
+
 declare type Locale = 'ru' | 'en' | 'it' | 'es' | 'pt' | 'de' | 'fr';
 
 export type Address = {
- country: ?string,
- state: ?string,
- city: ?string,
- street: ?string,
- number: ?string,
- zipCode: ?string,
- formattedAddress: string,
+  id: string,
+  country: string,
+  state: ?string,
+  city: string,
+  street: ?string,
+  number: ?string,
+  zipCode: ?number,
+  formattedAddress: string,
 }
 
 declare type Partner = {
@@ -30,3 +33,73 @@ declare type DocumentType = {
   type: string,
   url: string,
 }
+
+declare type CreditCard = {
+ number: string,
+ exp: string,
+ cvv: number,
+ holder: string,
+}
+
+declare type Client = {
+ id: string,
+ name?: string,
+ surname?: string,
+ birthDate?: Date,
+ phone?: string,
+ email?: string,
+ address?: Address,
+ language?: Locale,
+ documents?: DocumentType[],
+ creditCards?: CreditCard[],
+ creditCardsPhotos?: DocumentType[],
+ note?: string,
+}
+
+declare type DatePickerProps = {|
+  +onChange: DateTime => void,
+  +value: Date | DateTime,
+  +allowKeyboardControl?: boolean,
+  +animateYearScrolling?: boolean,
+  +autoOk?: boolean,
+  +disabled?: boolean,
+  +disableFuture?: boolean,
+  +disablePast?: boolean,
+  +disableToolbar?: boolean,
+  +emptyLabel?: string,
+  +format?: string,
+  +initialFocusedDate?: Date | DateTime,
+  +inputVariant?: 'standard' | 'outlined' | 'filled',
+  +invalidDateMessage?: React$Node,
+  +invalidLabel?: string,
+  +labelFunc?: (date: DateTime, invalidLabel: string) => string,
+  +leftArrowButtonProps?: $FlowFixMe, // $Shape<IconButtonProps>
+  +leftArrowIcon?: React$Node,
+  +loadingIndicator?: React$Element<*>,
+  +maxDate?: dateTime | Date,
+  +maxDateMessage?: React$Node,
+  +minDate?: DateTime | Date,
+  +minDateMessage?: React$Node,
+  +onAccept?: DateTime => void,
+  +onClose?: () => void,
+  +onError?: (error: React$Node, value: DateTime) => void,
+  +onMonthChange?: DateTime => void,
+  +onOpen?: () => void,
+  +onYearChange?: DateTime => void,
+  +open?: boolean,
+  +openTo?: 'date' | 'year' | 'month',
+  +orientation?: 'portrait' | 'landscape',
+  +PopoverProps?: $FlowFixMe, // $Shape<PopoverProps>
+  +readOnly?: boolean,
+  +renderDay?: (day: DateTime, selectedDate: DateTime, dayInCurrentMonth: boolean, dayComponent: React$Element) => React$Element,
+  +rightArrowButtonProps?: $FlowFixMe, // $Shape<IconButtonProps>
+  +rightArrowIcon?: React$Node,
+  +shouldDisableDate?: DateTime => void,
+  +strictCompareDates?: boolean,
+  +TextFieldComponent?: React$AbstractComponent<$FlowFixMe, mixed>, // TextFieldProps
+  +ToolbarComponent?: React$AbstractComponent<$FlowFixMe, mixed>, // ToolbarComponentProps
+  +variant?: 'dialog' | 'inline' | 'static',
+  +views?: Array<'year' | 'date' | 'month'>,
+|};
+
+declare type Status = 'reserved' | 'requested' | 'maintenance' | 'available' | 'nearRent';

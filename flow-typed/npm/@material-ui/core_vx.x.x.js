@@ -781,6 +781,13 @@ declare module "@material-ui/core/FormLabel/FormLabel" {
   }>;
 }
 
+declare module "@material-ui/core/useMediaQuery" {
+  import type { Theme } from '@material-ui/core';
+  declare type UseMediaQueryCallback = (theme: Theme) => string;
+  declare type UseMediaQuery = (condition: string | UseMediaQueryCallback) => boolean;
+  declare module.exports: UseMediaQuery;
+}
+
 declare module "@material-ui/core/FormControl" {
   declare module.exports: $Exports<"@material-ui/core/FormControl/FormControl">;
 }
@@ -1524,6 +1531,57 @@ declare module "@material-ui/core/Paper/Paper" {
   }>;
 }
 
+declare module "@material-ui/core/Popper" {
+  declare module.exports: $Exports<"@material-ui/core/Popper/Popper">;
+}
+
+declare module "@material-ui/core/Popper/Popper" {
+  import type {ComponentType, ElementType, Node} from "react";
+  declare type PopperPlacementType =
+    | 'bottom-end'
+    | 'bottom-start'
+    | 'bottom'
+    | 'left-end'
+    | 'left-start'
+    | 'left'
+    | 'right-end'
+    | 'right-start'
+    | 'right'
+    | 'top-end'
+    | 'top-start'
+    | 'top';
+
+  declare type PortalProps = {
+  children?: React$Node,
+  container?: React$Element<*> | (() => ?React$Element<*>) | null,
+  disablePortal?: boolean,
+  onRendered?: () => void,
+}
+
+  declare module.exports: ComponentType<{
+    anchorEl?: null | ReferenceObject | (() => ReferenceObject);
+    children:
+      | React$Node
+      | ((props: {
+          placement: PopperPlacementType;
+          TransitionProps?: {
+            in: boolean;
+            onEnter: () => {};
+            onExited: () => {};
+          };
+        }) => React$Node);
+    container?: $PropertyType<PortalProps, 'container'>;
+    disablePortal?: $PropertyType<PortalProps, 'disablePortal'>;
+    keepMounted?: boolean;
+    modifiers?: object;
+    open: boolean;
+    placement?: PopperPlacementType;
+    popperOptions?: object;
+    popperRef?: Reac$Ref<$FlowFixMe>;
+    transition?: boolean;
+    }>;
+}
+
 declare module "@material-ui/core/Popover" {
   declare module.exports: $Exports<"@material-ui/core/Popover/Popover">;
 }
@@ -2105,6 +2163,7 @@ declare module "@material-ui/core/styles/createPalette" {
 
   declare export type TypeBackground = {
     default: string,
+    lightGrey: string,
     paper: string
   };
 
@@ -2258,8 +2317,11 @@ declare module "@material-ui/core/styles/jssPreset" {
 
 declare module "@material-ui/core/styles/makeStyles" {
   import type { Theme } from "@material-ui/core/styles/createMuiTheme";
-  declare type MakeStylesCallback = (theme: Theme) => { [key: string]: $Shape<CSSStyleDeclaration> | { [key: string]: $Shape<CSSStyleDeclaration> } };
-  declare module.exports: (callback: MakeStylesCallback | { [key: string]: $Shape<CSSStyleDeclaration> }) => () => { [key: string]: string };
+  declare type MUIStyleDeclaration =
+    | { [key: string]: $Shape<CSSStyleDeclaration> }
+    | MUIStyleDeclaration;
+  declare type MakeStylesCallback = (theme: Theme) => MUIStyleDeclaration;
+  declare module.exports: (callback: MakeStylesCallback) => () => { [key: string]: string };
 }
 
 declare module "@material-ui/core/styles/MuiThemeProvider" {
