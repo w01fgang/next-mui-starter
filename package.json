@@ -60,7 +60,7 @@
     "lodash": "^4.17.15",
     "luxon": "1.21.3",
     "material-ui-popup-state": "^1.5.1",
-    "next": "9.1.6",
+    "next": "9.3.2",
     "next-plugin-graphql": "^0.0.2",
     "node-fetch": "^2.6.0",
     "prop-types": "^15.7.2",
